@@ -48,3 +48,33 @@ h2{font-size: clamp(22px,3vw,32px);margin:0 0 18px}
 
 .footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0;background:#0b0b10;text-align:center;opacity:.8}
 .btns{display:flex;flex-wrap:wrap;gap:10px}
+
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.icon-btn {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 12px; /* 方形圓角 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.icon-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.icon-btn img {
+  width: 26px;
+  height: 26px;
+  filter: invert(20%) sepia(20%) saturate(500%) hue-rotate(200deg);
+}
