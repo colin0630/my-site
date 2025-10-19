@@ -156,5 +156,17 @@
     // inject current year
     document.body.innerHTML = document.body.innerHTML.replace('{year}', new Date().getFullYear());
   </script>
+<script>
+  const btn = document.getElementById('langBtn');
+  if (btn) {
+    let zh = true;
+    btn.addEventListener('click', () => {
+      zh = !zh;
+      document.querySelectorAll('[data-zh]').forEach(el => {
+        el.textContent = zh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+      });
+    });
+  }
+</script>
 </body>
 </html>
