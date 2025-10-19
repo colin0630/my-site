@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guan Syun Su · Portfolio</title>
+  <meta name="description" content="PFAS researcher · Environmental exposure · Portfolio">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=128&auto=format&fit=crop" alt="avatar" class="avatar">
+        <div>
+          <div class="name">Guan Syun Su <span class="muted">/ 蘇冠勳</span></div>
+          <div class="role">Environmental Exposure · PFAS Research</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a href="#projects">Projects</a>
+        <a href="#pubs">Publications</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <button id="langBtn" class="btn small">中文/EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1 data-zh="打造兼具品牌感與專業度的個人網站"
+          data-en="A personal site that blends personality and professionalism">
+        打造兼具品牌感與專業度的個人網站
+      </h1>
+      <p class="lead"
+         data-zh="陽明交大碩士生，專注大氣 PFAS 暴露、資料分析與科學視覺化。"
+         data-en="NYCU master's student focusing on atmospheric PFAS exposure, data analysis, and scientific visualization.">
+        陽明交大碩士生，專注大氣 PFAS 暴露、資料分析與科學視覺化。
+      </p>
+      <div class="cta">
+        <a href="#projects" class="btn">See Projects</a>
+        <a href="#contact" class="btn ghost">Contact</a>
+      </div>
+    </div>
+    <div class="hero-bg"></div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 data-zh="精選作品" data-en="Featured Projects">精選作品</h2>
+      <div class="grid">
+        <a class="card" href="#" target="_blank">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop');"></div>
+          <div class="card-body">
+            <div class="card-title">PFAS Gas–Particle Partitioning in PM2.5</div>
+            <div class="card-desc">Multi-city study on compound-specific behavior and partitioning.</div>
+            <div class="tags"><span>PFAS</span><span>Air</span><span>PCA/RDA</span><span>Python</span></div>
+          </div>
+        </a>
+        <a class="card" href="#" target="_blank">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1544256718-3bcf237f3971?q=80&w=1200&auto=format&fit=crop');"></div>
+          <div class="card-body">
+            <div class="card-title">Exposure Dashboard</div>
+            <div class="card-desc">Interactive dashboard visualizing pollutant trends & risk indices.</div>
+            <div class="tags"><span>React</span><span>Animations</span><span>Viz</span></div>
+          </div>
+        </a>
+        <a class="card" href="#" target="_blank">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop');"></div>
+          <div class="card-body">
+            <div class="card-title">Scientific Graphics Toolkit</div>
+            <div class="card-desc">Polished plotting templates for papers and talks.</div>
+            <div class="tags"><span>Matplotlib</span><span>Design</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="pubs" class="section alt">
+    <div class="container">
+      <h2 data-zh="學術發表" data-en="Publications">學術發表</h2>
+      <ul class="list">
+        <li>
+          <a href="#" target="_blank">Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS in Ambient PM2.5</a>
+          <div class="muted">G.S. Su, Y.S. Hsu, K.H. Chi, N.H. Lin · Dioxin 2025</div>
+        </li>
+        <li>
+          <a href="#" target="_blank">PFAS in Urban vs Industrial Air: Source and Composition</a>
+          <div class="muted">G.S. Su, Y.S. Hsu, K.H. Chi · 2024</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience" class="section">
+    <div class="container">
+      <h2 data-zh="經歷" data-en="Experience">經歷</h2>
+      <div class="experience">
+        <div class="xp">
+          <div class="xp-head">NYCU · IE&OHS – Graduate Researcher <span class="muted">2023—Present</span></div>
+          <ul>
+            <li>Atmospheric sampling (PUF/QFF), QA/QC, 13C-labeled standards</li>
+            <li>R/Python pipeline: PCA, PRDA/RDA, risk assessment</li>
+            <li>Conference presentations; paper in preparation</li>
+          </ul>
+        </div>
+        <div class="xp">
+          <div class="xp-head">Research Assistant (Air Quality) <span class="muted">2021—2023</span></div>
+          <ul>
+            <li>Method dev: Soxhlet vs ultrasonic extraction</li>
+            <li>Instrument calibration & LOQ/LOD workflow</li>
+            <li>Visualization templates for reports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section alt">
+    <div class="container">
+      <h2 data-zh="聯絡" data-en="Contact">聯絡</h2>
+      <p class="lead" data-zh="歡迎合作／研究與顧問，寄信或在 LinkedIn 上聯絡我。"
+         data-en="Open to collaborations, research, and consulting. Email me or reach out on LinkedIn.">
+        歡迎合作／研究與顧問，寄信或在 LinkedIn 上聯絡我。
+      </p>
+      <div class="btns">
+        <a class="btn" href="mailto:you@example.com">Email</a>
+        <a class="btn ghost" href="#" target="_blank">LinkedIn</a>
+        <a class="btn ghost" href="#" target="_blank">GitHub</a>
+        <a class="btn" href="#" target="_blank">CV / Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container small">
+      © {year} Guan Syun Su — Built with vanilla HTML/CSS/JS
+    </div>
+  </footer>
+
+  <script>
+    // super tiny i18n toggle
+    const btn = document.getElementById('langBtn');
+    let zh = true;
+    btn.addEventListener('click', () => {
+      zh = !zh;
+      document.querySelectorAll('[data-zh]').forEach(el => {
+        el.textContent = zh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+      });
+    });
+    // inject current year
+    document.body.innerHTML = document.body.innerHTML.replace('{year}', new Date().getFullYear());
+  </script>
+</body>
+</html>
