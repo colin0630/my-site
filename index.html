@@ -1,54 +1,61 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Guan Syun Su · Portfolio</title>
-  <meta name="description" content="PFAS researcher · Environmental exposure · Portfolio">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="PFAS researcher · Environmental exposure · Portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- NAV -->
   <header class="nav">
     <div class="container nav-inner">
       <div class="brand">
-        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=128&auto=format&fit=crop" alt="avatar" class="avatar">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=128&auto=format&fit=crop" alt="avatar" class="avatar" />
         <div>
           <div class="name">Guan Syun Su <span class="muted">/ 蘇冠勳</span></div>
           <div class="role">Environmental Exposure · PFAS Research</div>
         </div>
       </div>
       <nav class="links">
-        <a href="#projects">Projects</a>
-        <a href="#pubs">Publications</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
+        <a href="#projects" data-zh="作品" data-en="Projects">作品</a>
+        <a href="#pubs" data-zh="發表" data-en="Publications">發表</a>
+        <a href="#experience" data-zh="經歷" data-en="Experience">經歷</a>
+        <a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a>
         <button id="langBtn" class="btn small">中文/EN</button>
       </nav>
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <h1 data-zh="打造兼具品牌感與專業度的個人網站"
-          data-en="A personal site that blends personality and professionalism">
+      <h1
+        data-zh="打造兼具品牌感與專業度的個人網站"
+        data-en="A personal site that blends personality and professionalism"
+      >
         打造兼具品牌感與專業度的個人網站
       </h1>
-      <p class="lead"
-         data-zh="陽明交大碩士生，專注大氣 PFAS 暴露、資料分析與科學視覺化。"
-         data-en="NYCU master's student focusing on atmospheric PFAS exposure, data analysis, and scientific visualization.">
+      <p
+        class="lead"
+        data-zh="陽明交大碩士生，專注大氣 PFAS 暴露、資料分析與科學視覺化。"
+        data-en="NYCU master's student focusing on atmospheric PFAS exposure, data analysis, and scientific visualization."
+      >
         陽明交大碩士生，專注大氣 PFAS 暴露、資料分析與科學視覺化。
       </p>
       <div class="cta">
-        <a href="#projects" class="btn">See Projects</a>
-        <a href="#contact" class="btn ghost">Contact</a>
+        <a href="#projects" class="btn" data-zh="看看作品" data-en="See Projects">看看作品</a>
+        <a href="#contact" class="btn ghost" data-zh="聯絡我" data-en="Contact">聯絡我</a>
       </div>
     </div>
     <div class="hero-bg"></div>
   </section>
 
+  <!-- PROJECTS -->
   <section id="projects" class="section">
     <div class="container">
       <h2 data-zh="精選作品" data-en="Featured Projects">精選作品</h2>
@@ -57,23 +64,34 @@
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">PFAS Gas–Particle Partitioning in PM2.5</div>
-            <div class="card-desc">Multi-city study on compound-specific behavior and partitioning.</div>
+            <div class="card-desc" data-zh="多城市研究：化合物特性與氣固相分配。"
+                 data-en="Multi-city study on compound-specific behavior and partitioning.">
+              多城市研究：化合物特性與氣固相分配。
+            </div>
             <div class="tags"><span>PFAS</span><span>Air</span><span>PCA/RDA</span><span>Python</span></div>
           </div>
         </a>
+
         <a class="card" href="#" target="_blank">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1544256718-3bcf237f3971?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">Exposure Dashboard</div>
-            <div class="card-desc">Interactive dashboard visualizing pollutant trends & risk indices.</div>
+            <div class="card-desc" data-zh="互動式儀表板：污染趨勢與風險指標可視化。"
+                 data-en="Interactive dashboard visualizing pollutant trends & risk indices.">
+              互動式儀表板：污染趨勢與風險指標可視化。
+            </div>
             <div class="tags"><span>React</span><span>Animations</span><span>Viz</span></div>
           </div>
         </a>
+
         <a class="card" href="#" target="_blank">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">Scientific Graphics Toolkit</div>
-            <div class="card-desc">Polished plotting templates for papers and talks.</div>
+            <div class="card-desc" data-zh="論文與簡報的高質感作圖模板。"
+                 data-en="Polished plotting templates for papers and talks.">
+              論文與簡報的高質感作圖模板。
+            </div>
             <div class="tags"><span>Matplotlib</span><span>Design</span></div>
           </div>
         </a>
@@ -81,6 +99,7 @@
     </div>
   </section>
 
+  <!-- PUBLICATIONS -->
   <section id="pubs" class="section alt">
     <div class="container">
       <h2 data-zh="學術發表" data-en="Publications">學術發表</h2>
@@ -97,6 +116,7 @@
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience" class="section">
     <div class="container">
       <h2 data-zh="經歷" data-en="Experience">經歷</h2>
@@ -121,52 +141,61 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="section alt">
     <div class="container">
       <h2 data-zh="聯絡" data-en="Contact">聯絡</h2>
-      <p class="lead" data-zh="歡迎合作／研究與顧問，寄信或在 LinkedIn 上聯絡我。"
-         data-en="Open to collaborations, research, and consulting. Email me or reach out on LinkedIn.">
+      <p class="lead"
+        data-zh="歡迎合作／研究與顧問，寄信或在 LinkedIn 上聯絡我。"
+        data-en="Open to collaborations, research, and consulting. Email me or reach out on LinkedIn."
+      >
         歡迎合作／研究與顧問，寄信或在 LinkedIn 上聯絡我。
       </p>
       <div class="btns">
-        <a class="btn" href="mailto:you@example.com">Email</a>
-        <a class="btn ghost" href="#" target="_blank">LinkedIn</a>
-        <a class="btn ghost" href="#" target="_blank">GitHub</a>
-        <a class="btn" href="#" target="_blank">CV / Resume</a>
+        <a class="btn" href="mailto:you@example.com" data-zh="Email" data-en="Email">Email</a>
+        <a class="btn ghost" href="#" target="_blank" data-zh="LinkedIn" data-en="LinkedIn">LinkedIn</a>
+        <a class="btn ghost" href="#" target="_blank" data-zh="GitHub" data-en="GitHub">GitHub</a>
+        <a class="btn" href="#" target="_blank" data-zh="履歷 / CV" data-en="CV / Resume">履歷 / CV</a>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container small">
-      © {year} Guan Syun Su — Built with vanilla HTML/CSS/JS
+      © <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS
     </div>
   </footer>
 
+  <!-- SCRIPTS -->
   <script>
-    // super tiny i18n toggle
-    const btn = document.getElementById('langBtn');
-    let zh = true;
-    btn.addEventListener('click', () => {
-      zh = !zh;
-      document.querySelectorAll('[data-zh]').forEach(el => {
-        el.textContent = zh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
-      });
+    // 確保 DOM 準備好
+    document.addEventListener('DOMContentLoaded', () => {
+      // 年份（不重繪整個 body）
+      const yearSpan = document.getElementById('year');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+      // 語言狀態（localStorage 記住使用者選擇）
+      let zh = (localStorage.getItem('lang') !== 'en');
+      const applyLang = () => {
+        document.querySelectorAll('[data-zh]').forEach(el => {
+          const zhText = el.getAttribute('data-zh');
+          const enText = el.getAttribute('data-en');
+          if (zhText !== null && enText !== null) el.textContent = zh ? zhText : enText;
+        });
+      };
+      applyLang();
+
+      // 切換按鈕
+      const btn = document.getElementById('langBtn');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          zh = !zh;
+          localStorage.setItem('lang', zh ? 'zh' : 'en');
+          applyLang();
+        });
+      }
     });
-    // inject current year
-    document.body.innerHTML = document.body.innerHTML.replace('{year}', new Date().getFullYear());
   </script>
-<script>
-  const btn = document.getElementById('langBtn');
-  if (btn) {
-    let zh = true;
-    btn.addEventListener('click', () => {
-      zh = !zh;
-      document.querySelectorAll('[data-zh]').forEach(el => {
-        el.textContent = zh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
-      });
-    });
-  }
-</script>
 </body>
 </html>
