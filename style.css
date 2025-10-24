@@ -200,3 +200,19 @@ img { max-width: 100%; display: block }
   .nav-inner { padding: 8px 0 }
   .links a { display: none }
 }
+
+/* ===== Fix oversized contact icons ===== */
+#contact .icon-btn img,
+#contact .icon-btn svg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform .2s ease;
+}
+
+#contact .icon-btn:hover img,
+#contact .icon-btn:hover svg {
+  transform: scale(1.08);
+}
