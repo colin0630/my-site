@@ -139,6 +139,32 @@ img { max-width: 100%; display: block }
 .list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none }
 .author-highlight { font-weight: 900 }
 
+/* ===== Author name underline (for <span class="author-highlight">) ===== */
+.author-highlight {
+  font-weight: 900;
+  position: relative;
+  display: inline-block;
+}
+
+/* 主線條效果 */
+.author-highlight::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;        /* 線條位置可依實際字體微調 */
+  width: 100%;
+  height: 1.5px;
+  background-color: currentColor;
+  opacity: 0.55;        /* 柔和透明度，淺深主題都能看清 */
+  border-radius: 2px;
+}
+
+/* 滑過時線條更亮（可選） */
+.author-highlight:hover::after {
+  opacity: 0.9;
+}
+
+
 /* --------- Contact --------- */
 .contact-icons { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap }
 .icon-btn {
