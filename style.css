@@ -1,6 +1,5 @@
 /* =============================
-   Guan Syun Su · Site — THEME OVERHAUL (global-contrast fix)
-   Drop-in replacement for style.css
+   Guan Syun Su · Site — THEME OVERHAUL (global-contrast unified)
    ============================= */
 
 /* ---------- Base Reset ---------- */
@@ -9,7 +8,9 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans TC","PingFang TC",Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  color: var(--section-fg); /* 全站基準字色 -> 隨主題變化 */
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -17,15 +18,14 @@ img{max-width:100%;display:block}
 
 /* ---------- Color System ---------- */
 :root{
-  --white: #ffffff; --black: #000000;
+  --white:#fff; --black:#000;
 
   /* default accent (violet) */
   --accent-50:#f5f3ff; --accent-100:#ede9fe; --accent-200:#ddd6fe; --accent-300:#c4b5fd;
   --accent-400:#a78bfa; --accent-500:#8b5cf6; --accent-600:#7c3aed; --accent-700:#6d28d9;
   --accent-800:#5b21b6; --accent-900:#4c1d95;
 
-  /* hero accent haze default */
-  --hero-a: rgba(139, 92, 246, .35);
+  --hero-a: rgba(139,92,246,.35);
 }
 
 /***** THEMES *****/
@@ -38,10 +38,9 @@ img{max-width:100%;display:block}
   --divider: rgba(255,255,255,0.08);
   --shadow: 0 8px 24px rgba(0,0,0,.45);
 
-  /* section/hero/card foregrounds */
   --section-fg: var(--text);
   --hero-fg:#ffffff;
-  --card:#1a2236cc;                 /* 比舊版稍實，減少「白化」 */
+  --card:#1a2236cc;                 /* 深色主題卡片底 */
   --card-border: rgba(255,255,255,0.14);
   --card-fg:#ffffff;
 }
@@ -56,10 +55,10 @@ img{max-width:100%;display:block}
   --shadow: 0 8px 24px rgba(2,6,23,.08);
 
   --section-fg: var(--text);
-  --hero-fg:#0f172a;    /* Hero 在淺色主題用深字 */
-  --card:#ffffff;       /* 卡片改純白底 */
+  --hero-fg:#0f172a;    /* Hero 用深字 */
+  --card:#ffffff;       /* 淺色卡片白底 */
   --card-border: rgba(15,23,42,0.10);
-  --card-fg:#0f172a;    /* 卡片文字深色 */
+  --card-fg:#0f172a;    /* 淺色卡片深字 */
 }
 
 /***** ACCENTS *****/
@@ -115,7 +114,7 @@ img{max-width:100%;display:block}
 .hero p.lead{
   font-size:clamp(1rem,1.25vw,1.1rem);
   line-height:1.85;
-  color: color-mix(in oklab, var(--hero-fg) 92%, transparent);
+  color: color-mix(in oklab, var(--hero-fg) 96%, transparent);
   margin:8px 0;max-width:820px
 }
 .hero .btn{margin-right:10px}
@@ -126,7 +125,10 @@ img{max-width:100%;display:block}
   font-size:clamp(1.35rem,2.2vw,1.8rem);
   letter-spacing:.2px;margin:0 0 18px;font-weight:800
 }
-.section.alt{background:var(--bg-2);color:#f8fafc}
+.section.alt{
+  background:var(--bg-2);
+  color: var(--section-fg); /* 改為吃變數，淺色主題自動深字 */
+}
 
 /* ---------- Grid & Cards ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
@@ -134,7 +136,7 @@ img{max-width:100%;display:block}
   display:block;border-radius:18px;overflow:hidden;
   background: var(--card);
   border:1px solid var(--card-border);
-  color: var(--card-fg);
+  color: var(--card-fg);            /* 卡片字色隨主題切換 */
   box-shadow:none;
   transition:transform .18s ease, box-shadow .22s ease, border-color .22s ease
 }
