@@ -152,11 +152,11 @@ img { max-width: 100%; display: block }
 .contact-icons { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap }
 .icon-btn {
   display: inline-flex; width: 42px; height: 42px; border-radius: 12px; align-items: center; justify-content: center;
-  background: color-mix(in oklab, var(--white) 8%, transparent);
+  background: color-mix(in oklab, var(--white) 15%, transparent);
   border: 1px solid var(--divider);
   transition: transform .15s ease, background .2s ease;
 }
-.icon-btn:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--white) 16%, transparent) }
+.icon-btn:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--white) 20%, transparent) }
 .icon-btn img { width: 20px; height: 20px; opacity: .95 }
 
 /* --------- Footer --------- */
