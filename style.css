@@ -187,19 +187,18 @@ img { max-width: 100%; display: block }
   filter: brightness(2) saturate(1.4);
 }
 
-/* ===== Contact vs Footer Contrast ===== */
+/* ===== Contact & Footer fixed tone ===== */
 
-/* 聯絡區：比背景亮一點 */
+/* 聯絡區（顏色一：柔和藍灰） */
 #contact.section.alt {
-  background: color-mix(in oklab, var(--bg) 75%, white 10%);
+  background: #e9ecfb;  /* 或 #eaf0ff 若想更亮 */
   color: var(--text);
-  border-top: 1px solid var(--divider);
+  border-top: 1px solid rgba(0,0,0,0.08);
 }
 
-/* 頁尾：比聯絡區再深一階 */
+/* 頁尾（顏色二：深藍紫調） */
 .footer {
-  background: color-mix(in oklab, var(--bg) 90%, black 15%);
-  color: color-mix(in oklab, var(--section-fg) 82%, var(--muted) 18%);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  background: #b2a4e0;  /* 可替換成 #a99ce3 若想偏紫一點 */
+  color: #f4f4f8;
+  border-top: 1px solid rgba(255,255,255,0.15);
 }
-
