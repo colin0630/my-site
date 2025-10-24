@@ -158,12 +158,34 @@ img { max-width: 100%; display: block }
 .author-highlight:hover::after { opacity: .95; }
 
 /* --------- Contact / Footer --------- */
-/* 聯絡區比背景亮一點 */
+
+/* 預設（淺色模式）聯絡區比背景亮一點 */
 #contact.section.alt {
   background: color-mix(in oklab, var(--bg) 75%, white 10%);
   color: var(--text);
   border-top: 1px solid var(--divider);
 }
+
+/* 淺色模式下頁尾更深一階 */
+.footer {
+  background: color-mix(in oklab, var(--bg) 90%, black 15%);
+  color: color-mix(in oklab, var(--section-fg) 82%, var(--muted) 18%);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ---------- 夜間主題回復原始深色層次 ---------- */
+[data-theme="dark"] #contact.section.alt {
+  background: var(--bg-2);     /* 回復原設定：深藍層 */
+  color: var(--text);
+  border-top: 1px solid var(--divider);
+}
+
+[data-theme="dark"] .footer {
+  background: var(--bg);       /* Footer 回歸原深底 */
+  color: color-mix(in oklab, var(--section-fg) 82%, var(--muted) 18%);
+  border-top: 1px solid var(--divider);
+}
+
 
 /* 頁尾比聯絡區更深 */
 .footer {
