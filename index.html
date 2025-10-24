@@ -288,5 +288,34 @@
     ]
   }
   </script>
+  // ============ 主題與重點色切換 ============
+// 預設：從 localStorage 讀取設定（沒有就用 HTML 上的屬性）
+const root = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || root.getAttribute('data-theme');
+let accent = localStorage.getItem('accent') || root.getAttribute('data-accent');
+
+// 套用目前設定
+root.setAttribute('data-theme', theme);
+root.setAttribute('data-accent', accent);
+
+// 切換函式
+function toggleTheme() {
+  theme = (theme === 'dark') ? 'light' : 'dark';
+  localStorage.setItem('theme', theme);
+  root.setAttribute('data-theme', theme);
+  // 動畫提示
+  themeBtn.textContent = (theme === 'dark') ? '🌙' : '☀️';
+}
+
+// 監聽按鈕
+if (themeBtn) {
+  themeBtn.textContent = (theme === 'dark') ? '🌙' : '☀️';
+  themeBtn.addEventListener('click', toggleTheme);
+}
+
+// （可選）如果想切換主色
+// root.setAttribute('data-accent', 'teal');
+// localStorage.setItem('accent', 'teal');
 </body>
 </html>
