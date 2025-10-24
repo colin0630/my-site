@@ -226,7 +226,7 @@
 <footer class="footer">
   <div class="container small">
     © <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS
-    <p>Ver:2.5 · Last updated: <span id="lastUpdated"></span></p>
+    <p>Ver:2.6 · Last updated: <span id="lastUpdated"></span></p>
   </div>
 </footer>
 
@@ -235,6 +235,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+      const lastUpdated = document.getElementById('lastUpdated');
+if (lastUpdated) {
+  // 自動顯示當前日期 (YYYY-MM-DD)
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  lastUpdated.textContent = `${y}-${m}-${d}`;
+}
 
       let zh = (localStorage.getItem('lang') !== 'en');
       const applyLang = () => {
