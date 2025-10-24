@@ -29,7 +29,11 @@
       <div class="brand">
         <img src="./suphoto/colinsu-photo.jpg" alt="Avatar" class="avatar" loading="lazy" decoding="async" />
         <div>
-          <div class="name">Guan-Syun Su <span class="muted">/ 蘇冠勳</span></div>
+          <!-- 這行改了：為中英文名字加上 class，做底線樣式用 -->
+          <div class="name">
+            <span class="en-name">Guan Syun Su</span>
+            <span class="muted">/ <span class="zh-name">蘇冠勳</span></span>
+          </div>
           <div class="role" data-zh="大氣暴露 · PFAS 採樣" data-en="Environmental Exposure · PFAS air sampling">大氣暴露 · PFAS 採樣</div>
         </div>
       </div>
@@ -75,8 +79,7 @@
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">PFAS Gas–Particle Partitioning in PM2.5</div>
-            <div class="card-desc" data-zh="多城市研究：化合物特性與氣固相分配。"
-                 data-en="Multi-city study on compound-specific behavior and partitioning.">多城市研究：化合物特性與氣固相分配。</div>
+            <div class="card-desc" data-zh="多城市研究：化合物特性與氣固相分配。" data-en="Multi-city study on compound-specific behavior and partitioning.">多城市研究：化合物特性與氣固相分配。</div>
             <div class="tags"><span>PFAS</span><span>Air</span><span>PCA/RDA</span><span>Python</span></div>
           </div>
         </a>
@@ -85,8 +88,7 @@
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1544256718-3bcf237f3971?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">Exposure Dashboard</div>
-            <div class="card-desc" data-zh="互動式儀表板：污染趨勢與風險指標可視化。"
-                 data-en="Interactive dashboard visualizing pollutant trends & risk indices.">互動式儀表板：污染趨勢與風險指標可視化。</div>
+            <div class="card-desc" data-zh="互動式儀表板：污染趨勢與風險指標可視化。" data-en="Interactive dashboard visualizing pollutant trends & risk indices.">互動式儀表板：污染趨勢與風險指標可視化。</div>
             <div class="tags"><span>React</span><span>Animations</span><span>Viz</span></div>
           </div>
         </a>
@@ -95,8 +97,7 @@
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">Scientific Graphics Toolkit</div>
-            <div class="card-desc" data-zh="論文與簡報的高質感作圖模板。"
-                 data-en="Polished plotting templates for papers and talks.">論文與簡報的高質感作圖模板。</div>
+            <div class="card-desc" data-zh="論文與簡報的高質感作圖模板。" data-en="Polished plotting templates for papers and talks.">論文與簡報的高質感作圖模板。</div>
             <div class="tags"><span>Matplotlib</span><span>Design</span></div>
           </div>
         </a>
@@ -209,19 +210,16 @@
   <footer class="footer">
     <div class="container small">
       © <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS
-      <p>Ver:1.6.2</p>
-      <p>Ver:2.0</p>
+      <p>Ver:2.1</p>
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS（原樣保留） -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // ---------- Year ----------
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // ---------- Language toggle ----------
       let zh = (localStorage.getItem('lang') !== 'en');
       const applyLang = () => {
         document.documentElement.lang = zh ? 'zh-Hant' : 'en';
@@ -240,10 +238,7 @@
         applyLang();
       });
 
-      // ---------- Theme (light/dark only) ----------
       const root = document.documentElement;
-
-      // default by system, then localStorage
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : (root.getAttribute('data-theme') || 'light'));
       root.setAttribute('data-theme', theme);
