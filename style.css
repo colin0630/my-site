@@ -142,7 +142,7 @@ img { max-width: 100%; display: block }
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
-  text-decoration-color: #8b5cf6; /* 淺色模式紫色 */
+  text-decoration-color: #a78bfa; /* 淺色模式淡紫 */
 }
 [data-theme="dark"] .author-highlight {
   text-decoration-color: #d9d9ff; /* 深色模式亮藍白 */
