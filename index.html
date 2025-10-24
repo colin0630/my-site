@@ -17,37 +17,6 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1200&auto=format&fit=crop" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="/" />
-
-  <style>
-    /* small, helpful defaults in case style.css hasn't loaded yet */
-    html{scroll-behavior:smooth}
-    .btn{display:inline-block;padding:.6rem 1rem;border-radius:.75rem;border:1px solid currentColor;text-decoration:none}
-    .btn.small{padding:.35rem .6rem;font-size:.9rem}
-    .btn.ghost{opacity:.85}
-    .muted{opacity:.7}
-    .avatar{width:48px;height:48px;border-radius:9999px;object-fit:cover}
-    .container{max-width:960px;margin:0 auto;padding:0 1rem}
-    .nav{position:sticky;top:0;background:#fff;backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #eee;z-index:50}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 0}
-    .brand{display:flex;gap:.75rem;align-items:center}
-    .links a, .links button{margin-left:1rem}
-    .hero{position:relative;padding:6rem 0}
-    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg, #f7fafc, transparent 60%);z-index:-1}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-    .card{display:block;border:1px solid #eee;border-radius:1rem;overflow:hidden;text-decoration:none;color:inherit;background:#fff}
-    .thumb{height:160px;background-size:cover;background-position:center}
-    .card-body{padding:1rem}
-    .card-title{font-weight:700;margin-bottom:.25rem}
-    .tags span{display:inline-block;margin-right:.5rem;margin-top:.5rem;font-size:.8rem;padding:.15rem .5rem;border-radius:999px;background:#f1f5f9}
-    .section{padding:4rem 0}
-    .section.alt{background:#0f172a;color:#f8fafc}
-    .list{display:grid;gap:.85rem}
-    .author-highlight{font-weight:800}
-    .contact-icons{display:flex;gap:.75rem;margin-top:.75rem}
-    .icon-btn{display:inline-flex;width:40px;height:40px;border-radius:10px;align-items:center;justify-content:center;background:#f1f5f9;border:1px solid #e5e7eb}
-    .icon-btn img{width:20px;height:20px}
-    .footer{padding:2rem 0;border-top:1px solid #eee}
-  </style>
 </head>
 <body>
   <!-- NAV -->
@@ -65,8 +34,15 @@
         <a href="#pubs" data-zh="發表" data-en="Publications">發表</a>
         <a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a>
         <a href="Guan_Syun_Su_CV.pdf" data-zh="履歷" data-en="CV" target="_blank" rel="noopener" download>履歷</a>
-        <button id="langBtn" class="btn small">中文/EN</button>
-        <button id="themeBtn" class="btn small">🌓</button>
+        <button id="langBtn" class="btn small" type="button">中文/EN</button>
+        <button id="themeBtn" class="btn small" type="button" title="切換深/淺">🌙</button>
+        <select id="accentSelect" class="btn small" title="切換主色">
+          <option value="violet">Violet</option>
+          <option value="teal">Teal</option>
+          <option value="cyan">Cyan</option>
+          <option value="amber">Amber</option>
+          <option value="rose">Rose</option>
+        </select>
       </nav>
     </div>
   </header>
@@ -85,7 +61,7 @@
       <p class="lead" data-zh="2024 是最接近夢想的一年，要變得很厲害喔！" data-en="2024 is the year closest to the dream—time to level up!">2024 是最接近夢想的一年，要變得很厲害喔！</p>
       <p class="lead" data-zh="這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！" data-en="This space is how I build my story: remember everything and keep going. Let's see how far we can go.">這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！</p>
       <div class="cta" role="group" aria-label="Primary">
-        <a href="#projects" class="btn" data-zh="看看作品" data-en="See Projects">看看作品</a>
+        <a href="#projects" class="btn primary" data-zh="看看作品" data-en="See Projects">看看作品</a>
         <a href="#contact" class="btn ghost" data-zh="聯絡我" data-en="Contact">聯絡我</a>
         <a href="Guan_Syun_Su_CV.pdf" class="btn ghost" target="_blank" rel="noopener" download data-zh="下載履歷" data-en="Download CV">下載履歷</a>
       </div>
@@ -242,11 +218,11 @@
   <!-- SCRIPTS -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Year
+      // ---------- Year ----------
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // Language state
+      // ---------- Language toggle ----------
       let zh = (localStorage.getItem('lang') !== 'en');
       const applyLang = () => {
         document.documentElement.lang = zh ? 'zh-Hant' : 'en';
@@ -258,14 +234,62 @@
       };
       applyLang();
 
-      // toggle button
-      const btn = document.getElementById('langBtn');
-      if (btn) {
-        btn.addEventListener('click', () => {
+      const langBtn = document.getElementById('langBtn');
+      if (langBtn) {
+        langBtn.addEventListener('click', () => {
           zh = !zh;
           localStorage.setItem('lang', zh ? 'zh' : 'en');
-          btn.setAttribute('aria-pressed', String(zh));
           applyLang();
+        });
+      }
+
+      // ---------- Theme & Accent ----------
+      const root = document.documentElement;
+
+      // Ensure attributes exist
+      if (!root.hasAttribute('data-theme')) root.setAttribute('data-theme', 'dark');
+      if (!root.hasAttribute('data-accent')) root.setAttribute('data-accent', 'violet');
+
+      // Load from localStorage
+      let theme  = localStorage.getItem('theme')  || root.getAttribute('data-theme');
+      let accent = localStorage.getItem('accent') || root.getAttribute('data-accent');
+      root.setAttribute('data-theme', theme);
+      root.setAttribute('data-accent', accent);
+
+      // Theme button (auto-create if missing)
+      let themeBtn = document.getElementById('themeBtn');
+      if (!themeBtn) {
+        const links = document.querySelector('.links');
+        if (links) {
+          themeBtn = document.createElement('button');
+          themeBtn.id = 'themeBtn';
+          themeBtn.className = 'btn small';
+          themeBtn.type = 'button';
+          links.appendChild(themeBtn);
+        }
+      }
+
+      const updateThemeIcon = () => {
+        if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '🌙' : '☀️';
+      };
+      updateThemeIcon();
+
+      const toggleTheme = () => {
+        theme = (theme === 'dark') ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateThemeIcon();
+      };
+      if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+      // Accent select
+      const accentSelect = document.getElementById('accentSelect');
+      if (accentSelect) {
+        accentSelect.value = accent;
+        accentSelect.addEventListener('change', () => {
+          accent = accentSelect.value;
+          root.setAttribute('data-accent', accent);
+          localStorage.setItem('accent', accent);
         });
       }
     });
@@ -288,34 +312,5 @@
     ]
   }
   </script>
-  // ============ 主題與重點色切換 ============
-// 預設：從 localStorage 讀取設定（沒有就用 HTML 上的屬性）
-const root = document.documentElement;
-const themeBtn = document.getElementById('themeBtn');
-let theme = localStorage.getItem('theme') || root.getAttribute('data-theme');
-let accent = localStorage.getItem('accent') || root.getAttribute('data-accent');
-
-// 套用目前設定
-root.setAttribute('data-theme', theme);
-root.setAttribute('data-accent', accent);
-
-// 切換函式
-function toggleTheme() {
-  theme = (theme === 'dark') ? 'light' : 'dark';
-  localStorage.setItem('theme', theme);
-  root.setAttribute('data-theme', theme);
-  // 動畫提示
-  themeBtn.textContent = (theme === 'dark') ? '🌙' : '☀️';
-}
-
-// 監聽按鈕
-if (themeBtn) {
-  themeBtn.textContent = (theme === 'dark') ? '🌙' : '☀️';
-  themeBtn.addEventListener('click', toggleTheme);
-}
-
-// （可選）如果想切換主色
-// root.setAttribute('data-accent', 'teal');
-// localStorage.setItem('accent', 'teal');
 </body>
 </html>
