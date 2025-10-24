@@ -201,5 +201,17 @@ img { max-width: 100%; display: block }
 }
 #contact .icon-btn img { filter: brightness(1.8) saturate(1.25); }
 
-/* ===== 移除原本「固定色塊」以支援深色模式 ===== */
-/* （不再使用硬編碼 #e9ecfb / #b2a4e0，改為依變數自適應） */
+/* --------- 名字底線顏色：依主題切換 --------- */
+.en-name, .zh-name, .author-highlight {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: #8b5cf6; /* 淺色模式預設紫色 */
+}
+
+[data-theme="dark"] .en-name,
+[data-theme="dark"] .zh-name,
+[data-theme="dark"] .author-highlight {
+  text-decoration-color: #d9d9ff; /* 深色模式微亮藍白 */
+}
+
