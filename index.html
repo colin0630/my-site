@@ -9,98 +9,120 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- SEO / Social -->
+  <meta property="og:title" content="Guan Syun Su · Portfolio" />
+  <meta property="og:description" content="NYCU master's student focusing on atmospheric PFAS exposure, data analysis, and scientific visualization." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1200&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="/" />
+
+  <style>
+    /* small, helpful defaults in case style.css hasn't loaded yet */
+    html{scroll-behavior:smooth}
+    .btn{display:inline-block;padding:.6rem 1rem;border-radius:.75rem;border:1px solid currentColor;text-decoration:none}
+    .btn.small{padding:.35rem .6rem;font-size:.9rem}
+    .btn.ghost{opacity:.85}
+    .muted{opacity:.7}
+    .avatar{width:48px;height:48px;border-radius:9999px;object-fit:cover}
+    .container{max-width:960px;margin:0 auto;padding:0 1rem}
+    .nav{position:sticky;top:0;background:#fff;backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #eee;z-index:50}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 0}
+    .brand{display:flex;gap:.75rem;align-items:center}
+    .links a, .links button{margin-left:1rem}
+    .hero{position:relative;padding:6rem 0}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg, #f7fafc, transparent 60%);z-index:-1}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .card{display:block;border:1px solid #eee;border-radius:1rem;overflow:hidden;text-decoration:none;color:inherit;background:#fff}
+    .thumb{height:160px;background-size:cover;background-position:center}
+    .card-body{padding:1rem}
+    .card-title{font-weight:700;margin-bottom:.25rem}
+    .tags span{display:inline-block;margin-right:.5rem;margin-top:.5rem;font-size:.8rem;padding:.15rem .5rem;border-radius:999px;background:#f1f5f9}
+    .section{padding:4rem 0}
+    .section.alt{background:#0f172a;color:#f8fafc}
+    .list{display:grid;gap:.85rem}
+    .author-highlight{font-weight:800}
+    .contact-icons{display:flex;gap:.75rem;margin-top:.75rem}
+    .icon-btn{display:inline-flex;width:40px;height:40px;border-radius:10px;align-items:center;justify-content:center;background:#f1f5f9;border:1px solid #e5e7eb}
+    .icon-btn img{width:20px;height:20px}
+    .footer{padding:2rem 0;border-top:1px solid #eee}
+  </style>
 </head>
 <body>
   <!-- NAV -->
-  <header class="nav">
+  <header class="nav" role="navigation" aria-label="Main">
     <div class="container nav-inner">
       <div class="brand">
-        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=128&auto=format&fit=crop" alt="avatar" class="avatar" />
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=128&auto=format&fit=crop" alt="Avatar" class="avatar" loading="lazy" decoding="async" />
         <div>
-          <div class="name">Guan-Syun, Su <span class="muted">/ 蘇冠勳</span></div>
-          <div class="role">Environmental Exposure · PFAS air sampling</div>
+          <div class="name">Guan‑Syun Su <span class="muted">/ 蘇冠勳</span></div>
+          <div class="role" data-zh="大氣暴露 · PFAS 採樣" data-en="Environmental Exposure · PFAS air sampling">大氣暴露 · PFAS 採樣</div>
         </div>
       </div>
-       <nav class="links">
+      <nav class="links">
         <a href="#projects" data-zh="作品" data-en="Projects">作品</a>
         <a href="#pubs" data-zh="發表" data-en="Publications">發表</a>
         <a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a>
-        <a href="Guan_Syun_Su_CV.pdf" data-zh="履歷" data-en="CV" target="_blank" rel="noopener">履歷</a>
-        <button id="langBtn" class="btn small">中文/EN</button>
-</nav>
+        <a href="Guan_Syun_Su_CV.pdf" data-zh="履歷" data-en="CV" target="_blank" rel="noopener" download>履歷</a>
+        <button id="langBtn" class="btn small" type="button" aria-pressed="true">中文/EN</button>
+      </nav>
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" aria-labelledby="hero-title">
     <div class="container">
-      <h1
+      <h1 id="hero-title"
         data-zh="冠勳的網站搭建中"
         data-en="A personal site that blends personality and professionalism"
-      >
-        冠勳的網站搭建中
-      </h1>
-      <p
-        class="lead"
-        data-zh="陽明交大碩士生，專注大氣PFAS採樣分析方法開發，資料分析與科學視覺化。"
-        data-en="NYCU master's student focusing on atmospheric PFAS exposure, data analysis, and scientific visualization."
-      >
-        陽明交大碩士生，專注大氣PFAS採樣分析方法開發，資料分析與科學視覺化。
-      </p>
-      <p
-        class="lead"
-        data-zh="024 是最接近夢想的一年，要變得很厲害喔!"
-      </p>
-        <p
-        class="lead"
-        data-zh="024 這裡是如何構成一個我的故事， 記得每一件事然後繼續下去，直到快吸不到氣了，直到心臟快跳不動了，就讓我們看看能走到哪裡吧！"
-      </p>
-      <div class="cta">
-  <a href="#projects" class="btn" data-zh="看看作品" data-en="See Projects">看看作品</a>
-  <a href="#contact" class="btn ghost" data-zh="聯絡我" data-en="Contact">聯絡我</a>
-  <a href="Guan_Syun_Su_CV.pdf" class="btn ghost" target="_blank" rel="noopener" data-zh="下載履歷" data-en="Download CV">下載履歷</a>
-</div>
+      >冠勳的網站搭建中</h1>
+      <p class="lead"
+        data-zh="陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。"
+        data-en="NYCU master's student focusing on atmospheric PFAS exposure, analytical method development, data analysis, and scientific visualization."
+      >陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。</p>
+      <p class="lead" data-zh="2024 是最接近夢想的一年，要變得很厲害喔！" data-en="2024 is the year closest to the dream—time to level up!">2024 是最接近夢想的一年，要變得很厲害喔！</p>
+      <p class="lead" data-zh="這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！" data-en="This space is how I build my story: remember everything and keep going. Let's see how far we can go.">這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！</p>
+      <div class="cta" role="group" aria-label="Primary">
+        <a href="#projects" class="btn" data-zh="看看作品" data-en="See Projects">看看作品</a>
+        <a href="#contact" class="btn ghost" data-zh="聯絡我" data-en="Contact">聯絡我</a>
+        <a href="Guan_Syun_Su_CV.pdf" class="btn ghost" target="_blank" rel="noopener" download data-zh="下載履歷" data-en="Download CV">下載履歷</a>
+      </div>
     </div>
-    <div class="hero-bg"></div>
+    <div class="hero-bg" aria-hidden="true"></div>
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="section">
+  <section id="projects" class="section" aria-labelledby="proj-title">
     <div class="container">
-      <h2 data-zh="精選作品" data-en="Featured Projects">精選作品</h2>
+      <h2 id="proj-title" data-zh="精選作品" data-en="Featured Projects">精選作品</h2>
       <div class="grid">
-        <a class="card" href="#" target="_blank">
+        <a class="card" href="#" target="_blank" rel="noopener">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">PFAS Gas–Particle Partitioning in PM2.5</div>
             <div class="card-desc" data-zh="多城市研究：化合物特性與氣固相分配。"
-                 data-en="Multi-city study on compound-specific behavior and partitioning.">
-              多城市研究：化合物特性與氣固相分配。
-            </div>
+                 data-en="Multi-city study on compound-specific behavior and partitioning.">多城市研究：化合物特性與氣固相分配。</div>
             <div class="tags"><span>PFAS</span><span>Air</span><span>PCA/RDA</span><span>Python</span></div>
           </div>
         </a>
 
-        <a class="card" href="#" target="_blank">
+        <a class="card" href="#" target="_blank" rel="noopener">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1544256718-3bcf237f3971?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">Exposure Dashboard</div>
             <div class="card-desc" data-zh="互動式儀表板：污染趨勢與風險指標可視化。"
-                 data-en="Interactive dashboard visualizing pollutant trends & risk indices.">
-              互動式儀表板：污染趨勢與風險指標可視化。
-            </div>
+                 data-en="Interactive dashboard visualizing pollutant trends & risk indices.">互動式儀表板：污染趨勢與風險指標可視化。</div>
             <div class="tags"><span>React</span><span>Animations</span><span>Viz</span></div>
           </div>
         </a>
 
-        <a class="card" href="#" target="_blank">
+        <a class="card" href="#" target="_blank" rel="noopener">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop');"></div>
           <div class="card-body">
             <div class="card-title">Scientific Graphics Toolkit</div>
             <div class="card-desc" data-zh="論文與簡報的高質感作圖模板。"
-                 data-en="Polished plotting templates for papers and talks.">
-              論文與簡報的高質感作圖模板。
-            </div>
+                 data-en="Polished plotting templates for papers and talks.">論文與簡報的高質感作圖模板。</div>
             <div class="tags"><span>Matplotlib</span><span>Design</span></div>
           </div>
         </a>
@@ -109,67 +131,66 @@
   </section>
 
   <!-- PUBLICATIONS -->
-  <section id="pubs" class="section alt">
+  <section id="pubs" class="section alt" aria-labelledby="pubs-title">
     <div class="container">
-      <h2 data-zh="學術發表" data-en="Publications">學術發表</h2>
+      <h2 id="pubs-title" data-zh="學術發表" data-en="Publications">學術發表</h2>
       <ul class="list">
         <li style="font-size: 1.1rem;">
-          <a href="#" target="_blank">Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS in Ambient PM2.5 across Urban, Traffic, Industrial and Background Area in Taiwan.</a>
-          <div class="muted"><strong style="color:#fff; font-weight:700;">Guan Syun Su</strong>, Yen Shun Hsu, Neng Huei Lin, Kai Hsien Chi · 45th International Symposium on Halogenated Persistent Organic Pollutants (POPs), 2025, Antalya</div>
+          <a href="#" target="_blank" rel="noopener">Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS in Ambient PM2.5 across Urban, Traffic, Industrial and Background Area in Taiwan.</a>
+          <div class="muted"><span class="author-highlight">Guan Syun Su</span>, Yen Shun Hsu, Neng Huei Lin, Kai Hsien Chi · 45th International Symposium on Halogenated Persistent Organic Pollutants (POPs), 2025, Antalya</div>
         </li>
         <li style="font-size: 1.1rem;">
-          <a href="#" target="_blank">台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查</a>
-          <div class="muted"><strong style="color:#fff; font-weight:700;">蘇冠勳</strong>、徐衍舜、紀凱獻 · 中華民國環境工程學會第三十七屆年會暨各專門學術研討會，2025，高雄市</div>
+          <a href="#" target="_blank" rel="noopener">台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查</a>
+          <div class="muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 中華民國環境工程學會第三十七屆年會暨各專門學術研討會，2025，高雄市</div>
         </li>
-         <li style="font-size: 1.1rem;">
-          <a href="#" target="_blank">台灣都會及工業區大氣PFAS之氣固相分佈及物種分佈特性研究</a>
-          <div class="muted"><strong style="color:#fff; font-weight:700;">蘇冠勳</strong>、徐衍舜、紀凱獻 · 第32屆國際氣膠科技研討會，2025，台南市</div>
-        </li> 
+        <li style="font-size: 1.1rem;">
+          <a href="#" target="_blank" rel="noopener">台灣都會及工業區大氣PFAS之氣固相分佈及物種分佈特性研究</a>
+          <div class="muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 第32屆國際氣膠科技研討會，2025，台南市</div>
+        </li>
         <li>
-          <a href="#" target="_blank">大氣中PM2.5全氟/多氟烷機物質（PFAS）採樣方法及臺灣五座城市大氣中濃度</a>
-          <div class="muted"><strong style="color:#fff; font-weight:700;">蘇冠勳</strong>、徐衍舜、紀凱獻· 2025空氣品質改善研討會：創新實務與永續政策，2025，台北市</div>
-        </li> 
+          <a href="#" target="_blank" rel="noopener">大氣中PM2.5全氟/多氟烷機物質（PFAS）採樣方法及臺灣五座城市大氣中濃度</a>
+          <div class="muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 2025空氣品質改善研討會：創新實務與永續政策，2025，台北市</div>
+        </li>
         <li style="font-size: 1.1rem;">
-          <a href="#" target="_blank">大氣氣固相全氟/多氟烷基物質(PFAS)採樣及分析技術方法開發</a>
-          <div class="muted"><strong style="color:#fff; font-weight:700;">蘇冠勳</strong>、徐衍舜、鄭恬恬、紀凱獻· 第39屆環境分析研討會，2025，桃園市</div>
-        </li> 
+          <a href="#" target="_blank" rel="noopener">大氣氣固相全氟/多氟烷基物質(PFAS)採樣及分析技術方法開發</a>
+          <div class="muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、鄭恬恬、紀凱獻 · 第39屆環境分析研討會，2025，桃園市</div>
+        </li>
         <li style="font-size: 1.1rem;">
-          <a href="#" target="_blank">亞洲三個城市在沙塵暴和非沙塵暴期間大氣持久性有機污染物(POPs)的來源解析和健康影響</a>
-          <div class="muted">Shahzada Amani Room, <strong style="color:#fff; font-weight:700;">蘇冠勳</strong>, 葉韋辰, 陳柏睿, 潘詩諭, Lodoysamba Sereeter, 林聖倫, 紀凱獻 · 第31屆國際氣膠科技研討會，2024，宜蘭市</div>
-        </li> 
+          <a href="#" target="_blank" rel="noopener">亞洲三個城市在沙塵暴和非沙塵暴期間大氣持久性有機污染物(POPs)的來源解析和健康影響</a>
+          <div class="muted">Shahzada Amani Room, <span class="author-highlight">蘇冠勳</span>, 葉韋辰, 陳柏睿, 潘詩諭, Lodoysamba Sereeter, 林聖倫, 紀凱獻 · 第31屆國際氣膠科技研討會，2024，宜蘭市</div>
+        </li>
         <li style="font-size: 1.1rem;">
-          <a href="#" target="_blank">寺廟線香燃燒微粒之暴露特徵</a>
-          <div class="muted"><strong style="color:#fff; font-weight:700;">蘇冠勳</strong>，王櫻芳· 2023環境安全衛生暨消防工程研討會，2023，高雄市</div>
+          <a href="#" target="_blank" rel="noopener">寺廟線香燃燒微粒之暴露特徵</a>
+          <div class="muted"><span class="author-highlight">蘇冠勳</span>，王櫻芳 · 2023環境安全衛生暨消防工程研討會，2023，高雄市</div>
         </li>
       </ul>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section id="experience" class="section">
+  <section id="experience" class="section" aria-labelledby="xp-title">
     <div class="container">
-      <h2 data-zh="經歷" data-en="Experience">經歷</h2>
+      <h2 id="xp-title" data-zh="經歷" data-en="Experience">經歷</h2>
       <div class="experience">
         <div class="xp">
-          <div class="xp-head">工業技術研究院-院部，實習生 <span class="muted">2023</span></div>
+          <div class="xp-head">工業技術研究院－院部，實習生 <span class="muted">2023</span></div>
           <ul>
             <li>SDGs</li>
             <li>危害性化學品管理</li>
             <li>事故資料統計分析</li>
           </ul>
         </div>
-        </div>
       </div>
     </div>
   </section>
 
-    <!-- Education -->
-  <section id="Education" class="section">
+  <!-- Education -->
+  <section id="education" class="section" aria-labelledby="edu-title">
     <div class="container">
-      <h2 data-zh="學歷" data-en="Experience">學歷</h2>
+      <h2 id="edu-title" data-zh="學歷" data-en="Education">學歷</h2>
       <div class="Education">
         <div class="edu">
-          <div class="edu-head">NYCU · IEOHS – Graduate Researcher <span class="muted">2024-</span></div>
+          <div class="edu-head">NYCU · IEOHS – Graduate Researcher <span class="muted">2024–</span></div>
           <ul>
             <li>Atmospheric sampling (PUF/QFF), QA/QC</li>
             <li>R/Python pipeline: PCA, PRDA/RDA, risk assessment</li>
@@ -177,7 +198,7 @@
           </ul>
         </div>
         <div class="edu">
-          <div class="edu-head">CSMU · OSH <span class="muted">2020—2024</span></div>
+          <div class="edu-head">CSMU · OSH <span class="muted">2020–2024</span></div>
           <ul>
             <li>Temple incense exposure</li>
             <li>Particle size distribution</li>
@@ -187,29 +208,28 @@
     </div>
   </section>
 
-
   <!-- CONTACT -->
-  <section id="contact" class="section alt">
-  <div class="container">
-    <h2 data-zh="聯絡" data-en="Contact">聯絡</h2>
-    <p data-zh="歡迎合作或討論研究。" data-en="Open to collaborations or research discussions.">歡迎合作或討論研究。</p>
+  <section id="contact" class="section alt" aria-labelledby="contact-title">
+    <div class="container">
+      <h2 id="contact-title" data-zh="聯絡" data-en="Contact">聯絡</h2>
+      <p data-zh="歡迎合作或討論研究。" data-en="Open to collaborations or research discussions.">歡迎合作或討論研究。</p>
 
-    <div class="contact-icons">
-      <a href="mailto:sucolin1@gmail.com" class="icon-btn" title="Email">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail">
-      </a>
+      <div class="contact-icons" role="group" aria-label="Links">
+        <a href="mailto:sucolin1@gmail.com" class="icon-btn" title="Email">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail" loading="lazy" decoding="async">
+        </a>
 
-      <a href="https://discord.gg/SAXzaDJTTQ" class="icon-btn" target="_blank" rel="noopener" title="Discord">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
-      </a>
+        <a href="https://discord.gg/SAXzaDJTTQ" class="icon-btn" target="_blank" rel="noopener" title="Discord">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord" loading="lazy" decoding="async">
+        </a>
 
-      <a href="https://www.linkedin.com/in/%E5%86%A0%E5%8B%B3-%E8%98%87-250171283?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
-         class="icon-btn" target="_blank" rel="noopener" title="LinkedIn">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
-      </a>
+        <a href="https://www.linkedin.com/in/%E5%86%A0%E5%8B%B3-%E8%98%87-250171283?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
+           class="icon-btn" target="_blank" rel="noopener" title="LinkedIn">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" loading="lazy" decoding="async">
+        </a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -220,15 +240,15 @@
 
   <!-- SCRIPTS -->
   <script>
-    // 確保 DOM 準備好
     document.addEventListener('DOMContentLoaded', () => {
-      // 年份（不重繪整個 body）
+      // Year
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // 語言狀態（localStorage 記住使用者選擇）
+      // Language state
       let zh = (localStorage.getItem('lang') !== 'en');
       const applyLang = () => {
+        document.documentElement.lang = zh ? 'zh-Hant' : 'en';
         document.querySelectorAll('[data-zh]').forEach(el => {
           const zhText = el.getAttribute('data-zh');
           const enText = el.getAttribute('data-en');
@@ -237,16 +257,35 @@
       };
       applyLang();
 
-      // 切換按鈕
+      // toggle button
       const btn = document.getElementById('langBtn');
       if (btn) {
         btn.addEventListener('click', () => {
           zh = !zh;
           localStorage.setItem('lang', zh ? 'zh' : 'en');
+          btn.setAttribute('aria-pressed', String(zh));
           applyLang();
         });
       }
     });
+  </script>
+
+  <!-- Schema.org Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Guan Syun Su",
+    "alternateName": "蘇冠勳",
+    "jobTitle": "Graduate Researcher",
+    "affiliation": {"@type":"CollegeOrUniversity","name":"NYCU IEOHS"},
+    "knowsAbout": ["PFAS","Air Sampling","Exposure Assessment","Data Visualization"],
+    "url": "/",
+    "sameAs": [
+      "mailto:sucolin1@gmail.com",
+      "https://www.linkedin.com/in/%E5%86%A0%E5%8B%B3-%E8%98%87-250171283"
+    ]
+  }
   </script>
 </body>
 </html>
