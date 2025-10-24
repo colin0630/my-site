@@ -37,16 +37,15 @@ img { max-width: 100%; display: block }
   --card-border: rgba(255,255,255,0.14);
   --card-fg:#ffffff;
 
-  /* hero accent（固定透明紫調，與主題無關） */
   --hero-a: rgba(139,92,246,.35);
 }
 
 [data-theme="light"] {
-  --bg:#f8fafc;         /* slate-50 */
-  --bg-2:#eef2ff;       /* indigo-50 */
+  --bg:#f8fafc;
+  --bg-2:#eef2ff;
   --surface:#ffffff;
-  --text:#0f172a;       /* slate-900 */
-  --muted:#475569;      /* slate-600 */
+  --text:#0f172a;
+  --muted:#475569;
   --divider: rgba(2,6,23,0.08);
   --shadow: 0 8px 24px rgba(2,6,23,.08);
 
@@ -138,11 +137,15 @@ img { max-width: 100%; display: block }
 /* --------- Lists / Publications --------- */
 .list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none }
 
-/* 名字底線（含 header 與發表區） */
-.en-name, .zh-name, .author-highlight {
+/* --------- 名字底線樣式（僅 Publications） --------- */
+.author-highlight {
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: #8b5cf6; /* 淺色模式紫色 */
+}
+[data-theme="dark"] .author-highlight {
+  text-decoration-color: #d9d9ff; /* 深色模式亮藍白 */
 }
 
 /* --------- Contact --------- */
@@ -154,7 +157,6 @@ img { max-width: 100%; display: block }
   transition: transform .15s ease, background .2s ease;
 }
 .icon-btn:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--white) 16%, transparent) }
-/* 還原 icon 尺寸（避免過大） */
 .icon-btn img { width: 20px; height: 20px; opacity: .95 }
 
 /* --------- Footer --------- */
@@ -174,19 +176,13 @@ img { max-width: 100%; display: block }
 
 /* ===== Contact section (theme-aware) ===== */
 #contact.section.alt {
-  /* 淺色：比背景稍亮；深色：比背景稍深 */
-  background:
-    color-mix(in oklab, var(--bg) 75%, var(--white) 10%);
+  background: color-mix(in oklab, var(--bg) 75%, var(--white) 10%);
   color: var(--text);
   border-top: 1px solid var(--divider);
 }
-
 [data-theme="dark"] #contact.section.alt {
-  /* 深色模式再調暗一點，維持對比 */
-  background:
-    color-mix(in oklab, var(--bg) 92%, var(--white) 6%);
+  background: color-mix(in oklab, var(--bg) 92%, var(--white) 6%);
 }
-
 #contact .contact-icons { margin-top: 16px; }
 #contact .icon-btn {
   background: color-mix(in oklab, var(--white) 18%, transparent);
@@ -200,18 +196,3 @@ img { max-width: 100%; display: block }
   transform: translateY(-3px);
 }
 #contact .icon-btn img { filter: brightness(1.8) saturate(1.25); }
-
-/* --------- 名字底線顏色：依主題切換 --------- */
-.en-name, .zh-name, .author-highlight {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  text-decoration-color: #8b5cf6; /* 淺色模式預設紫色 */
-}
-
-[data-theme="dark"] .en-name,
-[data-theme="dark"] .zh-name,
-[data-theme="dark"] .author-highlight {
-  text-decoration-color: #d9d9ff; /* 深色模式微亮藍白 */
-}
-
