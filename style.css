@@ -79,7 +79,7 @@ img { max-width: 100%; display: block }
 .btn.small { padding: .4rem .75rem; font-size: .9rem }
 .btn:hover { transform: translateY(-1px) }
 .btn:active { transform: translateY(0) }
-.btn.primary { background: #8b5cf6; color: #fff; border: none; font-weight: 700 }   /* 固定主按鈕色 */
+.btn.primary { background: #8b5cf6; color: #fff; border: none; font-weight: 700 }
 .btn.primary:hover { background: #7c3aed }
 .btn.ghost { background: transparent; border: 1px solid color-mix(in oklab, currentColor 55%, transparent) }
 
@@ -137,7 +137,13 @@ img { max-width: 100%; display: block }
 
 /* --------- Lists / Publications --------- */
 .list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none }
-.author-highlight { font-weight: 900 }
+
+/* 名字底線（含 header 與發表區） */
+.en-name, .zh-name, .author-highlight {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
 
 /* --------- Contact --------- */
 .contact-icons { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap }
@@ -148,10 +154,16 @@ img { max-width: 100%; display: block }
   transition: transform .15s ease, background .2s ease;
 }
 .icon-btn:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--white) 16%, transparent) }
+/* 還原 icon 尺寸（避免過大） */
 .icon-btn img { width: 20px; height: 20px; opacity: .95 }
 
 /* --------- Footer --------- */
-.footer { padding: 28px 0; border-top: 1px solid var(--divider); color: color-mix(in oklab, var(--section-fg) 82%, var(--muted) 18%) }
+.footer {
+  padding: 28px 0;
+  border-top: 1px solid var(--divider);
+  color: color-mix(in oklab, var(--section-fg) 82%, var(--muted) 18%);
+  background: color-mix(in oklab, var(--bg) 90%, var(--black) 12%);
+}
 
 /* --------- Responsive --------- */
 @media (max-width: 720px) {
@@ -160,45 +172,34 @@ img { max-width: 100%; display: block }
   .links a { display: none }
 }
 
-/* ===== Brighten Contact Section ===== */
+/* ===== Contact section (theme-aware) ===== */
 #contact.section.alt {
-  background: color-mix(in oklab, var(--bg) 75%, white 10%);
+  /* 淺色：比背景稍亮；深色：比背景稍深 */
+  background:
+    color-mix(in oklab, var(--bg) 75%, var(--white) 10%);
   color: var(--text);
+  border-top: 1px solid var(--divider);
 }
 
-#contact .contact-icons {
-  margin-top: 16px;
+[data-theme="dark"] #contact.section.alt {
+  /* 深色模式再調暗一點，維持對比 */
+  background:
+    color-mix(in oklab, var(--bg) 92%, var(--white) 6%);
 }
 
+#contact .contact-icons { margin-top: 16px; }
 #contact .icon-btn {
-  background: color-mix(in oklab, var(--white) 25%, transparent);
-  border-color: rgba(255,255,255,0.40);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  background: color-mix(in oklab, var(--white) 18%, transparent);
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
   transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
 }
-
 #contact .icon-btn:hover {
-  background: color-mix(in oklab, var(--white) 40%, transparent);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  background: color-mix(in oklab, var(--white) 30%, transparent);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
   transform: translateY(-3px);
 }
+#contact .icon-btn img { filter: brightness(1.8) saturate(1.25); }
 
-#contact .icon-btn img {
-  filter: brightness(2) saturate(1.4);
-}
-
-/* ===== Contact & Footer fixed tone ===== */
-
-/* 聯絡區（顏色一：柔和藍灰） */
-#contact.section.alt {
-  background: #e9ecfb;  /* 或 #eaf0ff 若想更亮 */
-  color: var(--text);
-  border-top: 1px solid rgba(0,0,0,0.08);
-}
-
-/* 頁尾（顏色二：深藍紫調） */
-.footer {
-  background: #b2a4e0;  /* 可替換成 #a99ce3 若想偏紫一點 */
-  color: #f4f4f8;
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
+/* ===== 移除原本「固定色塊」以支援深色模式 ===== */
+/* （不再使用硬編碼 #e9ecfb / #b2a4e0，改為依變數自適應） */
