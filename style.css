@@ -186,3 +186,20 @@ img { max-width: 100%; display: block }
 #contact .icon-btn img {
   filter: brightness(2) saturate(1.4);
 }
+
+/* ===== Contact vs Footer Contrast ===== */
+
+/* 聯絡區：比背景亮一點 */
+#contact.section.alt {
+  background: color-mix(in oklab, var(--bg) 75%, white 10%);
+  color: var(--text);
+  border-top: 1px solid var(--divider);
+}
+
+/* 頁尾：比聯絡區再深一階 */
+.footer {
+  background: color-mix(in oklab, var(--bg) 90%, black 15%);
+  color: color-mix(in oklab, var(--section-fg) 82%, var(--muted) 18%);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
