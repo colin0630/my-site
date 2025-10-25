@@ -1,17 +1,13 @@
 /* =============================
    Global theme (light/dark only)
    ============================= */
-
-/* Reset & base */
 * { box-sizing: border-box }
 html { scroll-behavior: smooth }
 body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans TC", "PingFang TC", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--section-fg);
-  background: var(--bg);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  color: var(--section-fg); background: var(--bg);
 }
 a { color: inherit; text-decoration: none }
 img { max-width: 100%; display: block }
@@ -22,43 +18,23 @@ img { max-width: 100%; display: block }
 /* --------- Theme tokens --------- */
 :root, [data-theme="dark"] {
   --white:#fff; --black:#000;
-
-  --bg:#0b1220;
-  --bg-2:#0f172a;
-  --surface:#0f172a;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-  --divider: rgba(255,255,255,0.08);
+  --bg:#0b1220; --bg-2:#0f172a; --surface:#0f172a;
+  --text:#e5e7eb; --muted:#94a3b8; --divider: rgba(255,255,255,0.08);
   --shadow: 0 8px 24px rgba(0,0,0,.45);
-
-  --section-fg: var(--text);
-  --hero-fg:#ffffff;
-  --card:#1a2236cc;
-  --card-border: rgba(255,255,255,0.14);
-  --card-fg:#ffffff;
-
+  --section-fg: var(--text); --hero-fg:#ffffff;
+  --card:#1a2236cc; --card-border: rgba(255,255,255,0.14); --card-fg:#ffffff;
   --hero-a: rgba(139,92,246,.35);
 }
-
 [data-theme="light"] {
-  --bg:#f8fafc;
-  --bg-2:#eef2ff;
-  --surface:#ffffff;
-  --text:#0f172a;
-  --muted:#475569;
-  --divider: rgba(2,6,23,0.08);
+  --bg:#f8fafc; --bg-2:#eef2ff; --surface:#ffffff;
+  --text:#0f172a; --muted:#475569; --divider: rgba(2,6,23,0.08);
   --shadow: 0 8px 24px rgba(2,6,23,.08);
-
-  --section-fg: var(--text);
-  --hero-fg:#0f172a;
-  --card:#ffffff;
-  --card-border: rgba(15,23,42,0.10);
-  --card-fg:#0f172a;
+  --section-fg: var(--text); --hero-fg:#0f172a;
+  --card:#ffffff; --card-border: rgba(15,23,42,0.10); --card-fg:#0f172a;
 }
 
 /* --------- Nav --------- */
-.nav {
-  position: sticky; top: 0; z-index: 50;
+.nav { position: sticky; top: 0; z-index: 50;
   background: color-mix(in oklab, var(--surface) 72%, transparent);
   backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid var(--divider);
@@ -71,10 +47,8 @@ img { max-width: 100%; display: block }
 .links a, .links button { margin-left: 14px }
 
 /* --------- Buttons --------- */
-.btn {
-  display: inline-block; padding: .6rem 1rem; border-radius: 14px; border: 1px solid currentColor; cursor: pointer;
-  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease;
-}
+.btn { display: inline-block; padding: .6rem 1rem; border-radius: 14px; border: 1px solid currentColor; cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease; }
 .btn.small { padding: .4rem .75rem; font-size: .9rem }
 .btn:hover { transform: translateY(-1px) }
 .btn:active { transform: translateY(0) }
@@ -83,89 +57,61 @@ img { max-width: 100%; display: block }
 .btn.ghost { background: transparent; border: 1px solid color-mix(in oklab, currentColor 55%, transparent) }
 
 /* --------- Hero --------- */
-.hero {
-  position: relative; padding: 80px 0 56px; text-align: left;
-  color: var(--hero-fg);
-  background:
-    radial-gradient(1200px 520px at 0% 0%, var(--hero-a), transparent 62%),
-    linear-gradient(180deg, color-mix(in oklab, var(--bg) 86%, var(--black) 14%) 0%, var(--bg) 60%);
-}
-.hero-bg { position: absolute; inset: 0; pointer-events: none }
-.hero h1 {
-  font-size: clamp(2rem, 4.3vw, 3rem);
-  line-height: 1.25; letter-spacing: .2px; font-weight: 800; margin: 0 0 14px;
-}
-.hero .lead {
-  font-size: clamp(1rem, 1.25vw, 1.1rem);
-  line-height: 1.85;
-  color: color-mix(in oklab, var(--hero-fg) 96%, transparent);
-  margin: 8px 0; max-width: 820px;
-}
+.hero { position: relative; padding: 80px 0 56px; text-align: left; color: var(--hero-fg);
+  background: radial-gradient(1200px 520px at 0% 0%, var(--hero-a), transparent 62%),
+              linear-gradient(180deg, color-mix(in oklab, var(--bg) 86%, var(--black) 14%) 0%, var(--bg) 60%); }
+.hero h1 { font-size: clamp(2rem, 4.3vw, 3rem); line-height: 1.25; letter-spacing: .2px; font-weight: 800; margin: 0 0 14px; }
+.hero .lead { font-size: clamp(1rem, 1.25vw, 1.1rem); line-height: 1.85;
+  color: color-mix(in oklab, var(--hero-fg) 96%, transparent); margin: 8px 0; max-width: 820px; }
 .hero .btn { margin-right: 10px }
 
 /* --------- Sections --------- */
 .section { padding: 60px 0; color: var(--section-fg) }
-.section h2 {
-  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
-  letter-spacing: .2px; margin: 0 0 18px; font-weight: 800;
-}
+.section h2 { font-size: clamp(1.35rem, 2.2vw, 1.8rem); letter-spacing: .2px; margin: 0 0 18px; font-weight: 800; }
 .section.alt { background: var(--bg-2) }
 
 /* --------- Grid & Cards --------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px }
-.card {
-  display: block; border-radius: 18px; overflow: hidden;
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  color: var(--card-fg);
-  box-shadow: none;
-  transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease;
-}
-.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in oklab, var(--card-border) 40%, var(--white) 60%) }
+.card { display: block; border-radius: 18px; overflow: hidden; background: var(--card);
+  border: 1px solid var(--card-border); color: var(--card-fg);
+  transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow);
+  border-color: color-mix(in oklab, var(--card-border) 40%, var(--white) 60%) }
 .thumb { height: 170px; background-size: cover; background-position: center }
 .card-body { padding: 14px }
 .card-title { font-weight: 800; margin-bottom: 6px }
 .card-desc { color: color-mix(in oklab, var(--card-fg) 92%, transparent) }
 .tags { margin-top: 6px }
-.tags span {
-  display: inline-block; margin: 6px 8px 0 0; font-size: .8rem; padding: .15rem .55rem; border-radius: 999px;
+.tags span { display: inline-block; margin: 6px 8px 0 0; font-size: .8rem; padding: .15rem .55rem; border-radius: 999px;
   background: color-mix(in oklab, var(--muted) 22%, transparent);
   color: var(--section-fg);
-  border: 1px solid color-mix(in oklab, var(--muted) 35%, transparent);
-}
+  border: 1px solid color-mix(in oklab, var(--muted) 35%, transparent); }
 
 /* --------- Lists / Publications --------- */
 .list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none }
 
-/* --------- 名字底線樣式（僅 Publications） --------- */
-.author-highlight {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  text-decoration-color: #c4b5fd; /* 淺色模式淡紫 */
+/* 名字底線（頁首不加；其他處加） */
+.en-name, .zh-name, .author-highlight {
+  text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;
+  text-decoration-color: #a78bfa; /* 淺色：淡紫 */
 }
-[data-theme="dark"] .author-highlight {
-  text-decoration-color: #d9d9ff; /* 深色模式亮藍白 */
+[data-theme="dark"] .en-name, [data-theme="dark"] .zh-name, [data-theme="dark"] .author-highlight {
+  text-decoration-color: #d9d9ff;
 }
+header .en-name, header .zh-name { text-decoration: none !important; }
 
 /* --------- Contact --------- */
 .contact-icons { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap }
-.icon-btn {
-  display: inline-flex; width: 42px; height: 42px; border-radius: 12px; align-items: center; justify-content: center;
-  background: color-mix(in oklab, var(--white) 15%, transparent);
-  border: 1px solid var(--divider);
-  transition: transform .15s ease, background .2s ease;
-}
-.icon-btn:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--white) 20%, transparent) }
+.icon-btn { display: inline-flex; width: 42px; height: 42px; border-radius: 12px; align-items: center; justify-content: center;
+  background: color-mix(in oklab, var(--white) 8%, transparent);
+  border: 1px solid var(--divider); transition: transform .15s ease, background .2s ease; }
+.icon-btn:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--white) 16%, transparent) }
 .icon-btn img { width: 20px; height: 20px; opacity: .95 }
 
 /* --------- Footer --------- */
-.footer {
-  padding: 28px 0;
-  border-top: 1px solid var(--divider);
+.footer { padding: 28px 0; border-top: 1px solid var(--divider);
   color: color-mix(in oklab, var(--section-fg) 82%, var(--muted) 18%);
-  background: color-mix(in oklab, var(--bg) 90%, var(--black) 12%);
-}
+  background: color-mix(in oklab, var(--bg) 90%, var(--black) 12%); }
 
 /* --------- Responsive --------- */
 @media (max-width: 720px) {
@@ -174,45 +120,51 @@ img { max-width: 100%; display: block }
   .links a { display: none }
 }
 
-/* ===== Contact section (theme-aware) ===== */
-#contact.section.alt {
-  background: color-mix(in oklab, var(--bg) 75%, var(--white) 10%);
-  color: var(--text);
-  border-top: 1px solid var(--divider);
+/* ===== Projects：ICON 卡片拼貼與標籤 ===== */
+.icon-card .thumb-collage{
+  display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,90px);
+  gap:4px; padding:8px; background:var(--surface); border-bottom:1px solid var(--divider);
 }
-[data-theme="dark"] #contact.section.alt {
-  background: color-mix(in oklab, var(--bg) 92%, var(--white) 6%);
-}
-#contact .contact-icons { margin-top: 16px; }
-#contact .icon-btn {
-  background: color-mix(in oklab, var(--white) 18%, transparent);
-  border-color: rgba(255,255,255,0.35);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
-}
-#contact .icon-btn:hover {
-  background: color-mix(in oklab, var(--white) 30%, transparent);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
-  transform: translateY(-3px);
-}
-#contact .icon-btn img { filter: brightness(1.8) saturate(1.25); }
+.icon-card .thumb-collage img{ width:100%; height:100%; object-fit:cover; border-radius:10px; }
+.flex-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 
-/* --------- ICON Gallery --------- */
-.icon-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 18px;
-  margin-top: 22px;
+/* 通用 badge */
+.badge{
+  font-size:.75rem; padding:.2rem .55rem; border-radius:999px; font-weight:700;
+  border:1px solid color-mix(in oklab, var(--muted) 40%, transparent);
+  background: color-mix(in oklab, #8b5cf6 18%, transparent);
 }
-.icon-gallery img {
-  width: 100%;
-  border-radius: 12px;
+.badge.large{ font-size:.82rem; padding:.28rem .7rem }
+
+/* ===== Icon gallery 美化 ===== */
+#icon-art{ scroll-margin-top: 90px; } /* 修復錨點被固定導覽列遮住 */
+.title-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap }
+
+.icon-gallery.pretty{
+  display:grid; gap:18px;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  margin-top: 16px;
+}
+.gallery-item{
   background: var(--surface);
-  border: 1px solid var(--divider);
-  transition: transform .25s ease, box-shadow .25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border:1px solid var(--divider);
+  border-radius:16px; overflow:hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transition: transform .2s ease, box-shadow .25s ease;
+  position:relative;
 }
-.icon-gallery img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+.gallery-item:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
 }
+.gallery-item img{ display:block; width:100%; height:180px; object-fit:cover }
+.gallery-item figcaption{
+  padding:.6rem .8rem; font-size:.9rem;
+  color: color-mix(in oklab, var(--section-fg) 92%, transparent);
+  border-top:1px solid var(--divider);
+}
+
+/* Lightbox（原生 dialog） */
+#lb{ border:none; padding:0; background:rgba(0,0,0,.75); }
+#lb::backdrop{ background:rgba(0,0,0,.55) }
+#lb img{ max-width:min(92vw,1200px); max-height:86vh; display:block; border-radius:12px }
