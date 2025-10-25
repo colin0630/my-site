@@ -136,53 +136,95 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 }
 .badge.large{ font-size:.82rem; padding:.28rem .7rem }
 
-/* ===== Icon gallery 美化 ===== */
-#icon-art{ scroll-margin-top: 90px; } /* 修復錨點被固定導覽列遮住 */
-.title-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap }
+/* ===== Icon gallery 美化（更緊湊 + 漂亮 hover） ===== */
+#icon-art { scroll-margin-top: 90px; } /* 修復錨點被固定導覽列遮住 */
+.title-row { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap }
 
+/* 版面更緊湊：小一點 gap、動態欄寬 */
 .icon-gallery.pretty{
-  display:grid;
-  gap:14px; /* 正方形時可略縮間距 */
+  --card-radius: 18px;
+  --ring-color: #a78bfa; /* 淡紫色 */
+  display: grid;
+  gap: 12px;                                                /* 原 18 → 12 更緊湊 */
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  margin-top:16px;
+  margin-top: 16px;
 }
 
-/* 卡片外層（陰影、邊框、圓角、hover 浮起） */
+@media (max-width: 640px){
+  .icon-gallery.pretty{
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* 手機更緊湊 */
+  }
+}
+
+/* 卡片（外層） */
 .gallery-item{
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--divider);
-  border-radius: 16px;
+  border-radius: var(--card-radius);
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,.08);
-  transition: transform .25s ease, box-shadow .3s ease, border .25s ease;
-  position: relative;
-}
-.gallery-item:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0,0,0,.28);
-  border: 1px solid color-mix(in oklab, #a78bfa 50%, transparent);
+  transition: transform .25s ease, box-shadow .30s ease, border-color .25s ease;
 }
 
-/* 圖片：正方形 + 圓角（❗無 height） */
-.gallery-item img{
-  display:block;
-  width:100%;
-  aspect-ratio: 1 / 1;   /* ✅ 強制正方形 */
-  object-fit: cover;
-  border-radius: 16px;   /* ✅ 圓角 */
-  background: var(--surface);
-  transition: transform .25s ease, box-shadow .25s ease;
+/* 漂亮 hover：微抬升 + 陰影加深 + 紫色高光描邊 */
+.gallery-item:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.28);
+  border-color: color-mix(in oklab, var(--divider) 30%, var(--ring-color) 70%);
 }
-.gallery-item img:hover{ transform: scale(1.05); }
+
+/* 鍵盤可達性：focus 與 hover 一樣漂亮 */
+.gallery-item:focus-within{
+  outline: none;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.28);
+  border-color: color-mix(in oklab, var(--divider) 30%, var(--ring-color) 70%);
+}
+
+/* 圖片：正方形 + 圓角（使用外層 radius） */
+.gallery-item img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;          /* ✅ 正方形 */
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  background: var(--surface);
+  transition: transform .25s ease, filter .25s ease;
+}
+
+/* 圖片 hover 微放大一點點，保持優雅 */
+.gallery-item:hover img{ transform: scale(1.035); }
 
 /* 標題 */
 .gallery-item figcaption{
-  padding:.6rem .8rem; font-size:.9rem; text-align:center;
+  padding: .6rem .8rem;
+  font-size: .9rem;
+  text-align: center;
   color: color-mix(in oklab, var(--section-fg) 92%, transparent);
-  border-top:1px solid var(--divider);
+  border-top: 1px solid var(--divider);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;         /* 最多兩行，過長省略 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 深色模式下 hover 的標題稍微更亮 */
+[data-theme="dark"] .gallery-item:hover figcaption{
+  color: color-mix(in oklab, var(--section-fg) 98%, transparent);
+}
+
+/* 使用者偏好降低動效時，關閉位移縮放 */
+@media (prefers-reduced-motion: reduce){
+  .gallery-item,
+  .gallery-item img{ transition: none }
+  .gallery-item:hover{ transform:none; box-shadow:0 2px 8px rgba(0,0,0,.08) }
+  .gallery-item:hover img{ transform:none }
 }
 
 /* Lightbox（原生 dialog） */
 #lb{ border:none; padding:0; background:rgba(0,0,0,.75); }
 #lb::backdrop{ background:rgba(0,0,0,.55) }
-#lb img{ max-width:min(92vw,1200px); max-height:86vh; display:block; border-radius:12px }
+#lb img{ max-width:min(92vw,1200px); max-height:86vh; display:block; border-radius:16px }
