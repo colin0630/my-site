@@ -140,19 +140,14 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 #icon-art{ scroll-margin-top: 90px; } /* 修復錨點被固定導覽列遮住 */
 .title-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap }
 
-.icon-gallery.pretty{
-  display:grid; gap:18px;
-  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-  margin-top: 16px;
+.gallery-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* ✅ 強制正方形 */
+  object-fit: cover;         /* 圖片等比例裁切 */
+  border-radius: 16px;       /* ✅ 加上圓角 */
 }
-.gallery-item{
-  background: var(--surface);
-  border:1px solid var(--divider);
-  border-radius:16px; overflow:hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
-  transition: transform .2s ease, box-shadow .25s ease;
-  position:relative;
-}
+
 .gallery-item:hover{
   transform: translateY(-2px);
   box-shadow: 0 10px 26px rgba(0,0,0,.18);
