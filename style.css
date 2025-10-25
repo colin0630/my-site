@@ -196,3 +196,23 @@ img { max-width: 100%; display: block }
   transform: translateY(-3px);
 }
 #contact .icon-btn img { filter: brightness(1.8) saturate(1.25); }
+
+/* --------- ICON Gallery --------- */
+.icon-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.icon-gallery img {
+  width: 100%;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.icon-gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
