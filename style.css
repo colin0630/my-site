@@ -349,37 +349,19 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   }
 }
 
-/* 右下角背景裝飾：放在內容後、背景前 */
-.decor-single{
+/* ===== 單張 ICON 背景裝飾（右下角） ===== */
+.decor-single {
   position: fixed;
-  right: -80px;
-  bottom: -60px;
+  right: -60px;
+  bottom: -40px;
   width: 720px;
-  opacity: .10;
-  filter: grayscale(100%) contrast(85%) blur(1px);
+  opacity: 0.08; /* 淡淡顯示 */
+  filter: grayscale(100%) contrast(85%) blur(0.5px);
   mix-blend-mode: soft-light;
-  z-index: 0;             /* ✅ 關鍵：要 0 或更高 */
-  pointer-events: none;
+  z-index: 0; /* ✅ 關鍵：不能是 -1 */
+  pointer-events: none; /* 不擋點擊 */
   user-select: none;
-  mask-image: linear-gradient(180deg, rgba(0,0,0,.30) 60%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.30) 60%, transparent 100%);
 }
-[data-theme="dark"] .decor-single{
-  opacity:.14;
-  filter:grayscale(100%) contrast(90%) brightness(120%) blur(1px);
-}
-
-/* 把主要內容抬高一層，確保在裝飾圖之上 */
-.nav, .hero, .section, .footer {
-  position: relative;
-  z-index: 1;
-}
-
-@media (max-width: 720px){
-  .decor-single{
-    width: 500px;
-    right: -120px;
-    bottom: -100px;
-    opacity:.08;
-  }
+[data-theme="dark"] .decor-single {
+  opacity: 0.13; /* 深色模式略亮一點 */
 }
