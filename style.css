@@ -250,3 +250,20 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   display: block;
   border-radius: 16px;
 }
+
+/* Artist card on icon page */
+.artist-card { padding: 10px 0 0; }
+.artist-card-link { display: inline-block; }
+.artist-card img{
+  display: block;
+  width: clamp(260px, 55vw, 520px); /* 會隨螢幕放大縮小 */
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  transition: transform .2s ease, box-shadow .25s ease, filter .2s ease;
+}
+.artist-card-link:hover img{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0,0,0,.35);
+  filter: saturate(1.06);
+}
