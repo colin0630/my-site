@@ -326,3 +326,81 @@ header .en-name, header .zh-name { text-decoration: none !important; }
     margin-top: 24px;
   }
 }
+
+/* =======================
+   ICON page decorative layer
+   ======================= */
+.icon-stage {
+  position: relative;
+  z-index: 0; /* 讓裝飾層可放在底下 */
+}
+
+/* 整個裝飾層鋪滿頁面，但不影響點擊與排版 */
+.decor-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;             /* 在內容後面 */
+  pointer-events: none;    /* 不可點擊 */
+  user-select: none;
+  overflow: hidden;
+}
+
+/* 每張裝飾圖的共同風格：很淡、與背景融合 */
+.decor {
+  position: absolute;
+  max-width: none;
+  filter: grayscale(100%) contrast(85%) saturate(60%) blur(.2px);
+  opacity: .10;            /* 基本透明度（light） */
+  mix-blend-mode: soft-light;
+}
+
+/* 深色模式下略提高透明度讓線條可見 */
+[data-theme="dark"] .decor { opacity: .14; }
+
+/* 位置與尺寸（可依喜好微調） */
+.decor-1 {                 /* 左上：沖眼/淋浴 */
+  top: -40px; left: -20px;
+  width: 520px;
+  transform: rotate(-2deg);
+}
+
+.decor-2 {                 /* 右上：通風櫃 */
+  top: 40px; right: -120px;
+  width: 760px;
+  transform: rotate(1.5deg);
+}
+
+.decor-3 {                 /* 右下：整體實驗室 */
+  bottom: -120px; right: -80px;
+  width: 980px;
+  transform: rotate(0.6deg);
+  opacity: .09;
+}
+
+.decor-4 {                 /* 左下：HV 採樣器 */
+  bottom: -60px; left: -80px;
+  width: 560px;
+  transform: rotate(-1deg);
+}
+
+.decor-5 {                 /* 右中：人物操作彩線 */
+  top: 44%; right: 8%;
+  width: 520px;
+  opacity: .11;
+  mix-blend-mode: overlay; /* 讓彩線更融合 */
+}
+
+/* 小螢幕：降低干擾、縮小或隱藏部分裝飾 */
+@media (max-width: 1024px) {
+  .decor-2 { width: 600px; right: -160px; }
+  .decor-3 { width: 820px; right: -120px; bottom: -140px; }
+  .decor-5 { width: 420px; right: 4%; top: 48%; }
+}
+@media (max-width: 720px) {
+  .decor { opacity: .08; filter: grayscale(100%) contrast(80%) blur(.3px); }
+  .decor-1 { display: none; }
+  .decor-2 { width: 440px; right: -180px; top: 20px; }
+  .decor-3 { width: 640px; right: -160px; bottom: -160px; }
+  .decor-4 { width: 360px; left: -140px; bottom: -100px; }
+  .decor-5 { width: 320px; right: 0; top: auto; bottom: 6%; }
+}
