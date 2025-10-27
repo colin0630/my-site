@@ -335,7 +335,7 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   opacity: .10;
   filter: grayscale(100%) contrast(85%) blur(.3px);
   mix-blend-mode: soft-light;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   user-select: none;
 }
