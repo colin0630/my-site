@@ -251,7 +251,7 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   border-radius: 16px;
 }
 
-/* ===== Hero ICON with Artist QR ===== */
+/* ===== Hero ICON with Artist QR (smaller, balanced) ===== */
 .hero-icon {
   background: linear-gradient(180deg, color-mix(in oklab, var(--bg-2) 85%, var(--white) 15%), var(--bg));
   padding: 80px 0 60px;
@@ -261,12 +261,12 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 32px;
   flex-wrap: wrap;
 }
 
 .hero-text {
-  flex: 1 1 480px;
+  flex: 1 1 500px;
 }
 
 .hero-text h1 {
@@ -285,29 +285,44 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   color: var(--muted);
 }
 
-/* Artist QR */
+/* Artist QR area */
 .hero-artist {
-  flex: 0 0 300px;
+  flex: 0 0 200px;          /* ✅ 改小：原 300 → 200 */
   text-align: center;
 }
 
 .hero-artist img {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 10px;
   background: transparent;
-  transition: transform 0.25s ease, box-shadow 0.3s ease;
+  transition: transform .25s ease, box-shadow .3s ease;
 }
 
 .hero-artist img:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.25);
 }
 
+/* Caption under QR */
+.artist-caption {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  color: color-mix(in oklab, var(--section-fg) 90%, var(--muted) 20%);
+}
+.artist-caption span {
+  font-weight: 700;
+  color: #8b5cf6;
+}
+
+/* RWD: stack vertically on small screens */
 @media (max-width: 720px) {
   .hero-flex {
     flex-direction: column;
     text-align: center;
   }
-  .hero-artist { flex: 0 0 auto; margin-top: 24px; }
+  .hero-artist {
+    flex: 0 0 auto;
+    margin-top: 24px;
+  }
 }
