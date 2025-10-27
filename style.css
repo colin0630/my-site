@@ -251,19 +251,63 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   border-radius: 16px;
 }
 
-/* Artist card on icon page */
-.artist-card { padding: 10px 0 0; }
-.artist-card-link { display: inline-block; }
-.artist-card img{
-  display: block;
-  width: clamp(260px, 55vw, 520px); /* 會隨螢幕放大縮小 */
-  height: auto;
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.28);
-  transition: transform .2s ease, box-shadow .25s ease, filter .2s ease;
+/* ===== Hero ICON with Artist QR ===== */
+.hero-icon {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--bg-2) 85%, var(--white) 15%), var(--bg));
+  padding: 80px 0 60px;
 }
-.artist-card-link:hover img{
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(0,0,0,.35);
-  filter: saturate(1.06);
+
+.hero-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1 1 480px;
+}
+
+.hero-text h1 {
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  margin: 0 0 16px;
+  background: linear-gradient(90deg, #5b67f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-text p {
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* Artist QR */
+.hero-artist {
+  flex: 0 0 300px;
+  text-align: center;
+}
+
+.hero-artist img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: transparent;
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+
+.hero-artist img:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+}
+
+@media (max-width: 720px) {
+  .hero-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-artist { flex: 0 0 auto; margin-top: 24px; }
 }
