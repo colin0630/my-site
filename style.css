@@ -327,24 +327,19 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   }
 }
 
-/* ===== 單張 ICON 背景裝飾（右下角） ===== */
 .decor-single {
-  position: fixed;        /* 固定在視窗右下角 */
+  position: fixed;
   right: -60px;
   bottom: -40px;
-  width: 800px;           /* 可調整大小 */
-  opacity: .10;           /* 透明度，越小越淡 */
+  width: 800px;
+  opacity: .10;
   filter: grayscale(100%) contrast(85%) blur(.3px);
   mix-blend-mode: soft-light;
-  z-index: -1;            /* 不擋內容 */
-  pointer-events: none;   /* 不可點擊 */
+  z-index: -1;
+  pointer-events: none;
   user-select: none;
 }
-
-[data-theme="dark"] .decor-single {
-  opacity: .14;           /* 深色模式略亮一點 */
-}
-
+[data-theme="dark"] .decor-single { opacity: .14; }
 @media (max-width: 720px) {
   .decor-single {
     width: 500px;
