@@ -326,3 +326,30 @@ header .en-name, header .zh-name { text-decoration: none !important; }
     margin-top: 24px;
   }
 }
+
+/* ===== 單張 ICON 背景裝飾（右下角） ===== */
+.decor-single {
+  position: fixed;        /* 固定在視窗右下角 */
+  right: -60px;
+  bottom: -40px;
+  width: 800px;           /* 可調整大小 */
+  opacity: .10;           /* 透明度，越小越淡 */
+  filter: grayscale(100%) contrast(85%) blur(.3px);
+  mix-blend-mode: soft-light;
+  z-index: -1;            /* 不擋內容 */
+  pointer-events: none;   /* 不可點擊 */
+  user-select: none;
+}
+
+[data-theme="dark"] .decor-single {
+  opacity: .14;           /* 深色模式略亮一點 */
+}
+
+@media (max-width: 720px) {
+  .decor-single {
+    width: 500px;
+    right: -120px;
+    bottom: -100px;
+    opacity: .08;
+  }
+}
