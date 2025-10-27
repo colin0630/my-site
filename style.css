@@ -339,7 +339,7 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   pointer-events: none;
   user-select: none;
 }
-[data-theme="dark"] .decor-single { opacity: .14; }
+[data-theme="dark"] .decor-single { opacity: .50; }
 @media (max-width: 720px) {
   .decor-single {
     width: 500px;
