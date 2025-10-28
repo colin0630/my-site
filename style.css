@@ -337,7 +337,7 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   opacity: 1 !important;           /* 完全不透明 */
 
 
-  z-index: 2;                       /* 疊到內容之上（不會被背景吃掉） */
+  z-index: 0;                       /* 疊到內容之上（不會被背景吃掉） */
   pointer-events: none;
   user-select: none;
 }
