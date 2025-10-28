@@ -326,30 +326,3 @@ header .en-name, header .zh-name { text-decoration: none !important; }
     margin-top: 24px;
   }
 }
-
-/* 放在 style.css 最後面，確保覆蓋 */
-.decor-single {
-  position: fixed;
-  right: 20px;        /* ✅ 稍微往左靠內一點 */
-  bottom: 60px;       /* ✅ 往上移動 */
-  width: 260px;       /* ✅ 縮小尺寸 */
-
-  opacity: 1 !important;
-  mix-blend-mode: normal !important;
-  filter: none !important;
-  z-index: 5 !important;
-  pointer-events: none;
-  user-select: none;
-}
-
-html[data-theme="dark"] .decor-single { 
-  opacity: 1 !important;
-}
-
-@media (max-width: 720px) {
-  .decor-single {
-    width: 180px;     /* ✅ 手機上再小一點 */
-    right: 10px;
-    bottom: 40px;
-  }
-}
