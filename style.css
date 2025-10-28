@@ -335,14 +335,13 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   width: 800px;
 
   opacity: 1 !important;           /* 完全不透明 */
-  mix-blend-mode: normal !important;/* 不與背景混色 */
-  filter: none !important;          /* 關掉灰階/對比/模糊 */
 
-  z-index: 3;                       /* 疊到內容之上（不會被背景吃掉） */
+
+  z-index: 2;                       /* 疊到內容之上（不會被背景吃掉） */
   pointer-events: none;
   user-select: none;
 }
 
 html[data-theme="dark"] .decor-single { 
-  opacity: 1 !important;            /* 深色模式也保證不透明 */
+  opacity: 0.5 !important;            /* 深色模式也保證不透明 */
 }
