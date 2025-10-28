@@ -331,8 +331,8 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 .decor-single {
   position: fixed;
   right: -60px;
-  bottom: -40px;
-  width: 800px;
+  bottom: -200px;
+  width: 400px;
 
   opacity: 1 !important;           /* 完全不透明 */
 
