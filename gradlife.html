@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>校園與生活紀錄 · Guan Syun Su</title>
+  <meta name="description" content="碩士期間的校園與生活紀錄：實驗、研討會、出遊、聚會等剪影。" />
+
+  <!-- 字型與樣式（沿用主站） -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 專屬於 gradlife 頁面的些微客製（可視需要刪改） */
+    .hero-life {
+      background: linear-gradient(180deg, color-mix(in oklab, var(--bg-2) 85%, var(--white) 15%), var(--bg));
+      padding: 80px 0 60px;
+    }
+    .hero-life h1 {
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      margin: 0 0 16px;
+      background: linear-gradient(90deg, #5b67f6 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-life p { max-width: 720px; font-size: 1.05rem; line-height: 1.8; color: var(--muted); }
+
+    /* 相簿工具列（可過濾/排序，先放樣式與簡單佈局） */
+    .toolbar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .toolbar .btn { padding:.45rem .8rem }
+    .toolbar input[type="search"]{ padding:.5rem .75rem; border-radius:12px; border:1px solid var(--divider); background:var(--surface); color:var(--section-fg); }
+
+    /* 相簿卡片風格沿用 .icon-gallery.pretty */
+    .album { margin-top: 18px; }
+    .album figure { cursor: pointer; }
+    .album figcaption small { display:block; margin-top:6px; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- 導覽列（返回主站區塊連結） -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="./suphoto/colinsu-photo.jpg" alt="Avatar" class="avatar">
+        <div>
+          <div class="name"><span>Guan Syun Su</span><span class="muted"> / 蘇冠勳</span></div>
+          <div class="role">大氣暴露 · PFAS 採樣</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a href="index.html#projects">作品</a>
+        <a href="index.html#pubs">發表</a>
+        <a href="index.html#contact">聯絡</a>
+        <button id="langBtn" class="btn small">中文/EN</button>
+        <button id="themeBtn" class="btn small">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero hero-life">
+    <div class="container">
+      <h1>校園與生活紀錄</h1>
+      <p>把碩士生活做成相簿：實驗日常、校園時刻、研討會出差與朋友們的合照。點擊照片可放大檢視（Lightbox）。</p>
+      <div class="toolbar" style="margin-top:14px">
+        <input id="search" type="search" placeholder="搜尋：關鍵字/地點/月份…" aria-label="搜尋相片">
+        <button class="btn ghost small" data-filter="all">全部</button>
+        <button class="btn ghost small" data-filter="lab">實驗</button>
+        <button class="btn ghost small" data-filter="campus">校園</button>
+        <button class="btn ghost small" data-filter="conf">研討會</button>
+        <button class="btn ghost small" data-filter="friends">朋友/聚會</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 相簿 -->
+  <section class="section alt" id="life-album">
+    <div class="container">
+      <div class="icon-gallery pretty album" id="album">
+        
+        <!-- 🔹 示意圖：請把路徑替換為你的實際照片檔案 -->
+        <figure class="gallery-item" data-tags="lab 2025-03 nycu" data-title="晨間開機前的儀器巡檢">
+          <img src="suphoto/life/2025-03-lab-check.jpg" alt="實驗室儀器巡檢">
+          <figcaption>晨間開機前的儀器巡檢<small>NYCU · 2025-03</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="campus 2025-03 nycu" data-title="校園黃昏的操場">
+          <img src="suphoto/life/2025-03-campus-track.jpg" alt="校園黃昏操場">
+          <figcaption>黃昏的操場<small>NYCU Campus · 2025-03</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="conf 2025-09 dioxin" data-title="Dioxin 2025 演講準備">
+          <img src="suphoto/life/2025-09-dioxin-prep.jpg" alt="Dioxin 2025 演講準備">
+          <figcaption>Dioxin 2025 演講準備<small>Antalya · 2025-09</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="friends 2025-04" data-title="同學生日聚會">
+          <img src="suphoto/life/2025-04-birthday.jpg" alt="同學生日聚會">
+          <figcaption>同學生日聚會<small>Hsinchu · 2025-04</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="lab 2025-05 sampling" data-title="戶外採樣站位">
+          <img src="suphoto/life/2025-05-field-sampling.jpg" alt="戶外採樣站位">
+          <figcaption>戶外採樣站位<small>Kaohsiung · 2025-05</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="conf 2025-06 poster" data-title="海報展示日">
+          <img src="suphoto/life/2025-06-poster-day.jpg" alt="海報展示">
+          <figcaption>海報展示日<small>Poster Session · 2025-06</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="campus 2025-02" data-title="圖書館自習時光">
+          <img src="suphoto/life/2025-02-library.jpg" alt="圖書館自習">
+          <figcaption>圖書館自習時光<small>NYCU Library · 2025-02</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="friends 2025-01" data-title="跨年夜一起吃火鍋">
+          <img src="suphoto/life/2025-01-hotpot.jpg" alt="跨年火鍋">
+          <figcaption>跨年夜一起吃火鍋<small>2025-01</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="lab 2025-07" data-title="清理石英濾紙與藥瓶">
+          <img src="suphoto/life/2025-07-lab-clean.jpg" alt="清理石英濾紙與藥瓶">
+          <figcaption>清理石英濾紙與藥瓶<small>Lab · 2025-07</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="campus 2025-08" data-title="校園夜景與月光">
+          <img src="suphoto/life/2025-08-campus-night.jpg" alt="校園夜景">
+          <figcaption>校園夜景與月光<small>NYCU · 2025-08</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="conf 2025-09 flight" data-title="出發土耳其的機場打卡">
+          <img src="suphoto/life/2025-09-airport.jpg" alt="機場出國">
+          <figcaption>出發土耳其的機場打卡<small>TPE → AYT · 2025-09</small></figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-tags="friends 2025-10 lab" data-title="與學長姐的歡送會">
+          <img src="suphoto/life/2025-10-farewell.jpg" alt="歡送會合照">
+          <figcaption>與學長姐的歡送會<small>Lab · 2025-10</small></figcaption>
+        </figure>
+
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <dialog id="lb"><img id="lbImg" alt=""></dialog>
+  </section>
+
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <div class="container small">
+      © <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS
+      <p>Ver:1.0 Last updated: <span id="lastUpdated"></span></p>
+    </div>
+  </footer>
+
+  <!-- JS（主站語言/主題/Lightbox + 搜尋/過濾） -->
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      // 年份 / 更新日
+      const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+      const l=document.getElementById('lastUpdated');
+      if(l){const d=new Date(); l.textContent=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+
+      // 語言（與主站一致）
+      let zh = (localStorage.getItem('lang') !== 'en');
+      const applyLang = () => {
+        document.documentElement.lang = zh ? 'zh-Hant' : 'en';
+        document.querySelectorAll('[data-zh]').forEach(el => {
+          const zhText = el.getAttribute('data-zh');
+          const enText = el.getAttribute('data-en');
+          if (zhText !== null && enText !== null) el.textContent = zh ? zhText : enText;
+        });
+      };
+      applyLang();
+      document.getElementById('langBtn')?.addEventListener('click',()=>{ zh=!zh; localStorage.setItem('lang', zh ? 'zh' : 'en'); applyLang(); });
+
+      // 主題（與主站一致）
+      const root=document.documentElement;
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : (root.getAttribute('data-theme') || 'light'));
+      root.setAttribute('data-theme', theme);
+      const themeBtn=document.getElementById('themeBtn');
+      const updateThemeIcon=()=>{ if(!themeBtn) return; themeBtn.textContent=(theme==='dark')?'🌙':'☀️'; };
+      updateThemeIcon();
+      themeBtn?.addEventListener('click',()=>{ theme=(theme==='dark')?'light':'dark'; root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); updateThemeIcon(); });
+
+      // Lightbox（點圖放大）
+      const lb=document.getElementById('lb'); const lbImg=document.getElementById('lbImg');
+      document.querySelectorAll('.gallery-item img').forEach(img=> img.addEventListener('click',()=>{ lbImg.src=img.src; lb.showModal(); }));
+      lb.addEventListener('click',e=>{ if(e.target===lb||e.target===lbImg) lb.close(); });
+      window.addEventListener('keydown', e=>{ if(e.key==='Escape'&&lb.open) lb.close(); });
+
+      // 搜尋 / 標籤過濾（超輕量）
+      const searchInput = document.getElementById('search');
+      const filterButtons = document.querySelectorAll('[data-filter]');
+      const cards = Array.from(document.querySelectorAll('#album .gallery-item'));
+      let currentTag = 'all';
+
+      function applyFilter(){
+        const q = (searchInput.value || '').trim().toLowerCase();
+        cards.forEach(card=>{
+          const tags = (card.getAttribute('data-tags')||'').toLowerCase();
+          const title = (card.getAttribute('data-title')||'').toLowerCase();
+          const matchTag = (currentTag==='all') || tags.split(/\s+/).includes(currentTag);
+          const matchSearch = !q || tags.includes(q) || title.includes(q);
+          card.style.display = (matchTag && matchSearch) ? '' : 'none';
+        });
+      }
+      filterButtons.forEach(btn=> btn.addEventListener('click',()=>{ currentTag = btn.dataset.filter; applyFilter(); }));
+      searchInput.addEventListener('input', applyFilter);
+    });
+  </script>
+</body>
+</html>
