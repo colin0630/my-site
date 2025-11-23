@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICON 美術製作 · Guan Syun Su</title>
+  <meta name="description" content="ICON 手繪系列 · 與北藝大同學共同創作 · 環境與研究主題圖像化" />
+
+  <!-- 字型與樣式 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 導覽列（返回主站區塊連結） -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="./suphoto/colinsu-photo.jpg" alt="Avatar" class="avatar">
+        <div>
+          <div class="name"><span>Guan Syun Su</span><span class="muted"> / 蘇冠勳</span></div>
+          <div class="role">大氣暴露 · PFAS 採樣</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a href="index.html#projects">作品</a>
+        <a href="index.html#pubs">發表</a>
+        <a href="index.html#contact">聯絡</a>
+        <button id="langBtn" class="btn small">中文/EN</button>
+        <button id="themeBtn" class="btn small">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+<!-- HERO 區塊（保持你現在的版本） -->
+<section class="hero hero-icon">
+  <div class="container hero-flex">
+    <div class="hero-text">
+      <h1>ICON 美術製作</h1>
+      <p>與北藝大同學藥上共同創作的手繪 ICON 系列，將大氣研究、實驗器材與環境主題轉化為視覺語言，用於直觀呈現研究結果與簡報發表。</p>
+      <p>更多作品與合作機會請至右側連結。</p>
+    </div>
+    <div class="hero-artist">
+      <a href="https://instagram.com/sariatheone" target="_blank" rel="noopener">
+        <img src="suphoto/45a10ae9-1c47-4b6c-b7a7-f619d269548d.png" alt="Artist @sariatheone QR">
+      </a>
+      <div class="artist-caption">合作藝術家 / Artist：<span>@sariatheone</span></div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 頁面標題 + 返回按鈕 -->
+  <section class="section alt" id="icon-art">
+    <div class="container">
+      <a href="index.html#projects" class="btn ghost" style="margin-bottom:16px;display:inline-block;">← 返回主頁</a>
+      <div class="title-row">
+        <h2>ICON 美術製作</h2>
+        <span class="badge large">Co-created with Menka</span>
+      </div>
+
+      <!-- 畫廊：卡片風格 + Hover + Lightbox -->
+      <div class="icon-gallery pretty">
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8420.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8422.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8421.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8426.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8425.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8427.PNG" </figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8429.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8430.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8431.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8423.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8424.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8428.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8432.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8416.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8418.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8419.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8417.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8415.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8414.PNG" </figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8413.PNG"</figcaption></figure>
+        <figure class="gallery-item"><img src="suphoto/icon/IMG_8412.PNG"</figcaption></figure>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <dialog id="lb"><img id="lbImg" alt=""></dialog>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container small">
+      © <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS
+      <p>Ver:1.8 Last updated: <span id="lastUpdated"></span></p>
+    </div>
+  </footer>
+
+  <!-- JS（沿用主站風格：主題、語言、年份、Lightbox） -->
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      // 年份 / 更新日
+      const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+      const l=document.getElementById('lastUpdated');
+      if(l){const d=new Date(); l.textContent=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+
+      // 語言
+      let zh = (localStorage.getItem('lang') !== 'en');
+      const applyLang = () => {
+        document.documentElement.lang = zh ? 'zh-Hant' : 'en';
+        document.querySelectorAll('[data-zh]').forEach(el => {
+          const zhText = el.getAttribute('data-zh');
+          const enText = el.getAttribute('data-en');
+          if (zhText !== null && enText !== null) el.textContent = zh ? zhText : enText;
+        });
+      };
+      applyLang();
+      document.getElementById('langBtn')?.addEventListener('click',()=>{ zh=!zh; localStorage.setItem('lang', zh ? 'zh' : 'en'); applyLang(); });
+
+      // 主題
+      const root=document.documentElement;
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : (root.getAttribute('data-theme') || 'light'));
+      root.setAttribute('data-theme', theme);
+      const themeBtn=document.getElementById('themeBtn');
+      const updateThemeIcon=()=>{ if(!themeBtn) return; themeBtn.textContent=(theme==='dark')?'🌙':'☀️'; };
+      updateThemeIcon();
+      themeBtn?.addEventListener('click',()=>{ theme=(theme==='dark')?'light':'dark'; root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); updateThemeIcon(); });
+
+      // Lightbox
+      const lb=document.getElementById('lb'); const lbImg=document.getElementById('lbImg');
+      document.querySelectorAll('.gallery-item img').forEach(img=> img.addEventListener('click',()=>{ lbImg.src=img.src; lb.showModal(); }));
+      lb.addEventListener('click',e=>{ if(e.target===lb||e.target===lbImg) lb.close(); });
+      window.addEventListener('keydown', e=>{ if(e.key==='Escape'&&lb.open) lb.close(); });
+    });
+ </script>
+</body>
+</html>
