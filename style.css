@@ -18,21 +18,21 @@ img { max-width: 100%; display: block }
 /* --------- Theme tokens --------- */
 :root, [data-theme="dark"] {
   --white:#fff; --black:#000;
-  /* ✅ 專業柔和深色模式 (Soft Professional Dark) */
-  --bg:#15151e;                   /* 柔和深灰/藍灰 */
-  --bg-2:#1a1a27;                 /* 次要深色背景 */
-  --surface:var(--bg-2);          /* 表面/導覽列 */
-  --text:#e0e0e0;                 /* 柔和淺色文字 */
-  --muted:#a0a0ad;                /* 柔和的靜音文字 */
-  --divider: rgba(255,255,255,0.10); /* 略微明顯的分隔線 */
-  --shadow: 0 4px 12px rgba(0,0,0,.35); /* 柔和陰影 */
+  /* 專業柔和深色模式 (Soft Professional Dark) */
+  --bg:#15151e;                   
+  --bg-2:#1a1a27;                 
+  --surface:var(--bg-2);          
+  --text:#e0e0e0;                 
+  --muted:#a0a0ad;                
+  --divider: rgba(255,255,255,0.10); 
+  --shadow: 0 4px 12px rgba(0,0,0,.35); 
   --section-fg: var(--text); --hero-fg:#ffffff;
   
   /* 深色模式專用卡片變數 */
-  --card-bg-dark: #20202d;        /* 卡片背景，比 --bg 亮一點 */
-  --card:var(--card-bg-dark);     /* 通用卡片背景指向深色 */
-  --card-border: rgba(255,255,255,0.16); /* 略微明顯的卡片邊框 */
-  --card-fg:var(--text);          /* 卡片文字色與主文字色一致 */
+  --card-bg-dark: #20202d;        
+  --card:var(--card-bg-dark);     
+  --card-border: rgba(255,255,255,0.16); 
+  --card-fg:var(--text);          
   --hero-a: rgba(139,92,246,.35);
 }
 [data-theme="light"] {
@@ -40,7 +40,7 @@ img { max-width: 100%; display: block }
   --text:#0f172a; --muted:#475569; --divider: rgba(2,6,23,0.08);
   --shadow: 0 8px 24px rgba(2,6,23,.08);
   --section-fg: var(--text); --hero-fg:#0f172a;
-  /* ✅ 淺色模式卡片變數確保為白色 */
+  /* 淺色模式卡片變數確保為白色 */
   --card:#ffffff; 
   --card-border: rgba(15,23,42,0.10); 
   --card-fg:#0f172a;
@@ -85,7 +85,7 @@ img { max-width: 100%; display: block }
 
 /* --------- Grid & Cards --------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px }
-.card { display: block; border-radius: 18px; overflow: hidden; background: var(--card); /* 使用通用 --card 變數 */
+.card { display: block; border-radius: 18px; overflow: hidden; background: var(--card); 
   border: 1px solid var(--card-border); color: var(--card-fg);
   transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow);
@@ -106,6 +106,37 @@ img { max-width: 100%; display: block }
   border: 1px solid color-mix(in oklab, var(--muted) 35%, transparent); }
 
 /* --------- Lists / Publications --------- */
+
+/* 🏆 New: Flex container for Pubs List + Awards Images */
+.pub-content-flex {
+  display: flex;
+  gap: 30px; /* 列表和圖片之間的間距 */
+  align-items: center; /* 垂直置中 */
+  flex-wrap: wrap; /* 允許在小螢幕上換行堆疊 */
+}
+
+/* 🏆 New: Image container styles */
+.pub-awards-imgs {
+  flex: 0 0 300px; /* 固定圖片區塊寬度 (適用大螢幕) */
+  display: flex;
+  flex-direction: column; /* 圖片垂直堆疊 */
+  gap: 20px;
+  align-self: center; /* 再次確認區塊置中 */
+}
+
+.pub-awards-imgs img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: var(--shadow); 
+  object-fit: contain;
+  background: var(--card); /* 圖片背景使用卡片背景，確保主題模式切換正確 */
+  padding: 10px;
+  border: 1px solid var(--card-border);
+}
+
+
 .list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none }
 
 /* 名字底線（頁首不加；其他處加） */
@@ -118,8 +149,10 @@ img { max-width: 100%; display: block }
 }
 header .en-name, header .zh-name { text-decoration: none !important; }
 
-/* Publications 區塊：字體與行距放大 */
+/* Publications 區塊：字體與行距放大 (列表佔據大部分空間) */
 .list.large-pubs {
+  flex: 1 1 550px; /* 列表佔據空間並允許彈性收縮 */
+  min-width: 0;
   gap: 24px; /* 增大列表項目之間的間距 */
 }
 
@@ -136,13 +169,12 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   flex-wrap: wrap; /* 允許換行，防止重疊 */
 }
 
-/* Style for the link (title text) */
-.pub-title a, .pub-title-flex a {
+/* Style for the title text (不再是連結，但使用原有的樣式) */
+.pub-title, .pub-title-flex {
   font-size: clamp(1.05rem, 1.5vw, 1.25rem); /* 放大標題字體 */
   line-height: 1.6; /* 增加標題行距 */
   font-weight: 600;
   display: block;
-  /* Additional styles for flex item */
   flex-shrink: 1; 
   min-width: 0;
 }
@@ -175,13 +207,23 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   background: color-mix(in oklab, var(--bg) 90%, var(--black) 12%); }
 
 /* --------- Responsive --------- */
+@media (max-width: 960px) { /* 🏆 新增：調整佈局斷點 */
+    .pub-content-flex {
+        flex-direction: column; /* 堆疊：列表在上，圖片在下 */
+    }
+    .pub-awards-imgs {
+        flex: 1 1 100%; /* 圖片區塊佔滿寬度 */
+        max-width: 400px; /* 限制圖片區塊最大寬度 */
+        margin: 20px auto 0; /* 圖片區塊置中並添加間距 */
+    }
+}
 @media (max-width: 720px) {
   .hero { padding: 64px 0 44px }
   .nav-inner { padding: 8px 0 }
   .links a { display: none }
 }
 
-/* ===== Projects：ICON 卡片拼貼與標籤 ===== */
+/* ===== Projects：ICON 卡片拼貼與標籤 (以下程式碼未變動) ===== */
 .icon-card .thumb-collage{
   display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,90px);
   gap:4px; padding:8px; background:var(--surface); border-bottom:1px solid var(--divider);
