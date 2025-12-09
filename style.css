@@ -114,7 +114,7 @@ img { max-width: 100%; display: block }
 }
 header .en-name, header .zh-name { text-decoration: none !important; }
 
-/* ✅ Publications 區塊：字體與行距放大 (新增) */
+/* ✅ Publications 區塊：字體與行距放大 (修正與新增) */
 .list.large-pubs {
   gap: 24px; /* 增大列表項目之間的間距 */
 }
@@ -124,19 +124,38 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   padding-left: 14px;
 }
 
-.pub-title a {
+/* 修正：用於包裝 Title Link 和 Award Badge，防止重疊 */
+.pub-title-flex {
+  display: flex; 
+  align-items: flex-start; /* 確保徽章和標題對齊頂部 */
+  gap: 10px; 
+  flex-wrap: wrap; /* 允許換行，防止重疊 */
+}
+
+/* Style for the link (title text) */
+.pub-title a, .pub-title-flex a {
   font-size: clamp(1.05rem, 1.5vw, 1.25rem); /* 放大標題字體 */
   line-height: 1.6; /* 增加標題行距 */
   font-weight: 600;
   display: block;
+  /* Additional styles for flex item */
+  flex-shrink: 1; 
+  min-width: 0;
 }
+
+/* Style for the award badge (非連結) */
+.pub-title-flex .pub-award {
+  flex-shrink: 0; /* 保持徽章不收縮 */
+  margin-top: 2px; /* 輕微調整以對齊大字體 */
+}
+
 
 .pub-meta {
   font-size: 0.95rem; /* 略微放大作者/會議資訊字體 */
   line-height: 1.6; /* 增加作者/會議資訊行距 */
   margin-top: 4px;
 }
-/* 👆 Publications 區塊：字體與行距放大 (新增結束) */
+/* 👆 Publications 區塊：字體與行距放大 (修正與新增結束) */
 
 
 /* --------- Contact --------- */
