@@ -6,15 +6,12 @@
   <title>Guan Syun Su · Portfolio</title>
   <meta name="description" content="PFAS researcher · Environmental exposure · Portfolio" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- SEO / Social -->
   <meta property="og:title" content="Guan Syun Su · Portfolio" />
   <meta property="og:description" content="NYCU master's student focusing on atmospheric PFAS exposure, data analysis, and scientific visualization." />
   <meta property="og:type" content="website" />
@@ -23,13 +20,11 @@
   <link rel="canonical" href="/" />
 </head>
 <body>
-  <!-- NAV -->
   <header class="nav" role="navigation" aria-label="Main">
     <div class="container nav-inner">
       <div class="brand">
         <img src="./suphoto/colinsu-photo.jpg" alt="Avatar" class="avatar" loading="lazy" decoding="async" />
         <div>
-          <!-- 頁首名字：不加底線 class -->
           <div class="name">
             <span>Guan Syun Su</span>
             <span class="muted">/ <span>蘇冠勳</span></span>
@@ -48,12 +43,32 @@
     </div>
   </header>
 
-  <!-- HERO -->
- <section id="projects" class="section" aria-labelledby="proj-title">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <h1 id="hero-title"
+        data-zh="冠勳的網站搭建中"
+        data-en="A personal site"
+      >冠勳的網站搭建中</h1>
+      <p class="lead"
+        data-zh="陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。"
+        data-en="NYCU master's student focusing on atmospheric PFAS exposure, analytical method development, data analysis, and scientific visualization."
+      >陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。</p>
+      <p class="lead" data-zh="2024 是最接近夢想的一年，要變得很厲害喔！" data-en="2024 is the year closest to the dream—time to level up!">2024 是最接近夢想的一年，要變得很厲害喔！</p>
+      <p class="lead" data-zh="這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！" data-en="This space is how I build my story: remember everything and keep going. Let's see how far we can go.">這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！</p>
+      <div class="cta" role="group" aria-label="Primary">
+        <a href="#projects" class="btn primary" data-zh="看看作品" data-en="See Projects">看看作品</a>
+        <a href="#contact" class="btn ghost" data-zh="聯絡我" data-en="Contact">聯絡我</a>
+        <a href="Guan_Syun_Su_CV.pdf" class="btn ghost" target="_blank" rel="noopener" download data-zh="下載履歷" data-en="Download CV">下載履歷</a>
+      </div>
+    </div>
+    <div class="hero-bg" aria-hidden="true"></div>
+  </section>
+
+<section id="projects" class="section" aria-labelledby="proj-title">
   <div class="container">
     <h2 id="proj-title" data-zh="精選作品" data-en="Featured Projects">精選作品</h2>
     <div class="grid">
-
+      
       <a class="card" href="#" target="_blank" rel="noopener">
         <div class="thumb" style="background-image:url('suphoto/comming soon.png');"></div>
         <div class="card-body">
@@ -63,39 +78,57 @@
         </div>
       </a>
 
-      <a class="card" href="icon.html" rel="noopener">
-        <div class="thumb" 
-          style="background-image:url('suphoto/icon/813ee047-f242-4ad5-b2f6-28a69a549048.png');
-                  background-size:90%;
-                  background-position:center;
-                  background-repeat:no-repeat;
-                  background-color:#FAF4FF;">
-        </div>
-        <div class="card-body">
-          <div class="card-title" data-zh="ICON 美術製作" data-en="Icon & Visual Design">ICON 美術製作</div>
-          <div class="card-desc" data-zh="與北藝大同學藥上共同創作的手繪 ICON 系列，融合環境與研究主題。" 
-              data-en="A co-created hand-drawn icon series with NTUA classmates, blending environmental and research themes.">
-            與北藝大同學藥上共同創作的手繪 ICON 系列，融合環境與研究主題。
-          </div>
-          <div class="tags"><span>Co-creation</span><span>Design</span><span>Illustration</span></div>
-        </div>
-      </a>
+    <a class="card" href="icon.html" rel="noopener">
+  <div class="thumb" 
+     style="background-image:url('suphoto/icon/813ee047-f242-4ad5-b2f6-28a69a549048.png');
+            background-size:90%;
+            background-position:center;
+            background-repeat:no-repeat;
+            background-color:	#FAF4FF;">
+    </div>
+  <div class="card-body">
+    <div class="card-title" data-zh="ICON 美術製作" data-en="Icon & Visual Design">ICON 美術製作</div>
+    <div class="card-desc" data-zh="與北藝大同學藥上共同創作的手繪 ICON 系列，融合環境與研究主題。" 
+         data-en="A co-created hand-drawn icon series with NTUA classmates, blending environmental and research themes.">
+      與北藝大同學藥上共同創作的手繪 ICON 系列，融合環境與研究主題。
+    </div>
+    <div class="tags"><span>Co-creation</span><span>Design</span><span>Illustration</span></div>
+  </div>
+</a>
 
       <a class="card" href="gradlife.html" target="_blank" rel="noopener">
         <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop');"></div>
         <div class="card-body">
           <div class="card-title" data-zh="碩士生活" data-en="Graduate Life">碩士生活</div>
-          <div class="card-desc" data-zh="實驗日常、研討會準備與學術旅程紀錄。" data-en="Daily research life, conference preparation, and academic journey.">實驗日常、研討會準備與學術旅程紀錄。</div>
+          <div class="card-desc" data-zh="研究、投稿、研討會準備與學術旅程紀錄。" data-en="Daily research life, conference preparation, and academic journey.">研究、投稿、研討會準備與學術旅程紀錄。</div>
           <div class="tags"><span>NYCU</span><span>Thesis</span><span>Conference</span></div>
         </div>
       </a>
 
-      <a class="card" href="#" target="_blank" rel="noopener">
+      <a class="card" href="DIOXIN2025.html" target="_blank" rel="noopener">
         <div class="thumb" style="background-image:url('suphoto/comming soon.png');"></div>
         <div class="card-body">
-          <div class="card-title" data-zh="線香暴露研究" data-en="Incense Exposure Study">線香暴露研究</div>
-          <div class="card-desc" data-zh="探討寺廟線香燃燒微粒的暴露特徵與粒徑分佈。" data-en="Investigating the exposure characteristics and particle size distribution of temple incense burning.">探討寺廟線香燃燒微粒的暴露特徵與粒徑分佈。</div>
-          <div class="tags"><span>Exposure</span><span>PM2.5</span><span>CSMU</span></div>
+          <div class="card-title" data-zh="興趣" data-en="Interests">興趣</div>
+          <div class="card-desc" data-zh="攝影、街頭穿搭、籃球與創作靈感來源。" data-en="Photography, streetwear, basketball, and creative inspirations.">攝影、街頭穿搭、籃球與創作靈感來源。</div>
+          <div class="tags"><span>Style</span><span>Photo</span><span>Basketball</span></div>
+        </div>
+      </a>
+
+          <a class="card" href="#" target="_blank" rel="noopener">
+        <div class="thumb" style="background-image:url('suphoto/comming soon.png');"></div>
+        <div class="card-body">
+          <div class="card-title" data-zh="興趣" data-en="Interests">興趣</div>
+          <div class="card-desc" data-zh="攝影、街頭穿搭、籃球與創作靈感來源。" data-en="Photography, streetwear, basketball, and creative inspirations.">攝影、街頭穿搭、籃球與創作靈感來源。</div>
+          <div class="tags"><span>Style</span><span>Photo</span><span>Basketball</span></div>
+        </div>
+      </a>
+
+       <a class="card" href="#" target="_blank" rel="noopener">
+        <div class="thumb" style="background-image:url('suphoto/comming soon.png');"></div>
+        <div class="card-body">
+          <div class="card-title" data-zh="興趣" data-en="Interests">興趣</div>
+          <div class="card-desc" data-zh="攝影、街頭穿搭、籃球與創作靈感來源。" data-en="Photography, streetwear, basketball, and creative inspirations.">攝影、街頭穿搭、籃球與創作靈感來源。</div>
+          <div class="tags"><span>Style</span><span>Photo</span><span>Basketball</span></div>
         </div>
       </a>
 
@@ -104,72 +137,72 @@
 </section>
 
 
-  <!-- PUBLICATIONS -->
-<section id="pubs" class="section alt" aria-labelledby="pubs-title">
-  <div class="container">
-    <h2 id="pubs-title" data-zh="學術發表" data-en="Publications">學術發表</h2>
-    <ul class="list large-pubs">
-      <li class="pub-item">
-        <div class="pub-title">
-          <a href="#" target="_blank" rel="noopener">Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS in Ambient PM2.5 across Urban, Traffic, Industrial and Background Area in Taiwan.</a>
-        </div>
-        <div class="pub-meta muted">
-          <span class="author-highlight">Guan Syun Su</span>, Yen Shun Hsu, Neng Huei Lin, Kai Hsien Chi · 45th International Symposium on Halogenated Persistent Organic Pollutants (POPs), 2025, Antalya
-        </div>
-      </li>
-      <li class="pub-item">
-        <div class="pub-title">
-          <a href="#" target="_blank" rel="noopener">台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查 <span class="badge large" style="background: #a78bfa; color: #fff; border-color: #8b5cf6;">🏆 <strong>優秀論文獎</strong></span></a>
-        </div>
-        <div class="pub-meta muted">
-          <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 中華民國環境工程學會第三十七屆年會暨各專門學術研討會，2025，高雄市
-        </div>
-      </li>
-      <li class="pub-item">
-        <div class="pub-title">
-          <a href="#" target="_blank" rel="noopener">大氣中PM2.5全氟/多氟烷機物質（PFAS）採樣方法及臺灣五座城市大氣中濃度 <span class="badge large" style="background: #e0e0e0; color: #333; border-color: #ccc;">🏅 <strong>佳作論文獎</strong></span></a>
-        </div>
-        <div class="pub-meta muted">
-          <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 2025空氣品質改善研討會：創新實務與永續政策，2025，台北市
-        </div>
-      </li>
-      <li class="pub-item">
-        <div class="pub-title">
-          <a href="#" target="_blank" rel="noopener">台灣都會及工業區大氣PFAS之氣固相分佈及物種分佈特性研究</a>
-        </div>
-        <div class="pub-meta muted">
-          <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 第32屆國際氣膠科技研討會，2025，台南市
-        </div>
-      </li>
-      <li class="pub-item">
-        <div class="pub-title">
-          <a href="#" target="_blank" rel="noopener">大氣氣固相全氟/多氟烷基物質(PFAS)採樣及分析技術方法開發</a>
-        </div>
-        <div class="pub-meta muted">
-          <span class="author-highlight">蘇冠勳</span>、徐衍舜、鄭恬恬、紀凱獻 · 第39屆環境分析研討會，2025，桃園市
-        </div>
-      </li>
-      <li class="pub-item">
-        <div class="pub-title">
-          <a href="#" target="_blank" rel="noopener">亞洲三個城市在沙塵暴和非沙塵暴期間大氣持久性有機污染物(POPs)的來源解析和健康影響</a>
-        </div>
-        <div class="pub-meta muted">
-          Shahzada Amani Room, <span class="author-highlight">蘇冠勳</span>, 葉韋辰, 陳柏睿, 潘詩諭, Lodoysamba Sereeter, 林聖倫, 紀凱獻 · 第31屆國際氣膠科技研討會，2024，宜蘭市
-        </div>
-      </li>
-      <li class="pub-item">
-        <div class="pub-title">
-          <a href="#" target="_blank" rel="noopener">寺廟線香燃燒微粒之暴露特徵</a>
-        </div>
-        <div class="pub-meta muted">
-          <span class="author-highlight">蘇冠勳</span>，王櫻芳 · 2023環境安全衛生暨消防工程研討會，2023，高雄市
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
+  <section id="pubs" class="section alt" aria-labelledby="pubs-title">
+    <div class="container">
+      <h2 id="pubs-title" data-zh="學術發表" data-en="Publications">學術發表</h2>
+      <ul class="list large-pubs">
+        <li class="pub-item">
+          <div class="pub-title">
+            <a href="#" target="_blank" rel="noopener">Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS in Ambient PM2.5 across Urban, Traffic, Industrial and Background Area in Taiwan.</a>
+          </div>
+          <div class="pub-meta muted">
+            <span class="author-highlight">Guan Syun Su</span>, Yen Shun Hsu, Neng Huei Lin, Kai Hsien Chi · 45th International Symposium on Halogenated Persistent Organic Pollutants (POPs), 2025, Antalya
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-title pub-title-flex">
+            <a href="#" target="_blank" rel="noopener">台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查</a>
+            <span class="badge large pub-award" style="background: #a78bfa; color: #fff; border-color: #8b5cf6;">🏆 <strong>優秀論文獎</strong></span>
+          </div>
+          <div class="pub-meta muted">
+            <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 中華民國環境工程學會第三十七屆年會暨各專門學術研討會，2025，高雄市
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-title pub-title-flex">
+            <a href="#" target="_blank" rel="noopener">大氣中PM2.5全氟/多氟烷機物質（PFAS）採樣方法及臺灣五座城市大氣中濃度</a>
+            <span class="badge large pub-award" style="background: #e0e0e0; color: #333; border-color: #ccc;">🏅 <strong>佳作論文獎</strong></span>
+          </div>
+          <div class="pub-meta muted">
+            <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 2025空氣品質改善研討會：創新實務與永續政策，2025，台北市
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-title">
+            <a href="#" target="_blank" rel="noopener">台灣都會及工業區大氣PFAS之氣固相分佈及物種分佈特性研究</a>
+          </div>
+          <div class="pub-meta muted">
+            <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 第32屆國際氣膠科技研討會，2025，台南市
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-title">
+            <a href="#" target="_blank" rel="noopener">大氣氣固相全氟/多氟烷基物質(PFAS)採樣及分析技術方法開發</a>
+          </div>
+          <div class="pub-meta muted">
+            <span class="author-highlight">蘇冠勳</span>、徐衍舜、鄭恬恬、紀凱獻 · 第39屆環境分析研討會，2025，桃園市
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-title">
+            <a href="#" target="_blank" rel="noopener">亞洲三個城市在沙塵暴和非沙塵暴期間大氣持久性有機污染物(POPs)的來源解析和健康影響</a>
+          </div>
+          <div class="pub-meta muted">
+            Shahzada Amani Room, <span class="author-highlight">蘇冠勳</span>, 葉韋辰, 陳柏睿, 潘詩諭, Lodoysamba Sereeter, 林聖倫, 紀凱獻 · 第31屆國際氣膠科技研討會，2024，宜蘭市
+          </div>
+        </li>
+        <li class="pub-item">
+          <div class="pub-title">
+            <a href="#" target="_blank" rel="noopener">寺廟線香燃燒微粒之暴露特徵</a>
+          </div>
+          <div class="pub-meta muted">
+            <span class="author-highlight">蘇冠勳</span>，王櫻芳 · 2023環境安全衛生暨消防工程研討會，2023，高雄市
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience" class="section" aria-labelledby="xp-title">
     <div class="container">
       <h2 id="xp-title" data-zh="經歷" data-en="Experience">經歷</h2>
@@ -186,7 +219,6 @@
     </div>
   </section>
 
-  <!-- Education -->
   <section id="education" class="section" aria-labelledby="edu-title">
     <div class="container">
       <h2 id="edu-title" data-zh="學歷" data-en="Education">學歷</h2>
@@ -210,7 +242,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="section alt" aria-labelledby="contact-title">
     <div class="container">
       <h2 id="contact-title" data-zh="聯絡" data-en="Contact">聯絡</h2>
@@ -233,7 +264,6 @@
     </div>
   </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="container small">
     © <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS
@@ -241,7 +271,6 @@
   </div>
 </footer>
 
-  <!-- SCRIPTS -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const yearSpan = document.getElementById('year');
@@ -296,7 +325,6 @@ if (lastUpdated) {
     });
   </script>
 
-  <!-- Schema.org Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
