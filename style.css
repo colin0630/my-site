@@ -18,7 +18,7 @@ img { max-width: 100%; display: block }
 /* --------- Theme tokens --------- */
 :root, [data-theme="dark"] {
   --white:#fff; --black:#000;
-  /* 專業柔和深色模式 (Soft Professional Dark) */
+  /* ✅ 專業柔和深色模式 (Soft Professional Dark) */
   --bg:#15151e;                   /* 柔和深灰/藍灰 */
   --bg-2:#1a1a27;                 /* 次要深色背景 */
   --surface:var(--bg-2);          /* 表面/導覽列 */
@@ -81,8 +81,7 @@ img { max-width: 100%; display: block }
 
 /* --------- Grid & Cards --------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px }
-.card { display: block; border-radius: 18px; overflow: hidden; 
-  background: var(--card-bg-dark, var(--card)); /* 優先使用深色卡片背景，光色用原 --card */
+.card { display: block; border-radius: 18px; overflow: hidden; background: var(--card);
   border: 1px solid var(--card-border); color: var(--card-fg);
   transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow);
@@ -114,6 +113,31 @@ img { max-width: 100%; display: block }
   text-decoration-color: #d9d9ff;
 }
 header .en-name, header .zh-name { text-decoration: none !important; }
+
+/* ✅ Publications 區塊：字體與行距放大 (新增) */
+.list.large-pubs {
+  gap: 24px; /* 增大列表項目之間的間距 */
+}
+
+.pub-item {
+  border-left: 3px solid var(--divider); /* 添加視覺分隔線 */
+  padding-left: 14px;
+}
+
+.pub-title a {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem); /* 放大標題字體 */
+  line-height: 1.6; /* 增加標題行距 */
+  font-weight: 600;
+  display: block;
+}
+
+.pub-meta {
+  font-size: 0.95rem; /* 略微放大作者/會議資訊字體 */
+  line-height: 1.6; /* 增加作者/會議資訊行距 */
+  margin-top: 4px;
+}
+/* 👆 Publications 區塊：字體與行距放大 (新增結束) */
+
 
 /* --------- Contact --------- */
 .contact-icons { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap }
@@ -181,8 +205,7 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 /* 卡片外層 */
 .gallery-item {
   position: relative;
-  /* 使用新的卡片背景變數，以保持與 .card 一致的層次感 */
-  background: var(--card-bg-dark, var(--surface));
+  background: var(--surface);
   border: 1px solid var(--divider);
   border-radius: var(--card-radius);
   overflow: hidden;
@@ -193,13 +216,7 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 /* Hover 效果：浮起 + 陰影加深 + 紫邊高光 */
 .gallery-item:hover {
   transform: translateY(-4px);
-  /* 深色模式下 box-shadow 在新背景上調整為更柔和 */
-  box-shadow: var(--shadow); 
-  [data-theme="dark"] & {
-    box-shadow: 0 10px 20px rgba(0,0,0,.45);
-  }
-  
-  /* 深色模式 hover 邊框高光調整 */
+  box-shadow: 0 16px 32px rgba(0,0,0,.30);
   border-color: color-mix(in oklab, var(--divider) 30%, var(--ring-color) 70%);
 }
 
