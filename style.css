@@ -18,11 +18,20 @@ img { max-width: 100%; display: block }
 /* --------- Theme tokens --------- */
 :root, [data-theme="dark"] {
   --white:#fff; --black:#000;
-  --bg:#0b1220; --bg-2:#0f172a; --surface:#0f172a;
-  --text:#e5e7eb; --muted:#94a3b8; --divider: rgba(255,255,255,0.08);
-  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  /* 專業柔和深色模式 (Soft Professional Dark) */
+  --bg:#15151e;                   /* 柔和深灰/藍灰 */
+  --bg-2:#1a1a27;                 /* 次要深色背景 */
+  --surface:var(--bg-2);          /* 表面/導覽列 */
+  --text:#e0e0e0;                 /* 柔和淺色文字 */
+  --muted:#a0a0ad;                /* 柔和的靜音文字 */
+  --divider: rgba(255,255,255,0.10); /* 略微明顯的分隔線 */
+  --shadow: 0 4px 12px rgba(0,0,0,.35); /* 柔和陰影 */
   --section-fg: var(--text); --hero-fg:#ffffff;
-  --card:#1a2236cc; --card-border: rgba(255,255,255,0.14); --card-fg:#ffffff;
+  /* 卡片專用深色背景 */
+  --card-bg-dark: #20202d;        /* 卡片背景，比 --bg 亮一點 */
+  --card:var(--card-bg-dark);     /* 使用新的深色卡片背景 */
+  --card-border: rgba(255,255,255,0.16); /* 略微明顯的卡片邊框 */
+  --card-fg:var(--text);          /* 卡片文字色與主文字色一致 */
   --hero-a: rgba(139,92,246,.35);
 }
 [data-theme="light"] {
@@ -72,11 +81,17 @@ img { max-width: 100%; display: block }
 
 /* --------- Grid & Cards --------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px }
-.card { display: block; border-radius: 18px; overflow: hidden; background: var(--card);
+.card { display: block; border-radius: 18px; overflow: hidden; 
+  background: var(--card-bg-dark, var(--card)); /* 優先使用深色卡片背景，光色用原 --card */
   border: 1px solid var(--card-border); color: var(--card-fg);
   transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow);
-  border-color: color-mix(in oklab, var(--card-border) 40%, var(--white) 60%) }
+  /* 深色模式 hover 邊框高光調整 */
+  border-color: color-mix(in oklab, var(--card-border) 40%, var(--white) 60%);
+  [data-theme="dark"] & {
+    border-color: color-mix(in oklab, var(--card-border) 40%, #8b5cf6 60%); /* 使用 primary 色高亮 */
+  }
+}
 .thumb { height: 170px; background-size: cover; background-position: center }
 .card-body { padding: 14px }
 .card-title { font-weight: 800; margin-bottom: 6px }
@@ -166,7 +181,8 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 /* 卡片外層 */
 .gallery-item {
   position: relative;
-  background: var(--surface);
+  /* 使用新的卡片背景變數，以保持與 .card 一致的層次感 */
+  background: var(--card-bg-dark, var(--surface));
   border: 1px solid var(--divider);
   border-radius: var(--card-radius);
   overflow: hidden;
@@ -177,7 +193,13 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 /* Hover 效果：浮起 + 陰影加深 + 紫邊高光 */
 .gallery-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0,0,0,.30);
+  /* 深色模式下 box-shadow 在新背景上調整為更柔和 */
+  box-shadow: var(--shadow); 
+  [data-theme="dark"] & {
+    box-shadow: 0 10px 20px rgba(0,0,0,.45);
+  }
+  
+  /* 深色模式 hover 邊框高光調整 */
   border-color: color-mix(in oklab, var(--divider) 30%, var(--ring-color) 70%);
 }
 
