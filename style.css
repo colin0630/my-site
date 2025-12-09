@@ -27,9 +27,10 @@ img { max-width: 100%; display: block }
   --divider: rgba(255,255,255,0.10); /* 略微明顯的分隔線 */
   --shadow: 0 4px 12px rgba(0,0,0,.35); /* 柔和陰影 */
   --section-fg: var(--text); --hero-fg:#ffffff;
-  /* 卡片專用深色背景 */
+  
+  /* 深色模式專用卡片變數 */
   --card-bg-dark: #20202d;        /* 卡片背景，比 --bg 亮一點 */
-  --card:var(--card-bg-dark);     /* 使用新的深色卡片背景 */
+  --card:var(--card-bg-dark);     /* 通用卡片背景指向深色 */
   --card-border: rgba(255,255,255,0.16); /* 略微明顯的卡片邊框 */
   --card-fg:var(--text);          /* 卡片文字色與主文字色一致 */
   --hero-a: rgba(139,92,246,.35);
@@ -39,7 +40,10 @@ img { max-width: 100%; display: block }
   --text:#0f172a; --muted:#475569; --divider: rgba(2,6,23,0.08);
   --shadow: 0 8px 24px rgba(2,6,23,.08);
   --section-fg: var(--text); --hero-fg:#0f172a;
-  --card:#ffffff; --card-border: rgba(15,23,42,0.10); --card-fg:#0f172a;
+  /* ✅ 淺色模式卡片變數確保為白色 */
+  --card:#ffffff; 
+  --card-border: rgba(15,23,42,0.10); 
+  --card-fg:#0f172a;
 }
 
 /* --------- Nav --------- */
@@ -81,7 +85,7 @@ img { max-width: 100%; display: block }
 
 /* --------- Grid & Cards --------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px }
-.card { display: block; border-radius: 18px; overflow: hidden; background: var(--card);
+.card { display: block; border-radius: 18px; overflow: hidden; background: var(--card); /* 使用通用 --card 變數 */
   border: 1px solid var(--card-border); color: var(--card-fg);
   transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow);
@@ -114,7 +118,7 @@ img { max-width: 100%; display: block }
 }
 header .en-name, header .zh-name { text-decoration: none !important; }
 
-/* ✅ Publications 區塊：字體與行距放大 (修正與新增) */
+/* Publications 區塊：字體與行距放大 */
 .list.large-pubs {
   gap: 24px; /* 增大列表項目之間的間距 */
 }
@@ -155,7 +159,6 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   line-height: 1.6; /* 增加作者/會議資訊行距 */
   margin-top: 4px;
 }
-/* 👆 Publications 區塊：字體與行距放大 (修正與新增結束) */
 
 
 /* --------- Contact --------- */
