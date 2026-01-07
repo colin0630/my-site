@@ -229,15 +229,17 @@
           <div class="edu-head">NYCU · IEOHS <span class="muted">2024–</span></div>
           <ul>
             <p data-zh="PFAS 空氣採樣技術開發、品保/品管" data-en="PFAS air sampling, Method development, QA/QC"</p>
-            <li>PFAS air sampling, Method development, QA/QC</li>
-            <li>Atmospheric sampling</li>
-            <li>R/Python pipeline: PCA, PRDA/RDA, risk assessment</li>
-            <li>Conference presentations; paper in preparation</li>
+            <p data-zh="程式資料視覺化: PCA, PRDA/RDA，健康風險評估" data-en="R/Python pipeline: PCA, PRDA/RDA, risk assessment"</p>
+            <p data-zh="口頭報告，論文撰寫" data-en="Conference presentations; paper in preparation"</p>
           </ul>
         </div>
         <div class="edu">
           <div class="edu-head">CSMU · OSH <span class="muted">2020–2024</span></div>
           <ul>
+            <p data-zh="職業衛生" data-en="Occupational Health"</p>
+            <p data-zh="寺廟線香暴露" data-en="Temple incense exposure"</p>
+            <p data-zh="粒徑分布特性研究" data-en="Particle size distribution"</p>
+
             <li>Occupational Health</li>
             <li>Temple incense exposure</li>
             <li>Particle size distribution</li>
@@ -271,10 +273,15 @@
 
 <footer class="footer">
   <div class="container small">
-    © <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS
-    p>Ver:2 8.2 Ver:
+    <p>© <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS</p>
+    <p class="ver">Ver: 2.8.2</p>
   </div>
 </footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
