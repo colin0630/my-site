@@ -272,59 +272,51 @@
   </section>
 
 <footer class="footer">
-  <div class="container small">
-    <p>© <span id="year"></span> Guan Syun Su — Built with vanilla HTML/CSS/JS</p>
-    <p class="ver">Ver: 2.8.2</p>
-  </div>
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
+    <div class="container small">
+      <p>© <span id="year"></span> Guan Syun Su — Built with HTML/CSS/JS</p>
+      <p class="ver">Ver: 2.8.2 | <span data-zh="最後更新：" data-en="Last Updated: ">最後更新：</span><span id="lastUpdated"></span></p>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Update Year
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-      const lastUpdated = document.getElementById('lastUpdated');
-if (lastUpdated) {
-  // 自動顯示當前日期 (YYYY-MM-DD)
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = String(now.getMonth() + 1).padStart(2, '0');
-  const d = String(now.getDate()).padStart(2, '0');
-  lastUpdated.textContent = `${y}-${m}-${d}`;
-}
 
-      let zh = (localStorage.getItem('lang') !== 'en');
+      // Update Last Updated Date
+      const lastUpdated = document.getElementById('lastUpdated');
+      if (lastUpdated) {
+        const now = new Date();
+        lastUpdated.textContent = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      }
+
+      // Language Toggle Logic
+      let isZh = (localStorage.getItem('lang') !== 'en');
       const applyLang = () => {
-        document.documentElement.lang = zh ? 'zh-Hant' : 'en';
+        document.documentElement.lang = isZh ? 'zh-Hant' : 'en';
         document.querySelectorAll('[data-zh]').forEach(el => {
           const zhText = el.getAttribute('data-zh');
           const enText = el.getAttribute('data-en');
-          if (zhText !== null && enText !== null) el.textContent = zh ? zhText : enText;
+          el.textContent = isZh ? zhText : enText;
         });
       };
       applyLang();
 
-      const langBtn = document.getElementById('langBtn');
-      langBtn?.addEventListener('click', () => {
-        zh = !zh;
-        localStorage.setItem('lang', zh ? 'zh' : 'en');
+      document.getElementById('langBtn')?.addEventListener('click', () => {
+        isZh = !isZh;
+        localStorage.setItem('lang', isZh ? 'zh' : 'en');
         applyLang();
       });
 
+      // Theme Toggle Logic
       const root = document.documentElement;
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : (root.getAttribute('data-theme') || 'light'));
+      let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       root.setAttribute('data-theme', theme);
 
       const themeBtn = document.getElementById('themeBtn');
       const updateThemeIcon = () => {
-        if (!themeBtn) return;
-        themeBtn.textContent = (theme === 'dark') ? '🌙' : '☀️';
-        themeBtn.setAttribute('aria-label', theme === 'dark' ? '目前為深色主題' : '目前為淺色主題');
+        if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
       };
       updateThemeIcon();
 
@@ -335,22 +327,6 @@ if (lastUpdated) {
         updateThemeIcon();
       });
     });
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Guan Syun Su",
-    "alternateName": "蘇冠勳",
-    "affiliation": {"@type":"CollegeOrUniversity","name":"NYCU IEOHS"},
-    "knowsAbout": ["PFAS","Air Sampling","Exposure Assessment","Data Visualization"],
-    "url": "/",
-    "sameAs": [
-      "mailto:sucolin1@gmail.com",
-      "https://www.linkedin.com/in/%E5%86%A0%E5%8B%B3-%E8%98%87-250171283"
-    ]
-  }
   </script>
 </body>
 </html>
