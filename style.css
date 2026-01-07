@@ -196,10 +196,10 @@ header .en-name, header .zh-name { text-decoration: none !important; }
 /* --------- Contact --------- */
 .contact-icons { 
   display: flex; 
-  gap: 2.5rem; /* 增加間距讓大圖示不擁擠 */
+  gap: 2.5rem; 
   margin-top: 1.5rem; 
   flex-wrap: wrap;
-  justify-content: flex-start; /* 保持左對齊，若要置中可改 center */
+  justify-content: flex-start;
 }
 
 .icon-btn { 
@@ -209,50 +209,36 @@ header .en-name, header .zh-name { text-decoration: none !important; }
   transition: transform .25s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 
-/* 圖示尺寸加大至 48px */
 .icon-btn img { 
   width: 48px; 
   height: 48px; 
-  opacity: 1;
   transition: filter 0.3s ease;
 }
 
-/* 懸停時整體放大 */
 .icon-btn:hover { 
-  transform: translateY(-5px) scale(1.15); 
+  transform: translateY(-5px) scale(1.1); 
 }
 
-/* --- 品牌彩色濾鏡 (將原始黑/白 SVG 轉為官方色彩) --- */
+/* --- 品牌顏色處理 --- */
 
-/* Gmail 官方紅 (#EA4335) */
+/* Gmail: 本身就是彩色的，不需要 filter，甚至可以加一點陰影讓它立體 */
 .icon-btn img[alt="Gmail"] {
-  filter: invert(32%) sepia(85%) saturate(2716%) hue-rotate(346deg) brightness(94%) contrast(92%);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-/* Discord 官方紫 (#5865F2) */
+/* Discord: 官方紫 (#5865F2) */
 .icon-btn img[alt="Discord"] {
   filter: invert(41%) sepia(74%) saturate(4171%) hue-rotate(222deg) brightness(97%) contrast(97%);
 }
 
-/* LinkedIn 官方藍 (#0077B5) */
+/* LinkedIn: 官方藍 (#0077B5) */
 .icon-btn img[alt="LinkedIn"] {
   filter: invert(30%) sepia(93%) saturate(1633%) hue-rotate(178deg) brightness(94%) contrast(102%);
 }
 
-/* 確保深色模式下色彩依然鮮艷 */
-[data-theme="dark"] .icon-btn img {
-  filter: brightness(1.1) saturate(1.2); /* 略微提升亮度適應深色背景 */
-}
-
-/* 重新套用各別濾鏡以維持顏色 */
+/* 深色模式下的微調 */
 [data-theme="dark"] .icon-btn img[alt="Gmail"] {
-  filter: invert(32%) sepia(85%) saturate(2716%) hue-rotate(346deg) brightness(1.1) contrast(92%);
-}
-[data-theme="dark"] .icon-btn img[alt="Discord"] {
-  filter: invert(41%) sepia(74%) saturate(4171%) hue-rotate(222deg) brightness(1.1) contrast(97%);
-}
-[data-theme="dark"] .icon-btn img[alt="LinkedIn"] {
-  filter: invert(30%) sepia(93%) saturate(1633%) hue-rotate(178deg) brightness(1.1) contrast(102%);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); /* 深色背景下增加陰影 */
 }
 
 /* --------- Footer --------- */
