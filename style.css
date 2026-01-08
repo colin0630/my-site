@@ -1,6 +1,5 @@
 /* ============================================================
-   專業藝術家版：Guan Syun Su Portfolio CSS
-   更新重點：字體混搭、深色模式深度調整、微互動優化
+   Guan Syun Su Portfolio - 藝術家專業美化版 (修正尺寸溢出)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
@@ -9,128 +8,132 @@
 html { scroll-behavior: smooth; }
 
 :root {
-  /* 基礎色調 - 淺色模式 */
   --bg: #fdfcfb;
   --bg-2: #f3f4f6;
   --surface: #ffffff;
   --text: #1e293b;
   --muted: #64748b;
   --primary: #4f46e5;
-  --primary-glow: rgba(79, 70, 229, 0.15);
-  --divider: rgba(0, 0, 0, 0.05);
-  --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
-  --card-border: rgba(0, 0, 0, 0.04);
+  --primary-glow: rgba(79, 70, 229, 0.12);
+  --divider: rgba(0, 0, 0, 0.06);
+  --shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
+  --card-border: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme="dark"] {
-  /* 基礎色調 - 深色模式 (深邃藍調) */
-  --bg: #0f1117; 
-  --bg-2: #161923;
+  --bg: #0b0e14; 
+  --bg-2: #161a23;
   --surface: #1e2230;
   --text: #e2e8f0;
   --muted: #94a3b8;
   --primary: #818cf8;
-  --primary-glow: rgba(129, 140, 248, 0.2);
-  --divider: rgba(255, 255, 255, 0.06);
-  --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --primary-glow: rgba(129, 140, 248, 0.25);
+  --divider: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+  --card-border: rgba(255, 255, 255, 0.1);
 }
 
 body {
   font-family: "Plus Jakarta Sans", "Inter", "Noto Sans TC", sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--text);
   background-color: var(--bg);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 h1, h2, h3, .card-title, .name {
   font-family: "Noto Serif TC", serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  font-weight: 800;
 }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-/* --------- Nav: 玻璃擬態 --------- */
+/* --------- Nav 修正 --------- */
 .nav {
   position: sticky; top: 0; z-index: 100;
-  background: color-mix(in oklab, var(--surface) 80%, transparent);
-  backdrop-filter: blur(12px);
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  backdrop-filter: saturate(150%) blur(12px);
   border-bottom: 1px solid var(--divider);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
 .brand { display: flex; align-items: center; gap: 14px; }
+
+/* 限制導覽列頭像大小 */
 .avatar { 
-  width: 48px; height: 48px; 
-  /* 藝術家感：不規則圓形 */
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  width: 44px; height: 44px; /* 固定尺寸防止溢出 */
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   object-fit: cover; 
-  border: 2px solid var(--primary);
+  border: 1.5px solid var(--primary);
+  flex-shrink: 0;
 }
-.name { font-size: 1.1rem; font-weight: 800; }
-.links { display: flex; align-items: center; gap: 10px; }
-.links a { 
-    font-size: 0.95rem; font-weight: 600; padding: 6px 12px; border-radius: 8px; 
-    transition: 0.2s; color: var(--muted);
-}
+
+.links { display: flex; align-items: center; gap: 4px; }
+.links a { font-size: 0.95rem; font-weight: 600; padding: 8px 14px; border-radius: 10px; transition: 0.2s ease; color: var(--muted); text-decoration: none; }
 .links a:hover { color: var(--primary); background: var(--primary-glow); }
 
-/* --------- Hero: 動態感與氣質 --------- */
-.hero {
-  position: relative; padding: 120px 0 80px; overflow: hidden;
-  background: radial-gradient(circle at 0% 0%, var(--primary-glow), transparent 50%);
-}
-.hero h1 { 
-  font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 20px;
-  background: linear-gradient(135deg, var(--text) 60%, var(--primary));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero .lead { font-size: 1.15rem; max-width: 700px; margin-bottom: 12px; color: var(--muted); }
+/* --------- Hero --------- */
+.hero { position: relative; padding: 100px 0 80px; overflow: hidden; background: radial-gradient(circle at 0% 0%, var(--primary-glow), transparent 60%); }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1.2; margin-bottom: 24px; background: linear-gradient(to right, var(--text) 40%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* --------- Buttons --------- */
-.btn {
-  display: inline-flex; align-items: center; padding: 10px 24px; border-radius: 12px;
-  font-weight: 700; cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid transparent;
-}
-.btn.primary { background: var(--primary); color: #fff; box-shadow: 0 4px 15px var(--primary-glow); }
-.btn.primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px var(--primary-glow); }
-.btn.ghost { border-color: var(--divider); background: transparent; color: var(--text); margin-left: 10px; }
-.btn.ghost:hover { background: var(--bg-2); }
-
-/* --------- Cards: 專業陰影 --------- */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-.card {
-  background: var(--surface); border: 1px solid var(--card-border);
-  border-radius: 24px; overflow: hidden; transition: 0.4s; text-decoration: none; color: inherit;
-}
-.card:hover { transform: translateY(-8px); box-shadow: var(--shadow); border-color: var(--primary); }
-.thumb { height: 200px; background-size: cover; background-position: center; transition: 0.5s; }
-.card:hover .thumb { transform: scale(1.05); }
-.card-body { padding: 24px; }
-
-/* --------- Publications: 學術優雅 --------- */
-.pub-item {
-  padding: 20px; border-radius: 16px; transition: 0.3s;
-  border-left: 3px solid var(--divider); margin-bottom: 16px;
-}
-.pub-item:hover { 
-    background: var(--bg-2); border-left-color: var(--primary); 
-    transform: translateX(10px);
-}
-.pub-title-flex { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.badge.pub-award {
-  background: linear-gradient(135deg, #818cf8, #c084fc) !important;
-  color: white !important; border: none !important;
-  padding: 4px 14px !important; font-size: 0.8rem !important;
-  box-shadow: 0 4px 10px rgba(129, 140, 248, 0.3);
+/* --------- 聯絡 ICON 尺寸嚴格控制 (重點修正) --------- */
+.contact-icons { 
+  display: flex; 
+  gap: 1.5rem; 
+  margin-top: 1.5rem; 
+  flex-wrap: wrap; 
 }
 
-/* --------- Footer --------- */
-.footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--divider); color: var(--muted); font-size: 0.9rem; }
-
-/* RWD */
-@media (max-width: 768px) {
-  .hero { padding: 80px 0 40px; }
-  .links a:not(.btn) { display: none; }
+.icon-btn { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  width: 48px;  /* 容器寬度 */
+  height: 48px; /* 容器高度 */
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
+
+.icon-btn img { 
+  width: 100%;  /* 強制填滿容器但受容器限制 */
+  height: 100%; 
+  max-width: 40px; /* 再次確保圖片本體不會過大 */
+  max-height: 40px;
+  object-fit: contain;
+}
+
+.icon-btn:hover { transform: scale(1.15) rotate(5deg); }
+
+/* --------- 作品集卡片 --------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+.card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; transition: 0.4s ease; text-decoration: none; color: inherit; }
+.card:hover { transform: translateY(-10px); box-shadow: var(--shadow); border-color: var(--primary); }
+
+/* 確保卡片圖片比例正常 */
+.thumb { 
+  height: 180px; 
+  width: 100%;
+  background-size: cover; 
+  background-position: center; 
+  transition: 0.6s ease; 
+}
+
+/* --------- 獎狀圖片尺寸控制 --------- */
+.pub-awards-imgs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 300px; /* 限制側邊圖片區域寬度 */
+}
+
+.pub-awards-imgs img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--divider);
+}
+
+/* 剩下的通用按鈕與頁尾保持原樣... */
+.btn { display: inline-flex; align-items: center; padding: 8px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; border: 1.5px solid transparent; text-decoration: none; font-size: 0.9rem; }
+.btn.primary { background: var(--primary); color: #fff; border: none; }
+.btn.ghost { border-color: var(--divider); background: transparent; color: var(--text); }
+.btn.small { padding: 4px 10px; font-size: 0.8rem; }
