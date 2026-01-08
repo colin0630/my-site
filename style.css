@@ -1,3 +1,4 @@
+/* style.css */
 /* ============================================================
    專業藝術家版：Guan Syun Su Portfolio CSS
    更新重點：字體混搭、深色模式深度調整、微互動優化
@@ -50,6 +51,46 @@ h1, h2, h3, .card-title, .name {
 }
 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* --------- Global Spacing: 各類別之間留白 --------- */
+.section { padding: 96px 0; }
+.section.alt { 
+  background: var(--bg-2); 
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+h2 { font-size: 2rem; margin-bottom: 22px; }
+p { margin-top: 10px; }
+
+/* Lists (for Publications etc.) */
+.list { list-style: none; padding-left: 0; margin-top: 18px; }
+.pub-item:last-child { margin-bottom: 0; }
+
+/* Experience / Education cards */
+.experience, .Education { display: grid; gap: 18px; margin-top: 18px; }
+.xp, .edu {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 22px;
+}
+.xp ul, .edu ul { margin-top: 10px; display: grid; gap: 10px; }
+.xp ul p, .edu ul p { margin: 0; color: var(--muted); }
+
+/* --------- Publications layout: awards fixed on the right --------- */
+.pub-content-flex {
+  justify-content: space-between;
+}
+.pub-awards-imgs {
+  position: sticky;
+  top: 92px; /* below the sticky nav */
+}
+
+@media (max-width: 960px) {
+  .section { padding: 72px 0; }
+  .pub-awards-imgs { position: static; }
+}
+
 /* 名字底線樣式 */
 .author-highlight {
   text-decoration: underline;
