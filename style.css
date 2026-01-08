@@ -1,8 +1,7 @@
 /* ============================================================
-   Guan Syun Su Portfolio - 藝術家專業美化版 (ICON 尺寸精確修正)
+   Guan Syun Su Portfolio - 藝術家專業版 (文字並排與尺寸校正)
    ============================================================ */
 
-/* 引入質感字體 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,10 +32,9 @@ body {
 }
 
 h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; font-weight: 800; }
-
 .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-/* --------- 導覽列：修正 Avatar 尺寸 --------- */
+/* --------- Nav --------- */
 .nav {
   position: sticky; top: 0; z-index: 100;
   background: color-mix(in oklab, var(--surface) 85%, transparent);
@@ -44,65 +42,58 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; font-weigh
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
 .brand { display: flex; align-items: center; gap: 12px; }
-
 .avatar { 
-  width: 44px !important; height: 44px !important; /* 強制固定 */
+  width: 44px !important; height: 44px !important; 
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  object-fit: cover; border: 1.5px solid var(--primary);
-  flex-shrink: 0; /* 防止被擠壓 */
+  object-fit: cover; border: 1.5px solid var(--primary); flex-shrink: 0;
 }
 
 /* --------- Hero --------- */
-.hero { position: relative; padding: 100px 0 80px; overflow: hidden; background: radial-gradient(circle at 0% 0%, var(--primary-glow), transparent 60%); }
-.hero h1 { font-size: clamp(2.4rem, 5vw, 3.5rem); line-height: 1.2; margin-bottom: 20px; background: linear-gradient(to right, var(--text) 40%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero { padding: 100px 0 80px; background: radial-gradient(circle at 0% 0%, var(--primary-glow), transparent 60%); }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 3.5rem); margin-bottom: 20px; background: linear-gradient(to right, var(--text) 40%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero .lead { color: var(--muted); max-width: 780px; margin-bottom: 12px; }
 
-/* --------- 作品集：修正 Card & Thumb --------- */
+/* --------- Grid & Cards --------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
 .card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; transition: 0.4s; text-decoration: none; color: inherit; display: block; }
 .card:hover { transform: translateY(-8px); box-shadow: var(--shadow); border-color: var(--primary); }
+.thumb { width: 100% !important; height: 180px !important; background-size: cover; background-position: center; }
 
-.thumb { 
-  width: 100% !important; height: 180px !important; /* 嚴格限制高度 */
-  background-size: cover; background-position: center; transition: 0.6s;
+/* --------- 學術發表 (並排結構) --------- */
+.pub-content-flex {
+  display: flex; gap: 40px; align-items: flex-start; justify-content: space-between;
 }
-.card:hover .thumb { transform: scale(1.05); }
-
-/* --------- 學術發表：獲獎勳章與圖片 --------- */
+.large-pubs { flex: 1; list-style: none; }
 .pub-item { padding: 20px; border-radius: 16px; border-left: 3px solid var(--divider); transition: 0.3s; margin-bottom: 12px; }
 .pub-item:hover { background: var(--surface); border-left-color: var(--primary); transform: translateX(8px); box-shadow: var(--shadow); }
 
+.pub-awards-imgs { flex: 0 0 280px; display: flex; flex-direction: column; gap: 20px; }
+.pub-awards-imgs img { 
+  width: 100% !important; height: auto !important; border-radius: 12px; 
+  border: 1px solid var(--card-border); box-shadow: var(--shadow);
+}
+
 .badge.pub-award {
   background: linear-gradient(135deg, #6366f1, #a855f7) !important;
-  color: #fff !important; border: none !important; font-size: 0.75rem !important;
-  padding: 4px 12px !important; border-radius: 6px !important; display: inline-block;
+  color: #fff !important; font-size: 0.75rem !important; padding: 4px 12px !important; border-radius: 6px !important;
 }
 
-.pub-awards-imgs { flex: 0 0 260px !important; } /* 限制獎狀側欄寬度 */
-.pub-awards-imgs img { 
-  max-width: 100% !important; height: auto !important; /* 確保不超過容器 */
-  border-radius: 12px; border: 1px solid var(--divider); margin-bottom: 16px;
-}
-
-/* --------- 聯絡 ICON：尺寸限制 (核心修正) --------- */
-.contact-icons { display: flex; gap: 1.5rem; margin-top: 1.5rem; align-items: center; }
-.icon-btn { display: inline-flex; width: 42px !important; height: 42px !important; transition: 0.3s; }
-.icon-btn img { 
-  width: 100% !important; height: 100% !important; 
-  max-width: 42px !important; max-height: 42px !important; /* 雙重鎖定尺寸 */
-  object-fit: contain; 
-}
+/* --------- 聯絡 ICON --------- */
+.contact-icons { display: flex; gap: 1.5rem; margin-top: 1.5rem; }
+.icon-btn { width: 42px !important; height: 42px !important; transition: 0.3s; }
+.icon-btn img { width: 100% !important; height: 100% !important; object-fit: contain; }
 .icon-btn:hover { transform: scale(1.2) rotate(5deg); }
 
-/* --------- 按鈕與通用 --------- */
-.btn { display: inline-flex; padding: 10px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; border: 1.5px solid transparent; }
+/* --------- 通用區塊 --------- */
+.section { padding: 80px 0; }
+.section.alt { background: var(--bg-2); }
+.btn { display: inline-flex; padding: 10px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; }
 .btn.primary { background: var(--primary); color: #fff; }
-.btn.ghost { border-color: var(--divider); color: var(--text); }
-.btn.small { padding: 4px 12px; font-size: 0.85rem; }
+.btn.ghost { border: 1.5px solid var(--divider); color: var(--text); }
+.footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--divider); color: var(--muted); }
 
-.footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--divider); color: var(--muted); font-size: 0.85rem; }
-
-@media (max-width: 768px) {
-  .hero h1 { font-size: 2.2rem; }
-  .links a:not(.btn) { display: none; }
+@media (max-width: 900px) {
+  .pub-content-flex { flex-direction: column; }
+  .pub-awards-imgs { flex: none; width: 100%; flex-direction: row; flex-wrap: wrap; }
+  .pub-awards-imgs img { width: calc(50% - 10px); }
 }
