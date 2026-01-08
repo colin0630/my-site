@@ -4,196 +4,126 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Guan Syun Su · Portfolio</title>
-  <meta name="description" content="PFAS researcher · Environmental exposure · Portfolio" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="style.css" />
-
-  <meta property="og:title" content="Guan Syun Su · Portfolio" />
-  <meta property="og:description" content="NYCU master's student focusing on atmospheric PFAS exposure, data analysis, and scientific visualization." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1200&auto=format&fit=crop" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="/" />
 </head>
 <body>
-  <header class="nav" role="navigation" aria-label="Main">
+  <header class="nav">
     <div class="container nav-inner">
       <div class="brand">
-        <img src="./suphoto/colinsu-photo.jpg" alt="Avatar" class="avatar" loading="lazy" decoding="async" />
+        <img src="./suphoto/colinsu-photo.jpg" alt="Avatar" class="avatar" />
         <div>
-          <div class="name">
-            <span>Guan Syun Su</span>
-            <span class="muted">/ <span>蘇冠勳</span></span>
-          </div>
-          <div class="role" data-zh="大氣暴露 · PFAS 大氣採樣分析方法" data-en="Environmental Exposure · PFAS air sampling">大氣暴露 · PFAS 採樣</div>
+          <div class="name">Guan Syun Su <span class="muted">/ 蘇冠勳</span></div>
+          <div class="role" data-zh="大氣暴露 · PFAS 採樣" data-en="Environmental Exposure · PFAS air sampling">大氣暴露 · PFAS 採樣</div>
         </div>
       </div>
       <nav class="links">
         <a href="#projects" data-zh="作品" data-en="Projects">作品</a>
         <a href="#pubs" data-zh="發表" data-en="Publications">發表</a>
         <a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a>
-        <a href="Guan_Syun_Su_CV.pdf" data-zh="履歷" data-en="CV" target="_blank" rel="noopener" download>履歷</a>
-        <button id="langBtn" class="btn ghost small" type="button">中文/EN</button>
-        <button id="themeBtn" class="btn ghost small" type="button" title="切換深/淺">🌙</button>
+        <button id="langBtn" class="btn ghost small" style="margin-left:10px; padding:4px 10px;">ZH/EN</button>
+        <button id="themeBtn" class="btn ghost small" style="padding:4px 10px;">🌙</button>
       </nav>
     </div>
   </header>
 
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero">
     <div class="container">
-      <h1 id="hero-title"
-        data-zh="冠勳的網站搭建中"
-        data-en="Colin's personal site is building."
-      >冠勳的網站搭建中</h1>
-      <p class="lead"
-        data-zh="陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。"
-        data-en="NYCU master's student focusing on atmospheric PFAS exposure, analytical method development, data analysis, and scientific visualization."
-      >陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。</p>
-      <p class="lead" data-zh="2024 是最接近夢想的一年，要變得很厲害喔！" data-en="2024 is the year closest to the dream—time to level up!">2024 是最接近夢想的一年，要變得很厲害喔！</p>
-      <p class="lead" data-zh="這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！" data-en="This space is how I build my story: remember everything and keep going. Let's see how far we can go.">這裡在構成我的故事：記得每一件事並持續向前。就讓我們看看能走到哪裡吧！</p>
-      <div class="cta" role="group" aria-label="Primary" style="margin-top: 32px;">
+      <h1 data-zh="冠勳的網站搭建中" data-en="Colin's Site Building">冠勳的網站搭建中</h1>
+      <p class="lead" data-zh="陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。" 
+         data-en="NYCU Master student focused on PFAS analysis and visualization.">
+        陽明交大碩士生，專注大氣 PFAS 採樣分析方法開發、資料分析與科學視覺化。
+      </p>
+      <div style="margin-top: 32px;">
         <a href="#projects" class="btn primary" data-zh="看看作品" data-en="See Projects">看看作品</a>
-        <a href="#contact" class="btn ghost" data-zh="聯絡我" data-en="Contact">聯絡我</a>
-        <a href="Guan_Syun_Su_CV.pdf" class="btn ghost" target="_blank" rel="noopener" download data-zh="下載履歷" data-en="Download CV">下載履歷</a>
+        <a href="Guan_Syun_Su_CV.pdf" class="btn ghost" data-zh="下載履歷" data-en="Download CV">下載履歷</a>
       </div>
     </div>
   </section>
 
-  <section id="projects" class="section" aria-labelledby="proj-title">
+  <section id="projects" class="section">
     <div class="container">
-      <h2 id="proj-title" data-zh="精選作品" data-en="Featured Projects">精選作品</h2>
+      <h2 data-zh="精選作品" data-en="Featured Projects" style="margin-bottom:30px;">精選作品</h2>
       <div class="grid">
-        
-        <a class="card" href="PFAS.html" target="_blank" rel="noopener">
+        <a class="card" href="PFAS.html">
           <div class="thumb" style="background-image:url('suphoto/comming soon.png');"></div>
           <div class="card-body">
-            <div class="card-title" data-zh="PFAS 研究" data-en="PFAS Research">PFAS 研究</div>
-            <div class="card-desc" data-zh="分析臺灣多城市大氣中 PFAS 的氣固相行為與來源。" data-en="Analysis of PFAS gas–particle partitioning and sources across multiple Taiwanese cities.">分析臺灣多城市大氣中 PFAS 的氣固相行為與來源。</div>
-            <div class="tags"><span>PFAS</span><span>Air Sampling</span><span>Data Analysis</span><span>PCA/RDA</span></div>
+            <div class="card-title">PFAS 研究</div>
+            <p class="muted" style="font-size:0.9rem;">分析臺灣大氣中 PFAS 行為。</p>
           </div>
         </a>
-
-        <a class="card" href="icon.html" rel="noopener">
-          <div class="thumb" 
-               style="background-image:url('suphoto/icon/813ee047-f242-4ad5-b2f6-28a69a549048.png');
-                      background-size: 80%; background-repeat: no-repeat; background-color: #FAF4FF;">
-          </div>
+        <a class="card" href="icon.html">
+          <div class="thumb" style="background-image:url('suphoto/icon/813ee047-f242-4ad5-b2f6-28a69a549048.png'); background-size:80%; background-repeat:no-repeat; background-color:#FAF4FF;"></div>
           <div class="card-body">
-            <div class="card-title" data-zh="ICON 美術製作" data-en="Icon & Visual Design">ICON 美術製作</div>
-            <div class="card-desc" data-zh="與北藝大同學藥上共同創作的手繪 ICON 系列，融合環境與研究主題。" 
-                 data-en="A co-created hand-drawn icon series with NTUA classmates, blending environmental and research themes.">
-              與北藝大同學藥上共同創作的手繪 ICON 系列，融合環境與研究主題。
-            </div>
-            <div class="tags"><span>Co-creation</span><span>Design</span><span>Illustration</span></div>
+            <div class="card-title">ICON 美術製作</div>
+            <p class="muted" style="font-size:0.9rem;">環境主題手繪 ICON 系列。</p>
           </div>
         </a>
-
-        <a class="card" href="gradlife.html" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop');"></div>
-          <div class="card-body">
-            <div class="card-title" data-zh="碩士生活" data-en="Graduate Life">碩士生活</div>
-            <div class="card-desc" data-zh="研究、投稿、研討會準備與學術旅程紀錄。" data-en="Daily research life, conference preparation, and academic journey.">研究、投稿、研討會準備與學術旅程紀錄。</div>
-            <div class="tags"><span>NYCU</span><span>Thesis</span><span>Conference</span></div>
-          </div>
-        </a>
-
-        <a class="card" href="DIOXIN2025.html" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image:url('suphoto/comming soon.png');"></div>
-          <div class="card-body">
-            <div class="card-title" data-zh="DIOXIN2025" data-en="DIOXIN2025">2025 世界戴奧辛年會</div>
-            <div class="card-desc" data-zh="戴奧辛年會照片" data-en="Photos in DIOXIN 2025">戴奧辛年會照片</div>
-            <div class="tags"><span>Conference</span><span>Photo</span><span>Academic</span></div>
-          </div>
-        </a>
-
-        <a class="card" href="#" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image:url('suphoto/comming soon.png');"></div>
-          <div class="card-body">
-            <div class="card-title" data-zh="實驗室日常" data-en="Colin in Lab">實驗室日常</div>
-            <div class="card-desc" data-zh="#" data-en="#">#</div>
-            <div class="tags"><span>Lab Life</span><span>Daily</span></div>
-          </div>
-        </a>
-
       </div>
     </div>
   </section>
 
-  <section id="pubs" class="section alt" aria-labelledby="pubs-title">
+  <section id="pubs" class="section alt">
     <div class="container">
-      <h2 id="pubs-title" data-zh="學術發表" data-en="Publications">學術發表</h2>
-      
+      <h2 data-zh="學術發表" data-en="Publications" style="margin-bottom:30px;">學術發表</h2>
       <div class="pub-content-flex">
-          <ul class="list large-pubs" style="list-style: none;">
-            <li class="pub-item">
-              <div class="pub-title">
-                Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS in Ambient PM2.5 across Urban, Traffic, Industrial and Background Area in Taiwan.
-              </div>
-              <div class="pub-meta muted">
-                <span class="author-highlight">Guan Syun Su</span>, Yen Shun Hsu, Neng Huei Lin, Kai Hsien Chi · 45th International Symposium on Halogenated Persistent Organic Pollutants (POPs), 2025, Antalya
-              </div>
-            </li>
-            <li class="pub-item">
-              <div class="pub-title pub-title-flex">
-                台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查
-                <span class="badge pub-award">🏆 優秀論文獎</span>
-              </div>
-              <div class="pub-meta muted">
-                <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 中華民國環境工程學會第三十七屆年會暨各專門學術研討會，2025，高雄市
-              </div>
-            </li>
-            <li class="pub-item">
-              <div class="pub-title pub-title-flex">
-                大氣中PM2.5全氟/多氟烷機物質(PFAS)採樣方法及臺灣五座城市大氣中濃度
-                <span class="badge pub-award" style="background: var(--bg-2); color: var(--text);">🏅 佳作論文獎</span>
-              </div>
-              <div class="pub-meta muted">
-                <span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 2025空氣品質改善研討會：創新實務與永續政策，2025，台北市
-              </div>
-            </li>
-            </ul>
-          
-          <div class="pub-awards-imgs">
-              <img src="suphoto/20251210_020530.jpg" alt="優秀論文獎獎狀" loading="lazy" decoding="async">
-              <img src="suphoto/20251210_020624.jpg" alt="佳作論文獎獎狀" loading="lazy" decoding="async">
-          </div>
-      </div>
-    </div>
-  </section>
-  
-  <section id="experience" class="section" aria-labelledby="xp-title">
-    <div class="container">
-      <h2 id="xp-title" data-zh="經歷" data-en="Experience">經歷</h2>
-      <div class="xp">
-        <div class="xp-head" data-zh="工業技術研究院 — 院部，實習生" data-en="ITRI - Headquarters, Intern">工業技術研究院 — 院部，實習生 <span class="muted">2023</span></div>
-        <ul style="padding-left: 20px; margin-top: 10px;">
-          <li data-zh="參與 SDGs 永續發展目標推動" data-en="Participated in SDGs initiatives">參與 SDGs 永續發展目標推動</li>
-          <li data-zh="危害性化學品安全管理" data-en="Hazardous chemical management">危害性化學品安全管理</li>
-          <li data-zh="事故資料統計與趨勢分析" data-en="Statistical analysis of accident data">事故資料統計與趨勢分析</li>
+        <ul class="large-pubs">
+          <li class="pub-item">
+            <div class="pub-title">Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS...</div>
+            <div class="pub-meta muted">Guan Syun Su, et al. · POPs 2025, Antalya</div>
+          </li>
+          <li class="pub-item">
+            <div class="pub-title">台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查 <span class="badge pub-award">🏆 優秀論文獎</span></div>
+            <div class="pub-meta muted">蘇冠勳 等 · 環境工程學會年會，2025</div>
+          </li>
+          <li class="pub-item">
+            <div class="pub-title">大氣中PM2.5全氟/多氟烷機物質(PFAS)採樣方法... <span class="badge pub-award" style="background:#e2e8f0 !important; color:#475569 !important;">🏅 佳作論文獎</span></div>
+            <div class="pub-meta muted">蘇冠勳 等 · 空氣品質改善研討會，2025</div>
+          </li>
         </ul>
+        <div class="pub-awards-imgs">
+          <img src="suphoto/20251210_020530.jpg" alt="優秀論文獎">
+          <img src="suphoto/20251210_020624.jpg" alt="佳作論文獎">
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section alt" aria-labelledby="contact-title">
+  <section id="experience" class="section">
     <div class="container">
-      <h2 id="contact-title" data-zh="聯絡" data-en="Contact">聯絡</h2>
-      <p data-zh="歡迎合作或討論研究。" data-en="Open to collaborations or research discussions.">歡迎合作或討論研究。</p>
+      <h2 data-zh="經歷" data-en="Experience" style="margin-bottom:30px;">經歷</h2>
+      <div class="pub-item" style="border-left-width:4px;">
+        <h3 data-zh="工業技術研究院 — 院部，實習生" data-en="ITRI Intern">工業技術研究院 — 院部，實習生 <span class="muted" style="font-size:1rem; font-weight:400;">2023</span></h3>
+        <p class="muted" style="margin-top:10px;" data-zh="參與 SDGs 永續發展目標推動、危害性化學品安全管理。" data-en="Participated in SDGs and chemical management.">參與 SDGs 永續發展目標推動、危害性化學品安全管理。</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="contact-icons" role="group" aria-label="Links">
-        <a href="mailto:sucolin1@gmail.com" class="icon-btn" title="Email">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
-        </a>
-        <a href="https://discord.gg/SAXzaDJTTQ" class="icon-btn" target="_blank" rel="noopener" title="Discord">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
-        </a>
-        <a href="https://www.linkedin.com/in/%E5%86%A0%E5%8B%B3-%E8%98%87-250171283" class="icon-btn" target="_blank" rel="noopener" title="LinkedIn">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
-        </a>
+  <section id="education" class="section alt">
+    <div class="container">
+      <h2 data-zh="學歷" data-en="Education" style="margin-bottom:30px;">學歷</h2>
+      <div class="grid">
+        <div class="card" style="padding:24px; cursor:default; transform:none !important; box-shadow:none !important;">
+          <h3>NYCU · IEOHS</h3>
+          <p class="muted">2024 – Present</p>
+          <p style="font-size:0.9rem; margin-top:10px;">PFAS Air Sampling & QA/QC</p>
+        </div>
+        <div class="card" style="padding:24px; cursor:default; transform:none !important; box-shadow:none !important;">
+          <h3>CSMU · OSH</h3>
+          <p class="muted">2020 – 2024</p>
+          <p style="font-size:0.9rem; margin-top:10px;">Temple Incense Exposure Research</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 data-zh="聯絡" data-en="Contact" style="margin-bottom:10px;">聯絡</h2>
+      <p data-zh="歡迎合作或討論研究。" data-en="Open to collaborations.">歡迎合作或討論研究。</p>
+      <div class="contact-icons">
+        <a href="mailto:sucolin1@gmail.com" class="icon-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email"></a>
+        <a href="https://discord.gg/SAXzaDJTTQ" class="icon-btn"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord"></a>
+        <a href="https://www.linkedin.com/in/%E5%86%A0%E5%8B%B3-%E8%98%87-250171283" class="icon-btn"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"></a>
       </div>
     </div>
   </section>
@@ -201,58 +131,31 @@
   <footer class="footer">
     <div class="container">
       <p>© <span id="year"></span> Guan Syun Su — Built with HTML/CSS/JS</p>
-      <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 8px;">Ver: 2.9.0 | <span data-zh="最後更新：" data-en="Last Updated: ">最後更新：</span><span id="lastUpdated"></span></p>
     </div>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 更新年份
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // 更新日期
-      const lastUpdated = document.getElementById('lastUpdated');
-      if (lastUpdated) {
-        const now = new Date();
-        lastUpdated.textContent = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-      }
-
-      // 語言切換
       let isZh = (localStorage.getItem('lang') !== 'en');
       const applyLang = () => {
         document.documentElement.lang = isZh ? 'zh-Hant' : 'en';
         document.querySelectorAll('[data-zh]').forEach(el => {
-          const zhText = el.getAttribute('data-zh');
-          const enText = el.getAttribute('data-en');
-          el.textContent = isZh ? zhText : enText;
+          el.textContent = isZh ? el.getAttribute('data-zh') : el.getAttribute('data-en');
         });
       };
       applyLang();
+      document.getElementById('langBtn')?.addEventListener('click', () => { isZh = !isZh; localStorage.setItem('lang', isZh ? 'zh' : 'en'); applyLang(); });
 
-      document.getElementById('langBtn')?.addEventListener('click', () => {
-        isZh = !isZh;
-        localStorage.setItem('lang', isZh ? 'zh' : 'en');
-        applyLang();
-      });
-
-      // 主題切換
       const root = document.documentElement;
       let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       root.setAttribute('data-theme', theme);
-
       const themeBtn = document.getElementById('themeBtn');
-      const updateThemeIcon = () => {
-        if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
-      };
+      const updateThemeIcon = () => { if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙'; };
       updateThemeIcon();
-
-      themeBtn?.addEventListener('click', () => {
-        theme = (theme === 'dark') ? 'light' : 'dark';
-        root.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        updateThemeIcon();
-      });
+      themeBtn?.addEventListener('click', () => { theme = (theme === 'dark') ? 'light' : 'dark'; root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); updateThemeIcon(); });
     });
   </script>
 </body>
