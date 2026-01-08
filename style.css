@@ -62,8 +62,9 @@ h1, h2, h3, .card-title, .name {
 .brand { display: flex; align-items: center; gap: 14px; }
 .avatar { 
   width: 48px; height: 48px; 
+   
   /* 藝術家感：不規則圓形 */
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  border-radius: 50%;
   object-fit: cover; 
   border: 2px solid var(--primary);
 }
