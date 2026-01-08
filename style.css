@@ -393,44 +393,39 @@ p { margin-top: 10px; }
   transform: translateY(-6px) scale(1.12);
   filter: drop-shadow(0 8px 14px rgba(0,0,0,0.18));
 }
-/* ===========================
-   Section 標題顏色 + 行距 + 內文區隔（覆蓋用）
+/* ==================================================
+   統一用 primary 紫 + 行距 + 內文區隔（覆蓋用）
    貼在 style.css 最底下
-   =========================== */
+   ================================================== */
 
-/* 1) 各 section 主色（你可以自己換顏色） */
-#projects   { --section-accent:  var(--primary); } 
-#pubs       { --section-accent:  var(--primary); } 
-#experience { --section-accent:  var(--primary); } 
-#education  { --section-accent:  var(--primary); } 
-#contact    { --section-accent: var(--primary); } 
+/* 1) 統一所有 section 的 accent 都用 primary */
+.section { --section-accent: var(--primary); }
 
-/* 2) 標題：顏色 + 更好看的行距 + 下底線分隔 */
+/* 2) 標題：全部 primary 紫 + 底下分隔線 */
 .section h2{
-  color: var(--section-accent, var(--primary));
-  letter-spacing: -0.02em;
+  color: var(--section-accent);
   line-height: 1.15;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
 }
-
 .section h2::after{
   content:"";
   display:block;
-  width: 56px;
+  width: 60px;
   height: 3px;
   margin-top: 10px;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--section-accent, var(--primary)) 82%, transparent);
+  background: color-mix(in oklab, var(--section-accent) 80%, transparent);
 }
 
-/* 3) 區塊內文：段落行距、段落間距一致 */
+/* 3) 區塊內文行距：閱讀舒服 */
 .section p{
   line-height: 1.85;
   margin-top: 10px;
   color: color-mix(in oklab, var(--text) 86%, var(--muted));
 }
 
-/* 4) Section 內文「更清楚的分隔線」：比你原本 section-split 更一致 */
+/* 4) 內文區隔：如果有 section-split 就變成紫色淡分隔線 */
 .section .section-split{
   height: 1px;
   margin: 18px 0 22px;
@@ -438,15 +433,12 @@ p { margin-top: 10px; }
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in oklab, var(--section-accent, var(--primary)) 40%, var(--divider)),
+    color-mix(in oklab, var(--section-accent) 35%, var(--divider)),
     transparent
   );
-  opacity: 1;
 }
 
-/* 若你沒有用 section-split，也讓 h2 的 after 夠用了 */
-
-/* 5) 精選作品 cards：標題/描述/標籤的間距與行距 */
+/* 5) 精選作品卡片：文字間距更乾淨 */
 .card-title{
   line-height: 1.25;
   margin-bottom: 8px;
@@ -456,32 +448,23 @@ p { margin-top: 10px; }
   margin-top: 0;
   color: var(--muted);
 }
-.tags{
-  margin-top: 14px;
-  gap: 8px;
-}
+.tags{ margin-top: 14px; gap: 8px; }
 
-/* 6) 學術發表：每一筆之間更清楚（內文區隔） */
-.pub-item{
+/* 6) 學術發表：每筆更清楚（紫色左邊線 + 下分隔） */
+#pubs .pub-item{
   padding: 18px 20px;
   margin-bottom: 14px;
-  border-left: 3px solid color-mix(in oklab, var(--section-accent, var(--primary)) 28%, var(--divider));
+  border-left: 3px solid color-mix(in oklab, var(--primary) 35%, var(--divider));
   background: color-mix(in oklab, var(--surface) 92%, transparent);
+  border-radius: 16px;
 }
-.pub-item:not(:last-child){
+#pubs .pub-item:not(:last-child){
   border-bottom: 1px solid var(--divider);
 }
-.pub-title{
-  line-height: 1.55;
-  margin-bottom: 6px;
-}
-.pub-meta{
-  line-height: 1.75;
-  margin-top: 2px;
-  color: var(--muted);
-}
+#pubs .pub-title{ line-height: 1.55; margin-bottom: 6px; }
+#pubs .pub-meta{ line-height: 1.75; color: var(--muted); }
 
-/* 7) 經歷/學歷：不管你是用 <ul><p> 或 <ul><li> 都能統一間距 */
+/* 7) 經歷/學歷：不管你是 ul>p 還是 ul>li 都統一間距 */
 #experience .xp ul,
 #education  .edu ul{
   margin-top: 12px;
@@ -490,26 +473,32 @@ p { margin-top: 10px; }
   padding-left: 1.15rem;
 }
 
-/* 如果你用的是 <ul><p>（你原本就是這樣），把 p 的多餘 margin 清掉 */
+/* 你的原本是 ul 裡放 p：把 p 的多餘 margin 清掉，避免忽大忽小 */
 #experience .xp ul p,
 #education  .edu ul p{
   margin: 0;
+  line-height: 1.85;
   color: var(--muted);
-  line-height: 1.85;
 }
 
-/* 如果你用的是 <ul class="bullets"><li>... */
-.bullets li{
+/* 如果你有用到 <li> 條列，也一併套用 */
+#experience .xp ul li,
+#education  .edu ul li{
   line-height: 1.85;
+  color: var(--muted);
+}
+#experience .xp ul li::marker,
+#education  .edu ul li::marker{
+  color: var(--primary);
 }
 
-/* 8) 聯絡區：字、icon 之間更乾淨的留白（內文區隔） */
+/* 8) 聯絡：文字+icon的區隔更漂亮（也走 primary 紫） */
 #contact .contact-lead{
   font-size: 1.05rem;
   line-height: 1.85;
   margin: 8px 0 14px;
   color: var(--muted);
 }
-#contact .contact-icons{
-  margin-top: 12px;
+#contact .contact-card::before{
+  background: linear-gradient(90deg, var(--primary), transparent);
 }
