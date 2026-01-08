@@ -1,5 +1,5 @@
 /* ============================================================
-   Guan Syun Su Portfolio - 藝術家專業版 (文字並排與尺寸校正)
+   Guan Syun Su Portfolio - 藝術家專業版 (全區塊修復)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
@@ -19,7 +19,7 @@ html { scroll-behavior: smooth; }
 [data-theme="dark"] {
   --bg: #0b0e14; --bg-2: #161a23; --surface: #1e2230;
   --text: #e2e8f0; --muted: #94a3b8; --primary: #818cf8;
-  --primary-glow: rgba(129, 140, 248, 0.2);
+  --primary-glow: rgba(129, 140, 248, 0.25);
   --divider: rgba(255, 255, 255, 0.08);
   --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
   --card-border: rgba(255, 255, 255, 0.1);
@@ -41,7 +41,6 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; font-weigh
   backdrop-filter: blur(12px); border-bottom: 1px solid var(--divider);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
-.brand { display: flex; align-items: center; gap: 12px; }
 .avatar { 
   width: 44px !important; height: 44px !important; 
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
@@ -59,41 +58,30 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; font-weigh
 .card:hover { transform: translateY(-8px); box-shadow: var(--shadow); border-color: var(--primary); }
 .thumb { width: 100% !important; height: 180px !important; background-size: cover; background-position: center; }
 
-/* --------- 學術發表 (並排結構) --------- */
-.pub-content-flex {
-  display: flex; gap: 40px; align-items: flex-start; justify-content: space-between;
-}
+/* --------- 學術發表 (並排結構修復) --------- */
+.pub-content-flex { display: flex; gap: 40px; align-items: flex-start; justify-content: space-between; margin-top: 30px; }
 .large-pubs { flex: 1; list-style: none; }
 .pub-item { padding: 20px; border-radius: 16px; border-left: 3px solid var(--divider); transition: 0.3s; margin-bottom: 12px; }
 .pub-item:hover { background: var(--surface); border-left-color: var(--primary); transform: translateX(8px); box-shadow: var(--shadow); }
+.badge.pub-award { background: linear-gradient(135deg, #6366f1, #a855f7) !important; color: #fff !important; font-size: 0.75rem; padding: 4px 12px; border-radius: 6px; display: inline-block; margin-left: 8px; }
 
 .pub-awards-imgs { flex: 0 0 280px; display: flex; flex-direction: column; gap: 20px; }
-.pub-awards-imgs img { 
-  width: 100% !important; height: auto !important; border-radius: 12px; 
-  border: 1px solid var(--card-border); box-shadow: var(--shadow);
-}
-
-.badge.pub-award {
-  background: linear-gradient(135deg, #6366f1, #a855f7) !important;
-  color: #fff !important; font-size: 0.75rem !important; padding: 4px 12px !important; border-radius: 6px !important;
-}
+.pub-awards-imgs img { width: 100% !important; border-radius: 12px; border: 1px solid var(--card-border); box-shadow: var(--shadow); }
 
 /* --------- 聯絡 ICON --------- */
 .contact-icons { display: flex; gap: 1.5rem; margin-top: 1.5rem; }
 .icon-btn { width: 42px !important; height: 42px !important; transition: 0.3s; }
 .icon-btn img { width: 100% !important; height: 100% !important; object-fit: contain; }
-.icon-btn:hover { transform: scale(1.2) rotate(5deg); }
 
-/* --------- 通用區塊 --------- */
 .section { padding: 80px 0; }
 .section.alt { background: var(--bg-2); }
-.btn { display: inline-flex; padding: 10px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; }
+.btn { display: inline-flex; padding: 10px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; border: 1px solid transparent; }
 .btn.primary { background: var(--primary); color: #fff; }
-.btn.ghost { border: 1.5px solid var(--divider); color: var(--text); }
+.btn.ghost { border-color: var(--divider); color: var(--text); }
 .footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--divider); color: var(--muted); }
 
 @media (max-width: 900px) {
   .pub-content-flex { flex-direction: column; }
-  .pub-awards-imgs { flex: none; width: 100%; flex-direction: row; flex-wrap: wrap; }
-  .pub-awards-imgs img { width: calc(50% - 10px); }
+  .pub-awards-imgs { flex: none; width: 100%; flex-direction: row; gap: 10px; }
+  .pub-awards-imgs img { width: calc(50% - 5px) !important; }
 }
