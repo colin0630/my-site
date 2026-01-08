@@ -94,3 +94,30 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; font-weigh
   .pub-awards-imgs { flex: none; width: 100%; flex-direction: row; gap: 10px; }
   .pub-awards-imgs img { width: calc(50% - 5px) !important; }
 }
+/* 1. 作品卡片反應 */
+.card:hover { 
+  transform: translateY(-10px); 
+  box-shadow: var(--shadow); 
+  border-color: var(--primary); 
+}
+
+/* 2. 發表與經歷區塊反應 */
+.pub-item:hover { 
+  background: var(--surface); 
+  border-left-color: var(--primary); 
+  transform: translateX(8px); 
+  box-shadow: var(--shadow);
+}
+
+/* 3. 學歷卡片反應 (需搭配 HTML 類別名稱) */
+.edu-card {
+  padding: 24px; background: var(--surface);
+  border: 1px solid var(--card-border); border-radius: 20px;
+  transition: all 0.4s ease;
+}
+.edu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+  border-color: var(--primary);
+}
+
