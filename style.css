@@ -50,6 +50,19 @@ h1, h2, h3, .card-title, .name {
 }
 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+/* 名字底線樣式 */
+.author-highlight {
+  text-decoration: underline;
+  text-decoration-thickness: 2.5px; /* 增加底線粗細 */
+  text-underline-offset: 4px;       /* 增加底線與文字的間距，更美觀 */
+  text-decoration-color: #818cf8;   /* 淺色模式：使用主題紫色 */
+  font-weight: 600;                 /* 稍微加粗文字 */
+}
+
+/* 深色模式下的底線顏色調整 */
+[data-theme="dark"] .author-highlight {
+  text-decoration-color: #c084fc;   /* 深色模式：使用較亮的粉紫色 */
+}
 
 /* --------- Nav: 玻璃擬態 --------- */
 .nav {
