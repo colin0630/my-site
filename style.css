@@ -108,52 +108,53 @@ h1, h2, h3, .card-title, .name {
 .thumb { height: 200px; background-size: cover; background-position: center; transition: 0.5s; }
 .card:hover .thumb { transform: scale(1.05); }
 .card-body { padding: 24px; }
-/* --------- Contact --------- */
-.contact-icons { 
-  display: flex; 
-  gap: 2.5rem; 
-  margin-top: 1.5rem; 
+/* --------- Contact Icons: 大尺寸彩色版 --------- */
+.contact-icons {
+  display: flex;
+  gap: 2.5rem; /* 增加圖示間的距離 */
+  margin-top: 1.5rem;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
-.icon-btn { 
-  display: inline-flex; 
-  align-items: center; 
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  transition: transform .25s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.icon-btn img { 
-  width: 48px; 
-  height: 48px; 
-  transition: filter 0.3s ease;
+/* 圖示基礎大小 */
+.icon-btn img {
+  width: 48px;  /* 放大圖示 */
+  height: 48px;
+  transition: 0.3s ease;
 }
 
-.icon-btn:hover { 
-  transform: translateY(-5px) scale(1.1); 
+/* 懸停時放大並增加陰影感 */
+.icon-btn:hover {
+  transform: translateY(-8px) scale(1.15);
 }
 
-/* --- 品牌顏色處理 --- */
+/* --- 品牌顏色處理 (透過 CSS Filter 讓單色 SVG 變彩色) --- */
 
-/* Gmail: 本身就是彩色的，不需要 filter，甚至可以加一點陰影讓它立體 */
+/* Gmail 本身就是彩色 SVG (在 HTML 已更換連結)，我們加一點立體陰影 */
 .icon-btn img[alt="Gmail"] {
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
 }
 
-/* Discord: 官方紫 (#5865F2) */
+/* Discord 官方紫 (#5865F2) */
 .icon-btn img[alt="Discord"] {
   filter: invert(41%) sepia(74%) saturate(4171%) hue-rotate(222deg) brightness(97%) contrast(97%);
 }
 
-/* LinkedIn: 官方藍 (#0077B5) */
+/* LinkedIn 官方藍 (#0077B5) */
 .icon-btn img[alt="LinkedIn"] {
   filter: invert(30%) sepia(93%) saturate(1633%) hue-rotate(178deg) brightness(94%) contrast(102%);
 }
 
-/* 深色模式下的微調 */
-[data-theme="dark"] .icon-btn img[alt="Gmail"] {
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); /* 深色背景下增加陰影 */
+/* 深色模式下的微調，讓顏色更亮一點 */
+[data-theme="dark"] .icon-btn img:not([alt="Gmail"]) {
+  filter: brightness(1.2) saturate(1.2);
 }
 
 /* --------- Publications: 學術優雅 --------- */
