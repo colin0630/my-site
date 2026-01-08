@@ -41,10 +41,19 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; font-weigh
   backdrop-filter: blur(12px); border-bottom: 1px solid var(--divider);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+/* --------- 導覽列：頭像改為圓形 --------- */
 .avatar { 
-  width: 44px !important; height: 44px !important; 
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  object-fit: cover; border: 1.5px solid var(--primary); flex-shrink: 0;
+  width: 44px !important; 
+  height: 44px !important; 
+  border-radius: 50% !important; /* 強制改為圓形 */
+  object-fit: cover; 
+  border: 1.5px solid var(--primary); 
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.brand:hover .avatar {
+  transform: scale(1.05); /* 滑鼠懸停時輕微放大 */
 }
 
 /* --------- Hero --------- */
