@@ -399,11 +399,11 @@ p { margin-top: 10px; }
    =========================== */
 
 /* 1) 各 section 主色（你可以自己換顏色） */
-#projects   { --section-accent: #22c55e; } /* 綠：精選作品 */
-#pubs       { --section-accent: #a78bfa; } /* 紫：學術發表 */
-#experience { --section-accent: #38bdf8; } /* 藍：經歷 */
-#education  { --section-accent: #f59e0b; } /* 橘：學歷 */
-#contact    { --section-accent: var(--primary); } /* 聯絡沿用主色 */
+#projects   { --section-accent:  var(--primary); } 
+#pubs       { --section-accent:  var(--primary); } 
+#experience { --section-accent:  var(--primary); } 
+#education  { --section-accent:  var(--primary); } 
+#contact    { --section-accent: var(--primary); } 
 
 /* 2) 標題：顏色 + 更好看的行距 + 下底線分隔 */
 .section h2{
