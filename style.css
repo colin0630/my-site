@@ -393,3 +393,123 @@ p { margin-top: 10px; }
   transform: translateY(-6px) scale(1.12);
   filter: drop-shadow(0 8px 14px rgba(0,0,0,0.18));
 }
+/* ===========================
+   Section 標題顏色 + 行距 + 內文區隔（覆蓋用）
+   貼在 style.css 最底下
+   =========================== */
+
+/* 1) 各 section 主色（你可以自己換顏色） */
+#projects   { --section-accent: #22c55e; } /* 綠：精選作品 */
+#pubs       { --section-accent: #a78bfa; } /* 紫：學術發表 */
+#experience { --section-accent: #38bdf8; } /* 藍：經歷 */
+#education  { --section-accent: #f59e0b; } /* 橘：學歷 */
+#contact    { --section-accent: var(--primary); } /* 聯絡沿用主色 */
+
+/* 2) 標題：顏色 + 更好看的行距 + 下底線分隔 */
+.section h2{
+  color: var(--section-accent, var(--primary));
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.section h2::after{
+  content:"";
+  display:block;
+  width: 56px;
+  height: 3px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--section-accent, var(--primary)) 82%, transparent);
+}
+
+/* 3) 區塊內文：段落行距、段落間距一致 */
+.section p{
+  line-height: 1.85;
+  margin-top: 10px;
+  color: color-mix(in oklab, var(--text) 86%, var(--muted));
+}
+
+/* 4) Section 內文「更清楚的分隔線」：比你原本 section-split 更一致 */
+.section .section-split{
+  height: 1px;
+  margin: 18px 0 22px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--section-accent, var(--primary)) 40%, var(--divider)),
+    transparent
+  );
+  opacity: 1;
+}
+
+/* 若你沒有用 section-split，也讓 h2 的 after 夠用了 */
+
+/* 5) 精選作品 cards：標題/描述/標籤的間距與行距 */
+.card-title{
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.card-desc{
+  line-height: 1.75;
+  margin-top: 0;
+  color: var(--muted);
+}
+.tags{
+  margin-top: 14px;
+  gap: 8px;
+}
+
+/* 6) 學術發表：每一筆之間更清楚（內文區隔） */
+.pub-item{
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border-left: 3px solid color-mix(in oklab, var(--section-accent, var(--primary)) 28%, var(--divider));
+  background: color-mix(in oklab, var(--surface) 92%, transparent);
+}
+.pub-item:not(:last-child){
+  border-bottom: 1px solid var(--divider);
+}
+.pub-title{
+  line-height: 1.55;
+  margin-bottom: 6px;
+}
+.pub-meta{
+  line-height: 1.75;
+  margin-top: 2px;
+  color: var(--muted);
+}
+
+/* 7) 經歷/學歷：不管你是用 <ul><p> 或 <ul><li> 都能統一間距 */
+#experience .xp ul,
+#education  .edu ul{
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;            /* 每點之間距離 */
+  padding-left: 1.15rem;
+}
+
+/* 如果你用的是 <ul><p>（你原本就是這樣），把 p 的多餘 margin 清掉 */
+#experience .xp ul p,
+#education  .edu ul p{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+/* 如果你用的是 <ul class="bullets"><li>... */
+.bullets li{
+  line-height: 1.85;
+}
+
+/* 8) 聯絡區：字、icon 之間更乾淨的留白（內文區隔） */
+#contact .contact-lead{
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin: 8px 0 14px;
+  color: var(--muted);
+}
+#contact .contact-icons{
+  margin-top: 12px;
+}
