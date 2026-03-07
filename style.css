@@ -51,14 +51,6 @@ h1, h2, h3, .card-title, .name {
 .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 .small { font-size: .95rem; }
 .muted { color: var(--muted); }
-.skip-link {
-  position: absolute; left: -9999px; top: auto;
-}
-.skip-link:focus {
-  left: 16px; top: 16px; z-index: 999;
-  padding: 10px 14px; border-radius: 12px;
-  background: var(--surface); border: 1px solid var(--card-border);
-}
 
 .nav {
   position: sticky; top: 0; z-index: 100;
