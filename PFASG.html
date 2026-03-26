@@ -1,1 +1,248 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Serif+TC:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PFAS Research | Guan Syun Su</title>
+  
+  <style>
+    /* Bento Box 網格排版 */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    @media (min-width: 960px) {
+      .bento-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(250px, auto); }
+      .bento-large { grid-column: span 2; }
+      .bento-tall { grid-row: span 2; }
+    }
+    .bento-card {
+      background: var(--surface); border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      display: flex; flex-direction: column; transition: .3s ease; box-shadow: var(--shadow);
+    }
+    .bento-card:hover { transform: translateY(-4px); border-color: var(--primary); }
+    .bento-img {
+      min-height: 200px; flex: 1; background-size: cover; background-position: center;
+      position: relative;
+    }
+    .bento-content { padding: 24px; }
+    .bento-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: var(--text); font-family: "Noto Serif TC", serif;}
+    
+    /* Zig-Zag 交錯流程排版 */
+    .process-step {
+      display: flex; gap: 40px; align-items: center; margin-bottom: 80px;
+    }
+    .process-step:nth-child(even) { flex-direction: row-reverse; }
+    .step-visual { flex: 1; position: relative; }
+    .step-visual img { 
+      width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow);
+      border: 1px solid var(--card-border); aspect-ratio: 4/3; object-fit: cover;
+    }
+    .step-info { flex: 1; }
+    .step-num { 
+      display: inline-block; font-size: 3rem; font-weight: 800; color: var(--primary-glow);
+      margin-bottom: -10px; line-height: 1; font-family: "Inter", sans-serif;
+    }
+    @media (max-width: 768px) {
+      .process-step, .process-step:nth-child(even) { flex-direction: column; gap: 24px; margin-bottom: 50px; }
+    }
 
+    /* 夥伴/團隊排版 */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .team-member { text-align: center; padding: 24px; background: var(--bg-2); border-radius: var(--radius-lg); border: 1px solid var(--divider);}
+    .team-avatar { 
+      width: 100px; height: 100px; border-radius: 50%; object-fit: cover; 
+      margin: 0 auto 16px; border: 3px solid var(--surface); box-shadow: var(--shadow);
+    }
+    .team-name { font-weight: 800; font-size: 1.1rem; }
+    .team-role { color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <header class="nav" role="navigation">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="./suphoto/colinsu-photo.jpg" alt="Portrait of Guan Syun Su" class="avatar" loading="lazy" />
+        <div>
+          <div class="name">Guan Syun Su <span class="muted">/ 蘇冠勳</span></div>
+          <div class="role" data-zh="大氣暴露 · PFAS 採樣分析方法" data-en="Environmental Exposure · PFAS air sampling">大氣暴露 · PFAS 採樣分析方法</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a href="index.html" data-zh="回首頁" data-en="Home">回首頁</a>
+        <button id="langBtn" class="btn small" type="button">中文/EN</button>
+        <button id="themeBtn" class="btn small" type="button" aria-label="Switch theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow" data-zh="研究主題" data-en="Research Focus">Research Focus</p>
+          <h1 data-zh="大氣 PFAS 研究" data-en="Atmospheric PFAS Research">大氣 PFAS 研究</h1>
+          <p class="lead" data-zh="本頁面展示大氣中全氟/多氟烷基物質 (PFAS) 的完整研究流程，包含從實地採樣設計、前處理、萃取優化到儀器分析的實作細節。" data-en="This page showcases the complete research workflow for atmospheric PFAS, from field sampling design and pre-treatment to extraction optimization and instrumental analysis.">本頁面展示大氣中全氟/多氟烷基物質 (PFAS) 的完整研究流程，包含從實地採樣設計、前處理、萃取優化到儀器分析的實作細節。</p>
+        </div>
+        <aside class="hero-panel">
+          <div class="stat-card">
+            <div class="stat-label" data-zh="關鍵技術" data-en="Core Techniques">核心分析技術</div>
+            <div class="stat-value" data-zh="採樣與萃取" data-en="Sampling & Extraction">採樣與萃取</div>
+            <div class="stat-sub" data-zh="High-volume Air Sampler, PUF, Activated Carbon, PFAA & FTS Analysis." data-en="High-volume Air Sampler, PUF, Activated Carbon, PFAA & FTS Analysis.">High-volume Air Sampler, PUF, Activated Carbon, PFAA & FTS Analysis.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="overview-title">
+      <div class="container">
+        <h2 id="overview-title" data-zh="研究方法總覽" data-en="Methodology Overview">研究方法總覽</h2>
+        <div class="section-split"></div>
+        <div class="bento-grid">
+          
+          <div class="bento-card bento-large">
+            <div class="bento-img" style="background-image: url('https://images.unsplash.com/photo-1614935151651-0bea6508abb6?q=80&w=1000&auto=format&fit=crop');"></div>
+            <div class="bento-content">
+              <div class="bento-title" data-zh="01. 大氣採樣 (Air Sampling)" data-en="01. Air Sampling">01. 大氣採樣 (Air Sampling)</div>
+              <p class="muted" data-zh="使用高量採樣器收集大氣中的 PM2.5 氣固相微粒，並搭配 PUF（聚氨酯泡棉）與活性碳棉作為採樣介質，精準捕捉不同相態的 PFAS 化合物。" data-en="Utilizing high-volume samplers to collect ambient PM2.5, combining PUF and activated carbon cotton media to precisely capture PFAS compounds across gas and particle phases.">使用高量採樣器收集大氣中的 PM2.5 氣固相微粒，並搭配 PUF（聚氨酯泡棉）與活性碳棉作為採樣介質，精準捕捉不同相態的 PFAS 化合物。</p>
+            </div>
+          </div>
+
+          <div class="bento-card bento-tall">
+            <div class="bento-img" style="background-image: url('https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=800&auto=format&fit=crop');"></div>
+            <div class="bento-content" style="flex: 0;">
+              <div class="bento-title" data-zh="03. 儀器分析 (Analysis)" data-en="03. Instrumental Analysis">03. 儀器分析</div>
+              <p class="muted" data-zh="針對 PFAA 與 FTS 等特定化合物進行質譜分析，建立檢量線並計算環境濃度。" data-en="Mass spectrometry analysis specifically targeting compounds like PFAAs and FTS to establish calibration curves and environmental concentrations.">針對 PFAA 與 FTS 等特定化合物進行質譜分析，建立檢量線並計算環境濃度。</p>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div class="bento-img" style="background-image: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=800&auto=format&fit=crop'); min-height: 150px;"></div>
+            <div class="bento-content">
+              <div class="bento-title" data-zh="02. 前處理與萃取" data-en="02. Pre-treatment & Extraction">02. 前處理與萃取</div>
+              <p class="muted" data-zh="探討酸鹼條件對萃取效率的影響，透過內部標準品校正，確保樣品前處理的回收率與數據品質。" data-en="Optimizing extraction efficiency through acid/base condition testing, utilizing internal standard corrections to ensure robust recovery rates.">探討酸鹼條件對萃取效率的影響，透過內部標準品校正，確保樣品前處理的回收率與數據品質。</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" aria-labelledby="details-title">
+      <div class="container">
+        <h2 id="details-title" data-zh="核心實驗流程" data-en="Core Experimental Workflow">核心實驗流程</h2>
+        <div class="section-split"></div>
+
+        <div class="process-step">
+          <div class="step-visual">
+            <img src="https://images.unsplash.com/photo-1563464536648-5c4bb8421008?q=80&w=800&auto=format&fit=crop" alt="採樣過程照片" loading="lazy">
+          </div>
+          <div class="step-info">
+            <div class="step-num">01</div>
+            <h3 class="bento-title" data-zh="實地採樣過程" data-en="Field Sampling Process">實地採樣過程</h3>
+            <p class="muted" data-zh="在台灣多個城市佈點，操作高量採樣器。氣相捕捉主要依賴 PUF 與活性碳棉材質的搭配，確保易揮發的 PFAS 物種不流失。過程中需嚴格控管空白樣品 (Blank) 以避免環境背景污染。" data-en="Deploying high-volume samplers across multiple cities in Taiwan. Gas-phase capture relies on the combination of PUF and activated carbon to prevent the loss of volatile PFAS species.">在台灣多個城市佈點，操作高量採樣器。氣相捕捉主要依賴 PUF 與活性碳棉材質的搭配，確保易揮發的 PFAS 物種不流失。過程中需嚴格控管空白樣品 (Blank) 以避免環境背景污染。</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-visual">
+            <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=800&auto=format&fit=crop" alt="前處理與萃取照片" loading="lazy">
+          </div>
+          <div class="step-info">
+            <div class="step-num">02</div>
+            <h3 class="bento-title" data-zh="樣品萃取與濃縮" data-en="Sample Extraction & Concentration">樣品萃取與濃縮</h3>
+            <p class="muted" data-zh="帶回實驗室後，將濾紙與吸附材進行超音波震盪萃取。針對 PFAS 的化學特性，我們測試了不同酸鹼溶液的比例，以找出最佳的目標物游離狀態，大幅提升 PFAA 與 FTS 類別的回收率。" data-en="In the lab, filters and sorbents undergo ultrasonic extraction. We tested various acid/base solution ratios to find the optimal ionization state, significantly improving the recovery of PFAAs and FTS.">帶回實驗室後，將濾紙與吸附材進行超音波震盪萃取。針對 PFAS 的化學特性，我們測試了不同酸鹼溶液的比例，以找出最佳的目標物游離狀態，大幅提升 PFAA 與 FTS 類別的回收率。</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="team-title">
+      <div class="container">
+        <h2 id="team-title" data-zh="研究夥伴與團隊" data-en="Research Partners & Team">研究夥伴與團隊</h2>
+        <div class="section-split"></div>
+        <p class="muted" style="margin-bottom: 30px;" data-zh="研究的完成仰賴實驗室團隊的合作與指導。" data-en="This research is made possible through the collaboration and guidance of our lab team.">研究的完成仰賴實驗室團隊的合作與指導。</p>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <img src="https://ui-avatars.com/api/?name=Prof&background=4f46e5&color=fff" alt="Advisor" class="team-avatar">
+            <div class="team-role" data-zh="指導教授" data-en="Advisor">指導教授</div>
+            <div class="team-name" data-zh="紀凱獻 教授" data-en="Prof. Kai-Hsien Chi">紀凱獻 教授</div>
+            <p class="small muted" style="margin-top: 8px;">NYCU IEOHS</p>
+          </div>
+
+          <div class="team-member">
+            <img src="https://ui-avatars.com/api/?name=Hsu&background=f3f4f6&color=1e293b" alt="Partner" class="team-avatar">
+            <div class="team-role" data-zh="共同研究者" data-en="Co-Researcher">共同研究者</div>
+            <div class="team-name" data-zh="徐衍舜" data-en="Yen Shun Hsu">徐衍舜</div>
+            <p class="small muted" style="margin-top: 8px;">Sampling & Analysis</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://ui-avatars.com/api/?name=Lab&background=f3f4f6&color=1e293b" alt="Lab Mate" class="team-avatar">
+            <div class="team-role" data-zh="實驗室夥伴" data-en="Lab Mates">實驗室夥伴</div>
+            <div class="team-name" data-zh="Aerosol Lab" data-en="Aerosol Lab">Aerosol Lab</div>
+            <p class="small muted" style="margin-top: 8px;">Data Discussion</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container small">
+      <p>© <span id="year"></span> Guan Syun Su</p>
+      <p class="ver" data-zh="PFAS 專題頁面" data-en="PFAS Research Page">PFAS 專題頁面</p>
+    </div>
+  </footer>
+
+  <script>
+    // 主題與語言切換邏輯 (沿用自你的 index.html)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      let isZh = (localStorage.getItem('lang') !== 'en');
+      const applyLang = () => {
+        document.documentElement.lang = isZh ? 'zh-Hant' : 'en';
+        document.querySelectorAll('[data-zh]').forEach(el => {
+          const zhText = el.getAttribute('data-zh');
+          const enText = el.getAttribute('data-en');
+          if (zhText && enText) el.textContent = isZh ? zhText : enText;
+        });
+      };
+      applyLang();
+
+      document.getElementById('langBtn')?.addEventListener('click', () => {
+        isZh = !isZh;
+        localStorage.setItem('lang', isZh ? 'zh' : 'en');
+        applyLang();
+      });
+
+      const root = document.documentElement;
+      let theme = localStorage.getItem('theme') || 'light';
+      root.setAttribute('data-theme', theme);
+      const themeBtn = document.getElementById('themeBtn');
+      const updateThemeIcon = () => {
+        if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
+      };
+      updateThemeIcon();
+
+      themeBtn?.addEventListener('click', () => {
+        theme = (theme === 'dark') ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateThemeIcon();
+      });
+    });
+  </script>
+</body>
+</html>
