@@ -212,7 +212,6 @@ h1, h2, h3, .card-title, .name {
   max-height: 140px;
   object-fit: contain;
 }
-}
 .gallery-item:hover img { transform: scale(1.03); }
 #lb {
   border: none; padding: 0; border-radius: 18px; overflow: hidden; background: transparent; max-width: min(92vw, 880px);
