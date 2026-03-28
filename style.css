@@ -223,6 +223,87 @@ h1, h2, h3, .card-title, .name {
   width: min(100%, 260px); border-radius: 22px; border: 1px solid var(--card-border); box-shadow: var(--shadow); margin-inline: auto;
 }
 
+/* ============================================================
+   ICON 跑馬燈動態循環效果 (Infinite Scroll Carousel)
+   ============================================================ */
+
+/* 1. 調整作品集區域的排版，移除原本的 Grid 網格 */
+.icon-gallery.pretty {
+  display: flex;          /* 改為橫向排列 */
+  flex-direction: row;    /* 強制橫向 */
+  flex-wrap: nowrap;     /* 禁止換行，這是跑馬燈的關鍵 */
+  overflow: hidden;      /* 隱藏超出邊框的圖片 */
+  padding: 2rem 0;        /* 上下留白 */
+  width: 100%;            /* 容器寬度 100% */
+  position: relative;
+  /* 增加左右漸層遮罩，讓邊緣看起來更自然 */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* 2. 定義動畫容器 */
+.icon-gallery.pretty::after {
+  content: "";
+  display: flex;
+}
+
+/* 3. 調整 gallery-item 的樣式，使其適合橫向滾動 */
+.gallery-item {
+  flex: 0 0 auto;         /* 不要縮放，保持原始大小 */
+  width: auto;            /* 寬度根據圖片自動 */
+  height: 180px;          /* 統一跑馬燈中圖片的高度，你可以根據需要調整 */
+  margin: 0 1rem;         /* 圖片之間的左右間距 */
+  aspect-ratio: auto;     /* 保持圖片原始比例 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4. 調整圖片本身 */
+.gallery-item img {
+  height: 100%;           /* 圖片填滿 gallery-item 的高度 */
+  width: auto;            /* 寬度自動，保持比例 */
+  max-width: none;        /* 移除最大寬度限制 */
+  border-radius: 12px;     /* 保持圓角 */
+  object-fit: contain;    /* 確保圖片完整顯示，不被剪裁 */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 5. 圖片懸停效果 (跑馬燈時依然有效) */
+.gallery-item img:hover {
+  transform: translateY(-5px) scale(1.05); /* 輕微上移和放大 */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);  /* 增加陰影 */
+}
+
+/* 6. 動畫的核心代碼：將整個 gallery 橫向移動 */
+.icon-gallery.pretty > * {
+  /* 這裡設定動畫：名稱 | 時間 | 速度曲線 | 重複次數 | 延遲 */
+  animation: scroll-icon-carousel 40s linear infinite; /* 40秒一圈，可自行調整快慢 */
+}
+
+/* 7. 定義 Keyframes 動畫 */
+/* 這個動畫的核心邏輯是將容器向左移動 50% 的寬度。
+   因為我们在 HTML 中複製了一份相同的圖片，
+   所以移動到一半時，視覺上會無縫銜接。
+*/
+@keyframes scroll-icon-carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); /* 移動整個容器的寬度 (因為我們後面會用 JS 複製一份) */
+  }
+}
+
+/* 8. 行動裝置優化 (RWD) */
+@media (max-width: 768px) {
+  .gallery-item {
+    height: 120px;       /* 行動裝置上圖片高度變小 */
+    margin: 0 0.5rem;    /* 間距變小 */
+  }
+}
+
 /* --- 發表卡片互動樣式 --- */
 .pub-card {
   cursor: pointer;
