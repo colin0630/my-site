@@ -330,8 +330,9 @@
     </div>
   </footer>
 
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 處理年份與最後更新時間
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
@@ -341,6 +342,7 @@
         lastUpdated.textContent = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
       }
 
+      // 處理多國語言切換
       let isZh = (localStorage.getItem('lang') !== 'en');
       const applyLang = () => {
         document.documentElement.lang = isZh ? 'zh-Hant' : 'en';
@@ -358,6 +360,7 @@
         applyLang();
       });
 
+      // 處理深淺色模式
       const root = document.documentElement;
       let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       root.setAttribute('data-theme', theme);
@@ -374,51 +377,66 @@
         updateThemeIcon();
       });
 
+      // 阻擋未完成連結的預設跳轉行為
       document.querySelectorAll('a[aria-disabled="true"]').forEach(card => {
         card.addEventListener('click', (e) => e.preventDefault());
       });
-    });
 
-     // --- 發表卡片彈出視窗邏輯 ---
+
+      // 👇👇👇 升級版：支援多張照片的彈出視窗邏輯 👇👇👇
       const modal = document.getElementById('pub-modal');
       const closeModalBtn = document.getElementById('close-modal');
       const modalTitle = document.getElementById('modal-title');
       const modalAuthors = document.getElementById('modal-authors');
       const modalHighlights = document.getElementById('modal-highlights');
-      const modalImg = document.getElementById('modal-img');
+      const modalPhotoContainer = document.querySelector('.modal-photo'); 
 
       document.querySelectorAll('.pub-card').forEach(card => {
         card.addEventListener('click', () => {
-          // 判斷當前是中文還是英文
           const currentLang = document.documentElement.lang === 'zh-Hant' ? 'zh' : 'en';
           
-          // 抓取卡片上的 data 屬性資料並填入視窗
           modalTitle.textContent = card.getAttribute(`data-title-${currentLang}`) || card.querySelector('.pub-title').textContent;
           modalAuthors.textContent = card.getAttribute(`data-authors-${currentLang}`) || card.querySelector('.pub-meta').textContent;
           
           const highlights = card.getAttribute(`data-highlights-${currentLang}`);
           modalHighlights.textContent = highlights ? highlights : (currentLang === 'zh' ? '詳細精華內容建構中...' : 'Details coming soon...');
           
-          // 處理照片顯示
-          const imgSrc = card.getAttribute('data-img');
-          if (imgSrc) {
-            modalImg.src = imgSrc;
-            modalImg.style.display = 'block';
+          // --- 處理照片 (支援舊版單張與新版多張) ---
+          modalPhotoContainer.innerHTML = ''; // 清空之前的圖片
+          
+          const imagesStr = card.getAttribute('data-images');
+          const singleImageStr = card.getAttribute('data-img');
+          let finalImageSrcs = [];
+
+          if (imagesStr) {
+            finalImageSrcs = imagesStr.split(',').map(s => s.trim());
+          } else if (singleImageStr) {
+            finalImageSrcs.push(singleImageStr);
+          }
+
+          if (finalImageSrcs.length > 0) {
+            finalImageSrcs.forEach(imgSrc => {
+              if (imgSrc) {
+                const imgTag = document.createElement('img');
+                imgTag.src = imgSrc;
+                imgTag.alt = "Publication Photo";
+                imgTag.classList.add('modal-detail-img');
+                modalPhotoContainer.appendChild(imgTag);
+              }
+            });
+            modalPhotoContainer.style.display = 'flex'; 
           } else {
-            modalImg.style.display = 'none';
+            modalPhotoContainer.style.display = 'none';
           }
           
-          // 打開視窗
           modal.showModal();
         });
       });
 
-      // 點擊打叉按鈕關閉
       closeModalBtn?.addEventListener('click', () => {
         modal.close();
       });
 
-      // 點擊視窗外圍（黑色半透明背景）也會自動關閉
       modal.addEventListener('click', (e) => {
         const dialogDimensions = modal.getBoundingClientRect();
         if (
@@ -430,7 +448,9 @@
           modal.close();
         }
       });
+      // 👆👆👆 彈出視窗邏輯結束 👆👆👆
+
+    }); // DOMContentLoaded 結束
   </script>
- 
 </body>
 </html>
