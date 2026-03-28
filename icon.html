@@ -12,7 +12,95 @@
   <meta property="og:image" content="suphoto/icon/813ee047-f242-4ad5-b2f6-28a69a549048.png" />
   <link rel="canonical" href="./icon.html" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* 外層：固定視窗，提供左右兩側的漸層遮罩 */
+    .icon-marquee {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 3rem 0;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+
+    /* 內層：真正移動的軌道 */
+    .icon-gallery.pretty {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 1.5rem;
+      width: max-content; /* 讓寬度根據內容自動延伸 */
+      animation: scroll-icon-carousel 28s linear infinite; /* 動畫時間 */
+    }
+
+    /* 每個作品卡片 */
+    .icon-gallery.pretty > * {
+      flex: 0 0 auto;
+      width: 220px;
+      height: 180px;
+      animation: none !important; 
+    }
+
+    .icon-gallery.pretty .gallery-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .icon-gallery.pretty .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-height: none;
+      transition: transform .25s ease, box-shadow .25s ease;
+      cursor: zoom-in; /* 提示使用者可以點擊放大 */
+    }
+
+    /* 圖片懸停時微幅放大 */
+    .icon-gallery.pretty .gallery-item img:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    /* ★ 關鍵功能：滑鼠懸停整個跑馬燈時，暫停滾動 ★ */
+    .icon-marquee:hover .icon-gallery.pretty {
+      animation-play-state: paused;
+    }
+
+    /* 動畫設定：向左移動 50% */
+    @keyframes scroll-icon-carousel {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* 行動裝置優化 (RWD) */
+    @media (max-width: 768px) {
+      .icon-marquee {
+        padding: 2rem 0;
+      }
+      .icon-gallery.pretty {
+        gap: 0.9rem;
+        animation-duration: 22s; /* 手機上稍微快一點點 */
+      }
+      .icon-gallery.pretty > * {
+        width: 150px;
+        height: 120px;
+      }
+      .icon-gallery.pretty .gallery-item {
+        padding: 10px;
+        border-radius: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="nav">
@@ -60,30 +148,30 @@
           <span class="badge large">Co-created with Menka</span>
         </div>
        <div class="icon-marquee">
-  <div class="icon-gallery pretty">
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8420.PNG" alt="ICON artwork 1" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8422.PNG" alt="ICON artwork 2" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8421.PNG" alt="ICON artwork 3" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8426.PNG" alt="ICON artwork 4" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8425.PNG" alt="ICON artwork 5" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8427.PNG" alt="ICON artwork 6" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8429.PNG" alt="ICON artwork 7" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8430.PNG" alt="ICON artwork 8" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8431.PNG" alt="ICON artwork 9" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8423.PNG" alt="ICON artwork 10" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8424.PNG" alt="ICON artwork 11" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8428.PNG" alt="ICON artwork 12" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8432.PNG" alt="ICON artwork 13" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8416.PNG" alt="ICON artwork 14" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8418.PNG" alt="ICON artwork 15" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8419.PNG" alt="ICON artwork 16" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8417.PNG" alt="ICON artwork 17" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8415.PNG" alt="ICON artwork 18" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8414.PNG" alt="ICON artwork 19" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8413.PNG" alt="ICON artwork 20" loading="lazy" decoding="async"></figure>
-    <figure class="gallery-item"><img src="suphoto/icon/IMG_8412.PNG" alt="ICON artwork 21" loading="lazy" decoding="async"></figure>
-  </div>
-</div>
+          <div class="icon-gallery pretty">
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8420.PNG" alt="ICON artwork 1" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8422.PNG" alt="ICON artwork 2" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8421.PNG" alt="ICON artwork 3" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8426.PNG" alt="ICON artwork 4" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8425.PNG" alt="ICON artwork 5" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8427.PNG" alt="ICON artwork 6" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8429.PNG" alt="ICON artwork 7" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8430.PNG" alt="ICON artwork 8" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8431.PNG" alt="ICON artwork 9" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8423.PNG" alt="ICON artwork 10" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8424.PNG" alt="ICON artwork 11" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8428.PNG" alt="ICON artwork 12" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8432.PNG" alt="ICON artwork 13" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8416.PNG" alt="ICON artwork 14" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8418.PNG" alt="ICON artwork 15" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8419.PNG" alt="ICON artwork 16" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8417.PNG" alt="ICON artwork 17" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8415.PNG" alt="ICON artwork 18" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8414.PNG" alt="ICON artwork 19" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8413.PNG" alt="ICON artwork 20" loading="lazy" decoding="async"></figure>
+            <figure class="gallery-item"><img src="suphoto/icon/IMG_8412.PNG" alt="ICON artwork 21" loading="lazy" decoding="async"></figure>
+          </div>
+        </div>
       </div>
       <dialog id="lb" aria-label="Artwork preview"><img id="lbImg" alt="Artwork preview"></dialog>
     </section>
@@ -180,7 +268,7 @@
     const gallery = document.querySelector('.icon-gallery.pretty');
 
     if (gallery) {
-      // 避免重複複製
+      // 避免重複複製，讓 JavaScript 自動複製一份圖片來達成無縫輪播
       if (!gallery.dataset.cloned) {
         gallery.innerHTML += gallery.innerHTML;
         gallery.dataset.cloned = 'true';
