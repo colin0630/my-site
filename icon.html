@@ -94,9 +94,9 @@
     </div>
   </footer>
 
-  <script>
+ <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // 1. 基本功能 (日期、語言、主題) - 保留原本代碼
+    // --- 1. 基礎功能 (年份、最後更新) ---
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
     const l = document.getElementById('lastUpdated');
@@ -105,6 +105,7 @@
       l.textContent = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     }
 
+    // --- 2. 多國語言與深色模式切換 ---
     let zh = (localStorage.getItem('lang') !== 'en');
     const applyLang = () => {
       document.documentElement.lang = zh ? 'zh-Hant' : 'en';
@@ -127,8 +128,7 @@
     root.setAttribute('data-theme', theme);
     const themeBtn = document.getElementById('themeBtn');
     const updateThemeIcon = () => {
-      if (!themeBtn) return;
-      themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
+      if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
     };
     updateThemeIcon();
     themeBtn?.addEventListener('click', () => {
@@ -138,57 +138,41 @@
       updateThemeIcon();
     });
 
-    // 2. Lightbox (圖片放大) 功能 - 保留原本代碼
+    // --- 3. Lightbox 點擊放大功能 ---
     const lb = document.getElementById('lb');
     const lbImg = document.getElementById('lbImg');
-    const setupLightbox = (imgs) => {
-      imgs.forEach(img => img.addEventListener('click', () => {
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lb.showModal();
-      }));
-    };
-    // 原本的圖片設定 Lightbox
-    setupLightbox(document.querySelectorAll('.gallery-item img'));
-
-    lb?.addEventListener('click', e => {
-      if (e.target === lb || e.target === lbImg) lb.close();
-    });
-    window.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && lb?.open) lb.close();
-    });
-
-
-    // ============================================================
-    // [新增] 核心代碼：實作無縫跑馬燈
-    // ============================================================
-    const gallery = document.querySelector('.icon-gallery.pretty');
     
-    if (gallery) {
-      // 1. 獲取所有原本的圖片項目
-      const originalItems = gallery.querySelectorAll('.gallery-item');
-      
-      // 2. 為了達到無縫循環，我們複製一整套圖片
-      //    (CSS 的 keyframe animation 將會移動 100% 的寬度，剛好接上複製品)
-      originalItems.forEach(item => {
-        const duplicatedItem = item.cloneNode(true); // true 表示深層複製 (包含裡面的 img)
-        gallery.appendChild(duplicatedItem); // 接在原本項目的後面
+    // 定義一個初始化 Lightbox 的函式，以便複用
+    const initLightbox = (items) => {
+      items.forEach(img => {
+        img.addEventListener('click', () => {
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lb.showModal();
+        });
       });
+    };
 
-      // 3. 確保複製出來的圖片也能被 Lightbox 點擊放大
-      //    (原本的 setupLightbox 函數是用 querySelectorAll('.gallery-item img')，
-      //     我們要在複製完成後重新抓取一次並設定)
-      const allImagesAfterDuplication = gallery.querySelectorAll('.gallery-item img');
-      setupLightbox(allImagesAfterDuplication);
-      
-      // 4. 當滑鼠懸停在整個跑馬燈上時，暫停動畫
+    lb?.addEventListener('click', e => { if (e.target === lb || e.target === lbImg) lb.close(); });
+    window.addEventListener('keydown', e => { if (e.key === 'Escape' && lb?.open) lb.close(); });
+
+    // --- 4. 動態跑馬燈邏輯 (核心修改) ---
+    const gallery = document.querySelector('.icon-gallery.pretty');
+    if (gallery) {
+      // 複製一份內容以達成無縫循環
+      const originalContent = gallery.innerHTML;
+      gallery.innerHTML = originalContent + originalContent;
+
+      // 重新選取所有圖片（包含原本與複製品）並綁定 Lightbox
+      const allImages = gallery.querySelectorAll('img');
+      initLightbox(allImages);
+
+      // 滑鼠移入：暫停動畫；滑鼠移出：繼續動畫
       gallery.addEventListener('mouseenter', () => {
         gallery.querySelectorAll('.gallery-item').forEach(item => {
           item.style.animationPlayState = 'paused';
         });
       });
-      
-      // 5. 當滑鼠離開時，繼續動畫
       gallery.addEventListener('mouseleave', () => {
         gallery.querySelectorAll('.gallery-item').forEach(item => {
           item.style.animationPlayState = 'running';
