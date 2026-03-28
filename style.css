@@ -248,15 +248,16 @@ h1, h2, h3, .card-title, .name {
 }
 
 /* 3. 調整 gallery-item 的樣式，使其適合橫向滾動 */
-.gallery-item {
-  flex: 0 0 auto;         /* 不要縮放，保持原始大小 */
-  width: auto;            /* 寬度根據圖片自動 */
-  height: 180px;          /* 統一跑馬燈中圖片的高度，你可以根據需要調整 */
-  margin: 0 1rem;         /* 圖片之間的左右間距 */
-  aspect-ratio: auto;     /* 保持圖片原始比例 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.gallery-item img {
+  height: 100%;           
+  width: auto;            
+  max-width: none;        
+  max-height: none;       /* 新增這一行，確保不被第 204 行的 140px 限制住 */
+  border-radius: 12px;     
+  object-fit: contain;    
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 }
 
 /* 4. 調整圖片本身 */
