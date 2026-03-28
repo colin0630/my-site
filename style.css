@@ -280,7 +280,7 @@ h1, h2, h3, .card-title, .name {
 /* 6. 動畫的核心代碼：將整個 gallery 橫向移動 */
 .icon-gallery.pretty > * {
   /* 這裡設定動畫：名稱 | 時間 | 速度曲線 | 重複次數 | 延遲 */
-  animation: scroll-icon-carousel 40s linear infinite; /* 40秒一圈，可自行調整快慢 */
+  animation: scroll-icon-carousel 20s linear infinite; /* 40秒一圈，可自行調整快慢 */
 }
 
 /* 7. 定義 Keyframes 動畫 */
