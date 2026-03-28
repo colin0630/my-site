@@ -227,7 +227,7 @@ h1, h2, h3, .card-title, .name {
    ICON 跑馬燈動態循環效果 (Infinite Scroll Carousel)
    ============================================================ */
 
-/* 1. 修正：動畫應該套用在容器本身，而不是子元素 ( > * ) */
+/* 1. 修正容器：讓整個容器成為動畫主體 */
 .icon-gallery.pretty {
   display: flex;
   flex-direction: row;
@@ -236,33 +236,31 @@ h1, h2, h3, .card-title, .name {
   width: 100%;
   position: relative;
   padding: 2rem 0;
-  
-  /* 讓整個橫向列表移動 */
-  animation: scroll-icon-carousel 15s linear infinite; 
+  /* 增加左右漸層遮罩，讓邊緣消失感更自然 */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+
+  /* 將動畫掛在容器上，而不是掛在圖片上 */
+  animation: scroll-icon-carousel 20s linear infinite; 
 }
 
-/* 2. 當滑鼠懸停時暫停 (選配) */
-.icon-gallery.pretty:hover {
-  animation-play-state: paused;
-}
-
-/* 3. 確保子元素不會縮水，並保持間距 */
-.gallery-item {
-  flex: 0 0 auto; 
-  height: 180px;
+/* 2. 移除原本針對子元素的動畫 (原本這段會導致圖片亂跳) */
+.icon-gallery.pretty > * {
+  animation: none !important; 
+  flex: 0 0 auto;
+  height: 180px; /* 統一高度讓它在中間 */
   margin: 0 1rem;
 }
 
-/* 4. 修正 Keyframes：從 0 移到 -50% 
-   (因為我們在 JS 複製了一份，所以移到一半就會剛好接上，達成無縫循環) */
+/* 3. 修正 Keyframes：因為 JS 複製了一份，所以移動 50% 就剛好循環 */
 @keyframes scroll-icon-carousel {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* 這裡改為 -50% 是因為容器內現在有兩組一模一樣的內容 */
-    transform: translateX(-50%); 
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
+}
+
+/* 4. 滑鼠懸停暫停 */
+.icon-gallery.pretty:hover {
+  animation-play-state: paused;
 }
 /* 5. 圖片懸停效果 (跑馬燈時依然有效) */
 .gallery-item img:hover {
