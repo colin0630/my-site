@@ -142,7 +142,23 @@
         <div class="pub-content-flex">
           <ul class="list large-pubs">
             <li class="pub-item"><div class="pub-title">Gas–Particle Partitioning and Compound-Specific Characteristics of PFAS in Ambient PM2.5 across Urban, Traffic, Industrial and Background Area in Taiwan.</div><div class="pub-meta muted"><span class="author-highlight">Guan Syun Su</span>, Yen Shun Hsu, Neng Huei Lin, Kai Hsien Chi · 45th International Symposium on Halogenated Persistent Organic Pollutants (POPs), 2025, Antalya</div></li>
-            <li class="pub-item"><div class="pub-title pub-title-flex">台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查 <span class="badge large pub-award" style="background:#a78bfa;color:#fff;border-color:#8b5cf6;">🏆 <strong>優秀論文獎</strong></span></div><div class="pub-meta muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 中華民國環境工程學會第三十七屆年會暨各專門學術研討會，2025，高雄市</div></li>
+           <li class="pub-item pub-card" 
+    data-title-zh="台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查" 
+    data-title-en="Investigation of Gas-Particle Partitioning of PFAS in 5 Taiwanese Cities"
+    data-authors-zh="蘇冠勳、徐衍舜、紀凱獻"
+    data-authors-en="Guan Syun Su, Yen Shun Hsu, Kai Hsien Chi"
+    data-highlights-zh="這裡填寫你的發表精華：本研究調查了五座城市的 PFAS 濃度，發現了..."
+    data-highlights-en="Here are the highlights: This study investigated PFAS..."
+    data-img="suphoto/20251210_020530.jpg">
+  
+  <div class="pub-title pub-title-flex">
+    台灣五座城市大氣全氟/多氟烷基物質(PFAS)氣固相濃度調查 
+    <span class="badge large pub-award" style="background:#a78bfa;color:#fff;border-color:#8b5cf6;">🏆 <strong>優秀論文獎</strong></span>
+  </div>
+  <div class="pub-meta muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 中華民國環境工程學會第三十七屆年會暨各專門學術研討會，2025</div>
+  
+  <div class="card-hint" data-zh="👉 點擊查看精華與照片" data-en="👉 Click for details & photos">👉 點擊查看精華與照片</div>
+</li>
             <li class="pub-item"><div class="pub-title pub-title-flex">大氣中PM2.5全氟/多氟烷機物質(PFAS)採樣方法及臺灣五座城市大氣中濃度 <span class="badge large pub-award" style="background:#e0e0e0;color:#333;border-color:#ccc;">🏅 <strong>佳作論文獎</strong></span></div><div class="pub-meta muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 2025空氣品質改善研討會：創新實務與永續政策，2025，台北市</div></li>
             <li class="pub-item"><div class="pub-title">台灣都會及工業區大氣PFAS之氣固相分佈及物種分佈特性研究</div><div class="pub-meta muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、紀凱獻 · 第32屆國際氣膠科技研討會，2025，台南市</div></li>
             <li class="pub-item"><div class="pub-title">大氣氣固相全氟/多氟烷基物質(PFAS)採樣及分析技術方法開發</div><div class="pub-meta muted"><span class="author-highlight">蘇冠勳</span>、徐衍舜、鄭恬恬、紀凱獻 · 第39屆環境分析研討會，2025，桃園市</div></li>
@@ -216,6 +232,26 @@
     </section>
   </main>
 
+  <dialog id="pub-modal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" id="close-modal" aria-label="Close">✕</button>
+    <div class="modal-body">
+      <h3 id="modal-title"></h3>
+      <p id="modal-authors" class="muted" style="margin-bottom: 12px;"></p>
+      <div class="section-split"></div>
+      <div class="modal-details">
+        <div class="modal-text">
+          <h4 data-zh="📌 發表精華" data-en="📌 Highlights" style="margin-bottom: 8px;">📌 發表精華</h4>
+          <p id="modal-highlights"></p>
+        </div>
+        <div class="modal-photo">
+          <img id="modal-img" src="" alt="Publication Photo" style="display: none;">
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
   <footer class="footer">
     <div class="container small">
       <p>© <span id="year"></span> Guan Syun Su — Built with HTML/CSS/JS</p>
@@ -272,5 +308,56 @@
       });
     });
   </script>
+  // --- 發表卡片彈出視窗邏輯 ---
+      const modal = document.getElementById('pub-modal');
+      const closeModalBtn = document.getElementById('close-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalAuthors = document.getElementById('modal-authors');
+      const modalHighlights = document.getElementById('modal-highlights');
+      const modalImg = document.getElementById('modal-img');
+
+      document.querySelectorAll('.pub-card').forEach(card => {
+        card.addEventListener('click', () => {
+          // 判斷當前是中文還是英文
+          const currentLang = document.documentElement.lang === 'zh-Hant' ? 'zh' : 'en';
+          
+          // 抓取卡片上的 data 屬性資料並填入視窗
+          modalTitle.textContent = card.getAttribute(`data-title-${currentLang}`) || card.querySelector('.pub-title').textContent;
+          modalAuthors.textContent = card.getAttribute(`data-authors-${currentLang}`) || card.querySelector('.pub-meta').textContent;
+          
+          const highlights = card.getAttribute(`data-highlights-${currentLang}`);
+          modalHighlights.textContent = highlights ? highlights : (currentLang === 'zh' ? '詳細精華內容建構中...' : 'Details coming soon...');
+          
+          // 處理照片顯示
+          const imgSrc = card.getAttribute('data-img');
+          if (imgSrc) {
+            modalImg.src = imgSrc;
+            modalImg.style.display = 'block';
+          } else {
+            modalImg.style.display = 'none';
+          }
+          
+          // 打開視窗
+          modal.showModal();
+        });
+      });
+
+      // 點擊打叉按鈕關閉
+      closeModalBtn?.addEventListener('click', () => {
+        modal.close();
+      });
+
+      // 點擊視窗外圍（黑色半透明背景）也會自動關閉
+      modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+          e.clientX < dialogDimensions.left ||
+          e.clientX > dialogDimensions.right ||
+          e.clientY < dialogDimensions.top ||
+          e.clientY > dialogDimensions.bottom
+        ) {
+          modal.close();
+        }
+      });
 </body>
 </html>
