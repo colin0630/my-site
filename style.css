@@ -261,6 +261,11 @@ h1, h2, h3, .card-title, .name {
   padding: 32px;
   position: relative;
 }
+#modal-title {
+  padding-right: 48px; /* 在右邊預留 48px 的安全距離給 X 按鈕 */
+  line-height: 1.5;    /* 順便讓折行的標題行距看起來更舒適 */
+  margin-bottom: 8px;
+}
 .close-btn {
   position: absolute;
   top: 20px;
