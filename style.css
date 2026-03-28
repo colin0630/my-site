@@ -224,6 +224,88 @@ h1, h2, h3, .card-title, .name {
   width: min(100%, 260px); border-radius: 22px; border: 1px solid var(--card-border); box-shadow: var(--shadow); margin-inline: auto;
 }
 
+/* --- 發表卡片互動樣式 --- */
+.pub-card {
+  cursor: pointer;
+  position: relative;
+}
+.card-hint {
+  font-size: 0.85rem;
+  color: var(--primary);
+  margin-top: 12px;
+  font-weight: 700;
+  opacity: 0.7;
+  transition: .25s ease;
+}
+.pub-card:hover .card-hint {
+  opacity: 1;
+  transform: translateX(6px);
+}
+
+/* --- 彈出視窗 (Modal) 樣式 --- */
+.modal {
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  max-width: 800px;
+  width: 92%;
+  padding: 0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  margin: auto; /* 置中 */
+}
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px); /* 背景模糊效果 */
+}
+.modal-content {
+  padding: 32px;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--bg-2);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .2s;
+  font-size: 1.1rem;
+}
+.close-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.1);
+}
+.modal-details {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.modal-text {
+  flex: 1;
+  min-width: 280px;
+  line-height: 1.8;
+}
+.modal-photo {
+  flex: 1;
+  min-width: 280px;
+}
+.modal-photo img {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+}
+
 @media (max-width: 960px) {
   .hero-layout, .hero-flex, .pub-content-flex { grid-template-columns: 1fr; flex-direction: column; }
   .hero-panel { justify-content: flex-start; }
