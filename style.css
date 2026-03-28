@@ -227,84 +227,95 @@ h1, h2, h3, .card-title, .name {
    ICON 跑馬燈動態循環效果 (Infinite Scroll Carousel)
    ============================================================ */
 
-/* 1. 修正容器：確保圖片在大螢幕上也能橫跨整個寬度 */
+/* 外層容器：真正執行位移動畫的是整個 gallery */
 .icon-gallery.pretty {
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-  padding: 3rem 0; /* 增加上下間距讓陰影不被切到 */
-  
-  /* 關鍵修正：確保圖片從最左邊開始排列 */
-  justify-content: flex-start; 
   align-items: center;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  overflow: hidden;
+  width: max-content;
+  min-width: 100%;
+  position: relative;
+  padding: 3rem 0;
+  animation: scroll-icon-carousel 28s linear infinite;
 
-  /* 設定動畫 */
-  animation: scroll-icon-carousel 25s linear infinite; 
-  
-  /* 漸層遮罩 */
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
-/* 2. 修正子元素：移除所有個別動畫，統一由父容器控制 */
+/* 每個作品卡片：不再個別跑動畫 */
 .icon-gallery.pretty > * {
-  animation: none !important; 
-  flex: 0 0 auto; /* 核心：禁止縮放，保持原始大小 */
-  height: 180px; 
-  margin: 0 1.5rem; /* 增加間距讓畫面更開闊 */
+  flex: 0 0 auto;
+  width: 220px;
+  height: 180px;
+  margin: 0;
+  animation: none !important;
 }
 
-/* 3. 修正 Keyframes：這是解決「右邊空白」的關鍵 */
-@keyframes scroll-icon-carousel {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    /* 配合 JS 的 innerHTML += innerHTML，移動 -50% 是最完美的無縫點 */
-    transform: translateX(-50%); 
-  }
+/* 卡片本身 */
+.icon-gallery.pretty .gallery-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  padding: 14px;
 }
-/* 4. 滑鼠懸停暫停 */
+
+/* 圖片 */
+.icon-gallery.pretty .gallery-item img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  transition: transform .25s ease, box-shadow .25s ease;
+  cursor: zoom-in;
+}
+
+/* hover 時只做視覺效果，不影響跑馬燈邏輯 */
+.icon-gallery.pretty .gallery-item img:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* 整個 gallery 暫停 */
 .icon-gallery.pretty:hover {
   animation-play-state: paused;
 }
-/* 5. 圖片懸停效果 (跑馬燈時依然有效) */
-.gallery-item img:hover {
-  transform: translateY(-5px) scale(1.05); /* 輕微上移和放大 */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);  /* 增加陰影 */
-}
 
-/* 6. 動畫的核心代碼：將整個 gallery 橫向移動 */
-.icon-gallery.pretty > * {
-  /* 這裡設定動畫：名稱 | 時間 | 速度曲線 | 重複次數 | 延遲 */
-  animation: scroll-icon-carousel 5s linear infinite; /* 40秒一圈，可自行調整快慢 */
-}
-
-/* 7. 定義 Keyframes 動畫 */
-/* 這個動畫的核心邏輯是將容器向左移動 50% 的寬度。
-   因為我们在 HTML 中複製了一份相同的圖片，
-   所以移動到一半時，視覺上會無縫銜接。
-*/
+/* 只移動一半，因為 JS 會複製一整份內容 */
 @keyframes scroll-icon-carousel {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%); /* 移動整個容器的寬度 (因為我們後面會用 JS 複製一份) */
+    transform: translateX(-50%);
   }
 }
 
-/* 8. 行動裝置優化 (RWD) */
+/* 行動裝置 */
 @media (max-width: 768px) {
-  .gallery-item {
-    height: 120px;       /* 行動裝置上圖片高度變小 */
-    margin: 0 0.5rem;    /* 間距變小 */
+  .icon-gallery.pretty {
+    gap: 0.9rem;
+    padding: 2rem 0;
+    animation-duration: 22s;
+  }
+
+  .icon-gallery.pretty > * {
+    width: 150px;
+    height: 120px;
+  }
+
+  .icon-gallery.pretty .gallery-item {
+    padding: 10px;
+    border-radius: 16px;
   }
 }
-
 /* --- 發表卡片互動樣式 --- */
 .pub-card {
   cursor: pointer;
