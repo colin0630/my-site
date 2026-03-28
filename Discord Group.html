@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Discord Knowledge Base | Guan Syun Su</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* --- 專屬動畫與排版樣式 --- */
+    .discord-intro-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    /* 定義滑入淡入的動畫 */
+    @keyframes messageSlideIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 模擬訊息區塊 */
+    .message-block {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 40px;
+      /* 預設隱藏，由動畫來顯示 */
+      opacity: 0; 
+      /* 套用動畫：名稱 期間 速度曲線 停留在最後狀態 */
+      animation: messageSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* 針對每個區塊設定不同的延遲時間，做出依序彈出的效果 */
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 1.0s; }
+    .delay-3 { animation-delay: 1.8s; }
+
+    .message-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--primary);
+    }
+
+    .message-content {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 0 16px 16px 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      width: 100%;
+    }
+
+    .message-header {
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .message-text {
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .message-image {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+    
+    .back-nav {
+      margin-top: 40px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="name">Discord 知識庫</div>
+      </div>
+      <nav class="links">
+        <a href="index.html" class="btn small primary">← 返回首頁</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="discord-intro-container">
+      
+      <div class="message-block delay-1">
+        <img src="suphoto/colinsu-photo.jpg" alt="Avatar" class="message-avatar">
+        <div class="message-content">
+          <div class="message-header">Guan Syun Su (系統提示)</div>
+          <div class="message-text">
+            歡迎來到我的 Discord 知識庫！<br>
+            我習慣將平時的研究靈感、考試筆記以及程式碼片段，分門別類地記錄在專屬的 Discord 伺服器中。這就像是我個人的第二大腦 🧠。
+          </div>
+        </div>
+      </div>
+
+      <div class="message-block delay-2">
+        <img src="suphoto/colinsu-photo.jpg" alt="Avatar" class="message-avatar">
+        <div class="message-content">
+          <div class="message-header"># 考試與讀書筆記</div>
+          <div class="message-text">
+            我會建立專屬頻道（例如：<code>#作業環境測定期末範圍</code>），將手寫筆記拍照上傳，並加上重點標籤，方便日後隨時跨裝置檢索與複習。
+          </div>
+          <img src="suphoto/discord-notes.jpg" alt="作業環境測定筆記" class="message-image">
+        </div>
+      </div>
+
+      <div class="message-block delay-3">
+        <img src="suphoto/colinsu-photo.jpg" alt="Avatar" class="message-avatar">
+        <div class="message-content">
+          <div class="message-header"># 程式繪圖與資料視覺化</div>
+          <div class="message-text">
+            在處理 PFAS 氣象條件等複雜數據時，我會將 Python 或 R 語言的程式碼片段與跑出來的 Heatmap 圖表一起貼在 <code>#氣象條件heatmap-圓形</code> 頻道。這樣不僅能記錄圖表的演進，未來要重複使用程式碼也非常快！
+          </div>
+          <img src="suphoto/discord-code.png" alt="Python 程式碼與 Heatmap 圖表" class="message-image">
+        </div>
+      </div>
+
+      <a href="index.html" class="btn ghost back-nav">← 回到作品集</a>
+    </div>
+  </main>
+
+  <script>
+    // 繼承你在主頁設定的深淺色模式
+    document.addEventListener('DOMContentLoaded', () => {
+      const root = document.documentElement;
+      let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      root.setAttribute('data-theme', theme);
+    });
+  </script>
+</body>
+</html>
