@@ -227,7 +227,7 @@ h1, h2, h3, .card-title, .name {
    ICON 跑馬燈動態循環效果 (Infinite Scroll Carousel)
    ============================================================ */
 
-/* 1. 修正容器：讓整個容器成為動畫主體 */
+/* 1. 修正容器：確保圖片在大螢幕上也能橫跨整個寬度 */
 .icon-gallery.pretty {
   display: flex;
   flex-direction: row;
@@ -235,29 +235,38 @@ h1, h2, h3, .card-title, .name {
   overflow: hidden;
   width: 100%;
   position: relative;
-  padding: 2rem 0;
-  /* 增加左右漸層遮罩，讓邊緣消失感更自然 */
+  padding: 3rem 0; /* 增加上下間距讓陰影不被切到 */
+  
+  /* 關鍵修正：確保圖片從最左邊開始排列 */
+  justify-content: flex-start; 
+  align-items: center;
+
+  /* 設定動畫 */
+  animation: scroll-icon-carousel 25s linear infinite; 
+  
+  /* 漸層遮罩 */
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-
-  /* 將動畫掛在容器上，而不是掛在圖片上 */
-  animation: scroll-icon-carousel 20s linear infinite; 
 }
 
-/* 2. 移除原本針對子元素的動畫 (原本這段會導致圖片亂跳) */
+/* 2. 修正子元素：移除所有個別動畫，統一由父容器控制 */
 .icon-gallery.pretty > * {
   animation: none !important; 
-  flex: 0 0 auto;
-  height: 180px; /* 統一高度讓它在中間 */
-  margin: 0 1rem;
+  flex: 0 0 auto; /* 核心：禁止縮放，保持原始大小 */
+  height: 180px; 
+  margin: 0 1.5rem; /* 增加間距讓畫面更開闊 */
 }
 
-/* 3. 修正 Keyframes：因為 JS 複製了一份，所以移動 50% 就剛好循環 */
+/* 3. 修正 Keyframes：這是解決「右邊空白」的關鍵 */
 @keyframes scroll-icon-carousel {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } 
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* 配合 JS 的 innerHTML += innerHTML，移動 -50% 是最完美的無縫點 */
+    transform: translateX(-50%); 
+  }
 }
-
 /* 4. 滑鼠懸停暫停 */
 .icon-gallery.pretty:hover {
   animation-play-state: paused;
