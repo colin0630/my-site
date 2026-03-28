@@ -158,10 +158,10 @@
 
     // --- 4. 動態跑馬燈邏輯 (核心修改) ---
     const gallery = document.querySelector('.icon-gallery.pretty');
-    if (gallery) {
-      // 複製一份內容以達成無縫循環
-      const originalContent = gallery.innerHTML;
-      gallery.innerHTML = originalContent + originalContent;
+if (gallery) {
+    // 必須複製內容，動畫才不會看到盡頭
+    gallery.innerHTML += gallery.innerHTML; 
+}
 
       // 重新選取所有圖片（包含原本與複製品）並綁定 Lightbox
       const allImages = gallery.querySelectorAll('img');
