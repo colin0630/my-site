@@ -227,50 +227,43 @@ h1, h2, h3, .card-title, .name {
    ICON 跑馬燈動態循環效果 (Infinite Scroll Carousel)
    ============================================================ */
 
-/* 1. 調整作品集區域的排版，移除原本的 Grid 網格 */
+/* 1. 修正：動畫應該套用在容器本身，而不是子元素 ( > * ) */
 .icon-gallery.pretty {
-  display: flex;          /* 改為橫向排列 */
-  flex-direction: row;    /* 強制橫向 */
-  flex-wrap: nowrap;     /* 禁止換行，這是跑馬燈的關鍵 */
-  overflow: hidden;      /* 隱藏超出邊框的圖片 */
-  padding: 2rem 0;        /* 上下留白 */
-  width: 100%;            /* 容器寬度 100% */
-  position: relative;
-  /* 增加左右漸層遮罩，讓邊緣看起來更自然 */
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-/* 2. 定義動畫容器 */
-.icon-gallery.pretty::after {
-  content: "";
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 2rem 0;
+  
+  /* 讓整個橫向列表移動 */
+  animation: scroll-icon-carousel 15s linear infinite; 
 }
 
-/* 3. 調整 gallery-item 的樣式，使其適合橫向滾動 */
-.gallery-item img {
-  height: 100%;           
-  width: auto;            
-  max-width: none;        
-  max-height: none;       /* 新增這一行，確保不被第 204 行的 140px 限制住 */
-  border-radius: 12px;     
-  object-fit: contain;    
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+/* 2. 當滑鼠懸停時暫停 (選配) */
+.icon-gallery.pretty:hover {
+  animation-play-state: paused;
 }
 
-/* 4. 調整圖片本身 */
-.gallery-item img {
-  height: 100%;           /* 圖片填滿 gallery-item 的高度 */
-  width: auto;            /* 寬度自動，保持比例 */
-  max-width: none;        /* 移除最大寬度限制 */
-  border-radius: 12px;     /* 保持圓角 */
-  object-fit: contain;    /* 確保圖片完整顯示，不被剪裁 */
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* 3. 確保子元素不會縮水，並保持間距 */
+.gallery-item {
+  flex: 0 0 auto; 
+  height: 180px;
+  margin: 0 1rem;
 }
 
+/* 4. 修正 Keyframes：從 0 移到 -50% 
+   (因為我們在 JS 複製了一份，所以移到一半就會剛好接上，達成無縫循環) */
+@keyframes scroll-icon-carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* 這裡改為 -50% 是因為容器內現在有兩組一模一樣的內容 */
+    transform: translateX(-50%); 
+  }
+}
 /* 5. 圖片懸停效果 (跑馬燈時依然有效) */
 .gallery-item img:hover {
   transform: translateY(-5px) scale(1.05); /* 輕微上移和放大 */
