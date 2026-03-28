@@ -302,14 +302,19 @@ h1, h2, h3, .card-title, .name {
 .modal-photo {
   flex: 1;
   min-width: 280px;
+  display: flex;
+  flex-direction: column; 
+  gap: 16px;             
 }
-.modal-photo img {
+
+/* 針對 JavaScript 動態生成的圖片樣式 */
+.modal-detail-img {
   width: 100%;
   border-radius: 16px;
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow);
+  object-fit: contain; 
 }
-
 @media (max-width: 960px) {
   .hero-layout, .hero-flex, .pub-content-flex { grid-template-columns: 1fr; flex-direction: column; }
   .hero-panel { justify-content: flex-start; }
