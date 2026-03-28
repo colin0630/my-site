@@ -99,53 +99,66 @@
     // --- 1. 基礎功能 (年份、最後更新) ---
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
+
     const l = document.getElementById('lastUpdated');
     if (l) {
       const d = new Date();
       l.textContent = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     }
 
-    // --- 2. 多國語言與深色模式切換 ---
+    // --- 2. 多國語言切換 ---
     let zh = (localStorage.getItem('lang') !== 'en');
+
     const applyLang = () => {
       document.documentElement.lang = zh ? 'zh-Hant' : 'en';
       document.querySelectorAll('[data-zh]').forEach(el => {
         const zhText = el.getAttribute('data-zh');
         const enText = el.getAttribute('data-en');
-        if (zhText !== null && enText !== null) el.textContent = zh ? zhText : enText;
+        if (zhText !== null && enText !== null) {
+          el.textContent = zh ? zhText : enText;
+        }
       });
     };
+
     applyLang();
+
     document.getElementById('langBtn')?.addEventListener('click', () => {
       zh = !zh;
       localStorage.setItem('lang', zh ? 'zh' : 'en');
       applyLang();
     });
 
+    // --- 3. 深色模式切換 ---
     const root = document.documentElement;
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : (root.getAttribute('data-theme') || 'light'));
+
     root.setAttribute('data-theme', theme);
+
     const themeBtn = document.getElementById('themeBtn');
     const updateThemeIcon = () => {
-      if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
+      if (themeBtn) {
+        themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+      }
     };
+
     updateThemeIcon();
+
     themeBtn?.addEventListener('click', () => {
-      theme = (theme === 'dark') ? 'light' : 'dark';
+      theme = theme === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
       updateThemeIcon();
     });
 
-    // --- 3. Lightbox 點擊放大功能 ---
+    // --- 4. Lightbox 點擊放大功能 ---
     const lb = document.getElementById('lb');
     const lbImg = document.getElementById('lbImg');
-    
-    // 定義一個初始化 Lightbox 的函式，以便複用
+
     const initLightbox = (items) => {
       items.forEach(img => {
         img.addEventListener('click', () => {
+          if (!lb || !lbImg) return;
           lbImg.src = img.src;
           lbImg.alt = img.alt;
           lb.showModal();
@@ -153,31 +166,26 @@
       });
     };
 
-    lb?.addEventListener('click', e => { if (e.target === lb || e.target === lbImg) lb.close(); });
-    window.addEventListener('keydown', e => { if (e.key === 'Escape' && lb?.open) lb.close(); });
+    lb?.addEventListener('click', (e) => {
+      if (e.target === lb || e.target === lbImg) lb.close();
+    });
 
-    // --- 4. 動態跑馬燈邏輯 (核心修改) ---
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb?.open) lb.close();
+    });
+
+    // --- 5. ICON 跑馬燈初始化 ---
     const gallery = document.querySelector('.icon-gallery.pretty');
-if (gallery) {
-    // 必須複製內容，動畫才不會看到盡頭
-    gallery.innerHTML += gallery.innerHTML; 
-}
 
-      // 重新選取所有圖片（包含原本與複製品）並綁定 Lightbox
+    if (gallery) {
+      // 避免重複複製
+      if (!gallery.dataset.cloned) {
+        gallery.innerHTML += gallery.innerHTML;
+        gallery.dataset.cloned = 'true';
+      }
+
       const allImages = gallery.querySelectorAll('img');
       initLightbox(allImages);
-
-      // 滑鼠移入：暫停動畫；滑鼠移出：繼續動畫
-      gallery.addEventListener('mouseenter', () => {
-        gallery.querySelectorAll('.gallery-item').forEach(item => {
-          item.style.animationPlayState = 'paused';
-        });
-      });
-      gallery.addEventListener('mouseleave', () => {
-        gallery.querySelectorAll('.gallery-item').forEach(item => {
-          item.style.animationPlayState = 'running';
-        });
-      });
     }
   });
 </script>
