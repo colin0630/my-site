@@ -224,37 +224,38 @@ h1, h2, h3, .card-title, .name {
 }
 
 /* ============================================================
-   ICON 跑馬燈動態循環效果 (Infinite Scroll Carousel)
+   ICON 跑馬燈動態循環效果
    ============================================================ */
 
-/* 外層容器：真正執行位移動畫的是整個 gallery */
-.icon-gallery.pretty {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1.5rem;
+/* 外層：固定視窗，不移動 */
+.icon-marquee {
+  width: 100%;
   overflow: hidden;
-  width: max-content;
-  min-width: 100%;
   position: relative;
   padding: 3rem 0;
-  animation: scroll-icon-carousel 28s linear infinite;
 
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
-/* 每個作品卡片：不再個別跑動畫 */
+/* 內層：真正移動的軌道 */
+.icon-gallery.pretty {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1.5rem;
+  width: max-content;
+  animation: scroll-icon-carousel 28s linear infinite;
+}
+
+/* 每個卡片 */
 .icon-gallery.pretty > * {
   flex: 0 0 auto;
   width: 220px;
   height: 180px;
-  margin: 0;
   animation: none !important;
 }
 
-/* 卡片本身 */
 .icon-gallery.pretty .gallery-item {
   display: flex;
   align-items: center;
@@ -267,28 +268,25 @@ h1, h2, h3, .card-title, .name {
   padding: 14px;
 }
 
-/* 圖片 */
 .icon-gallery.pretty .gallery-item img {
   width: 100%;
   height: 100%;
-  max-height: none;
   object-fit: contain;
+  max-height: none;
   transition: transform .25s ease, box-shadow .25s ease;
   cursor: zoom-in;
 }
 
-/* hover 時只做視覺效果，不影響跑馬燈邏輯 */
 .icon-gallery.pretty .gallery-item img:hover {
   transform: translateY(-4px) scale(1.04);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
 }
 
-/* 整個 gallery 暫停 */
-.icon-gallery.pretty:hover {
+/* hover 暫停的是內層軌道 */
+.icon-marquee:hover .icon-gallery.pretty {
   animation-play-state: paused;
 }
 
-/* 只移動一半，因為 JS 會複製一整份內容 */
 @keyframes scroll-icon-carousel {
   0% {
     transform: translateX(0);
@@ -298,11 +296,13 @@ h1, h2, h3, .card-title, .name {
   }
 }
 
-/* 行動裝置 */
 @media (max-width: 768px) {
+  .icon-marquee {
+    padding: 2rem 0;
+  }
+
   .icon-gallery.pretty {
     gap: 0.9rem;
-    padding: 2rem 0;
     animation-duration: 22s;
   }
 
