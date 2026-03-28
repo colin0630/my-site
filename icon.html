@@ -95,37 +95,107 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded',()=>{
-      const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
-      const l=document.getElementById('lastUpdated');
-      if(l){const d=new Date(); l.textContent=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. 基本功能 (日期、語言、主題) - 保留原本代碼
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+    const l = document.getElementById('lastUpdated');
+    if (l) {
+      const d = new Date();
+      l.textContent = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
 
-      let zh = (localStorage.getItem('lang') !== 'en');
-      const applyLang = () => {
-        document.documentElement.lang = zh ? 'zh-Hant' : 'en';
-        document.querySelectorAll('[data-zh]').forEach(el => {
-          const zhText = el.getAttribute('data-zh');
-          const enText = el.getAttribute('data-en');
-          if (zhText !== null && enText !== null) el.textContent = zh ? zhText : enText;
-        });
-      };
+    let zh = (localStorage.getItem('lang') !== 'en');
+    const applyLang = () => {
+      document.documentElement.lang = zh ? 'zh-Hant' : 'en';
+      document.querySelectorAll('[data-zh]').forEach(el => {
+        const zhText = el.getAttribute('data-zh');
+        const enText = el.getAttribute('data-en');
+        if (zhText !== null && enText !== null) el.textContent = zh ? zhText : enText;
+      });
+    };
+    applyLang();
+    document.getElementById('langBtn')?.addEventListener('click', () => {
+      zh = !zh;
+      localStorage.setItem('lang', zh ? 'zh' : 'en');
       applyLang();
-      document.getElementById('langBtn')?.addEventListener('click',()=>{ zh=!zh; localStorage.setItem('lang', zh ? 'zh' : 'en'); applyLang(); });
-
-      const root=document.documentElement;
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : (root.getAttribute('data-theme') || 'light'));
-      root.setAttribute('data-theme', theme);
-      const themeBtn=document.getElementById('themeBtn');
-      const updateThemeIcon=()=>{ if(!themeBtn) return; themeBtn.textContent=(theme==='dark')?'☀️':'🌙'; };
-      updateThemeIcon();
-      themeBtn?.addEventListener('click',()=>{ theme=(theme==='dark')?'light':'dark'; root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); updateThemeIcon(); });
-
-      const lb=document.getElementById('lb'); const lbImg=document.getElementById('lbImg');
-      document.querySelectorAll('.gallery-item img').forEach(img=> img.addEventListener('click',()=>{ lbImg.src=img.src; lbImg.alt=img.alt; lb.showModal(); }));
-      lb?.addEventListener('click',e=>{ if(e.target===lb||e.target===lbImg) lb.close(); });
-      window.addEventListener('keydown', e=>{ if(e.key==='Escape'&&lb?.open) lb.close(); });
     });
-  </script>
+
+    const root = document.documentElement;
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : (root.getAttribute('data-theme') || 'light'));
+    root.setAttribute('data-theme', theme);
+    const themeBtn = document.getElementById('themeBtn');
+    const updateThemeIcon = () => {
+      if (!themeBtn) return;
+      themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
+    };
+    updateThemeIcon();
+    themeBtn?.addEventListener('click', () => {
+      theme = (theme === 'dark') ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateThemeIcon();
+    });
+
+    // 2. Lightbox (圖片放大) 功能 - 保留原本代碼
+    const lb = document.getElementById('lb');
+    const lbImg = document.getElementById('lbImg');
+    const setupLightbox = (imgs) => {
+      imgs.forEach(img => img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.showModal();
+      }));
+    };
+    // 原本的圖片設定 Lightbox
+    setupLightbox(document.querySelectorAll('.gallery-item img'));
+
+    lb?.addEventListener('click', e => {
+      if (e.target === lb || e.target === lbImg) lb.close();
+    });
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lb?.open) lb.close();
+    });
+
+
+    // ============================================================
+    // [新增] 核心代碼：實作無縫跑馬燈
+    // ============================================================
+    const gallery = document.querySelector('.icon-gallery.pretty');
+    
+    if (gallery) {
+      // 1. 獲取所有原本的圖片項目
+      const originalItems = gallery.querySelectorAll('.gallery-item');
+      
+      // 2. 為了達到無縫循環，我們複製一整套圖片
+      //    (CSS 的 keyframe animation 將會移動 100% 的寬度，剛好接上複製品)
+      originalItems.forEach(item => {
+        const duplicatedItem = item.cloneNode(true); // true 表示深層複製 (包含裡面的 img)
+        gallery.appendChild(duplicatedItem); // 接在原本項目的後面
+      });
+
+      // 3. 確保複製出來的圖片也能被 Lightbox 點擊放大
+      //    (原本的 setupLightbox 函數是用 querySelectorAll('.gallery-item img')，
+      //     我們要在複製完成後重新抓取一次並設定)
+      const allImagesAfterDuplication = gallery.querySelectorAll('.gallery-item img');
+      setupLightbox(allImagesAfterDuplication);
+      
+      // 4. 當滑鼠懸停在整個跑馬燈上時，暫停動畫
+      gallery.addEventListener('mouseenter', () => {
+        gallery.querySelectorAll('.gallery-item').forEach(item => {
+          item.style.animationPlayState = 'paused';
+        });
+      });
+      
+      // 5. 當滑鼠離開時，繼續動畫
+      gallery.addEventListener('mouseleave', () => {
+        gallery.querySelectorAll('.gallery-item').forEach(item => {
+          item.style.animationPlayState = 'running';
+        });
+      });
+    }
+  });
+</script>
 </body>
 </html>
