@@ -358,80 +358,83 @@ body {
 }
 
 /* --- 漢堡選單 基礎樣式 (電腦版隱藏) --- */
-.menu-toggle {
-  display: none; /* 預設隱藏 */
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 21px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1001; /* 比 nav 稍微高一點 */
+/* --- [修正] 頭像基礎樣式，確保電腦版正常 --- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0; /* 防止頭像被擠壓 */
 }
 
-.menu-toggle .bar {
-  height: 3px;
-  width: 100%;
-  background-color: var(--text); /* 改用 var(--text) 確保隨主題變色 */
-  border-radius: 10px;
-  transition: all 0.3s ease;
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  display: block; /* 確保圖片顯示 */
 }
 
-/* --- 手機版 RWD 樣式 (關鍵部分) --- */
+/* --- [修正] 漢堡選單 RWD 樣式 --- */
 @media (max-width: 768px) {
-  /* 顯示漢堡按鈕 */
-  .menu-toggle {
+  .nav-inner {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
   }
 
-  /* 將原本的選單隱藏，並設定為手機版樣式 */
-  .nav-menu {
+  /* 確保手機版頭像不會消失且維持比例 */
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .menu-toggle {
+    display: flex !important; /* 強制顯示按鈕 */
+  }
+
+  /* 將原本的 .nav-menu 改為 .links，因為你的 HTML 用的是 .links */
+  .links {
+    display: flex; /* 必須為 flex */
+    flex-direction: column;
     position: absolute;
-    top: 100%; /* 在導覽列下方 */
+    top: 100%;
     left: 0;
     width: 100%;
     background-color: var(--surface);
     border-bottom: 1px solid var(--divider);
-    flex-direction: column; /* 垂直排列 */
-    gap: 0; /* 清除 gap */
+    gap: 0;
     padding: 1rem 0;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     
-    /* 預設狀態：隱藏且滑出螢幕 */
+    /* 初始狀態：隱藏 */
     opacity: 0;
+    visibility: hidden; /* 改用 visibility 配合 opacity */
     transform: translateY(-10px);
-    pointer-events: none; /* 隱藏時不可點擊 */
     transition: all 0.3s ease;
+    pointer-events: none;
   }
 
-  /* 當選單被激活時 (由 JS 控制) */
-  .nav-menu.is-active {
+  /* 當選單被激活時 */
+  .links.is-active {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
   }
 
-  .nav-menu li {
+  /* 讓選單內的連結垂直排列並撐滿 */
+  .links a, .links .btn {
+    display: block !important; /* 強制顯示被隱藏的連結 */
     width: 100%;
     text-align: center;
+    padding: 12px;
+    border-radius: 0;
   }
-
-  .nav-menu li a {
-    display: block;
-    padding: 1rem;
-    width: 100%;
-  }
-
-  /* 漢堡按鈕 動畫 (變成 X) */
-  .menu-toggle.is-active .bar:nth-child(2) {
-    opacity: 0;
-  }
-  .menu-toggle.is-active .bar:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-  .menu-toggle.is-active .bar:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+  
+  /* 移除你原本隱藏連結的那行 */
+  .links a:not([href$="CV.pdf"]) { 
+    display: block; 
   }
 }
