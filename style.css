@@ -40,13 +40,6 @@ body {
   /* 確保這裡沒有任何 overflow 的設定 */
 }
 
-/* --- 修正：網頁主要內容容器置中與寬度限制 --- */
-.container { 
-  max-width: 1120px; /* 限制網頁最大寬度 */
-  margin: 0 auto;    /* 讓整個容器在畫面中水平置中 */
-  padding: 0 24px;   /* 兩側保留安全距離，避免文字貼齊邊緣 */
-  width: 100%;       /* 確保容器在小螢幕時也能撐滿 */
-}
 
 /* --- 導覽列固定與優化 --- */
 .nav {
@@ -166,8 +159,17 @@ body {
 .badge.large { padding: 8px 12px; }
 
 .list { list-style: none; padding-left: 0; }
-.pub-content-flex { display: flex; gap: 40px; align-items: flex-start; }
-.list.large-pubs { flex: 1; }
+.pub-content-flex { 
+  display: flex; 
+  gap: 40px; 
+  align-items: flex-start; 
+  justify-content: center; /* 新增：讓整個群組置中 */
+}
+.list.large-pubs { 
+  flex: 1; 
+  max-width: 900px; /* 新增：限制卡片最大寬度，恢復以前的比例 */
+  margin: 0 auto;   /* 新增：卡片本身置中 */
+}
 .pub-item { padding: 18px 20px; border-radius: 16px; transition: .25s ease; margin-bottom: 14px; border-left: 3px solid color-mix(in oklab, var(--primary) 35%, var(--divider)); background: color-mix(in oklab, var(--surface) 92%, transparent); }
 .pub-item:hover { background: var(--surface); transform: translateX(6px); }
 .pub-title { line-height: 1.58; margin-bottom: 6px; }
@@ -177,7 +179,12 @@ body {
 .pub-awards-imgs { flex: 0 0 300px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 92px; }
 .pub-awards-imgs img { width: 100%; border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--card-border); }
 
-.experience, .Education { display: grid; gap: 18px; }
+.experience, .Education { 
+  display: grid; 
+  gap: 18px; 
+  max-width: 900px; /* 新增：統一限制最大寬度 */
+  margin: 0 auto;   /* 新增：區塊置中 */
+}
 .xp, .edu, .contact-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 20px; padding: 22px; box-shadow: 0 10px 26px -20px rgba(0,0,0,.18); }
 .xp-head, .edu-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 800; font-size: 1.05rem; margin-bottom: 12px; }
 .bullets { padding-left: 1.15rem; display: grid; gap: 10px; color: var(--muted); }
