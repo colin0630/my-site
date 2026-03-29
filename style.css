@@ -222,6 +222,11 @@ body {
 .modal-photo { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 16px; }
 .modal-detail-img { width: 100%; border-radius: 16px; border: 1px solid var(--card-border); box-shadow: var(--shadow); object-fit: contain; }
 
+/* --- 修正：讓所有內容區塊的標題與內容完美切齊 --- */
+.section .container {
+  max-width: 900px; 
+}
+
 /* =========================================
    手機版響應式設計 (RWD)
    ========================================= */
