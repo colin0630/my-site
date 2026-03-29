@@ -26,7 +26,7 @@
 
     body {
       margin: 0;
-      font-family: 'PingFang TC', sans-serif;
+      font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
       background-color: var(--background);
       color: var(--text);
       transition: background 0.3s;
@@ -52,13 +52,14 @@
 
     .brand .name { font-weight: 800; color: var(--primary); }
 
+    /* 容器排版 */
     .discord-intro-container {
       max-width: 800px;
       margin: 40px auto;
-      padding: 0 24px 150px 24px;
+      padding: 0 24px 150px 24px; /* 底部墊高避免被輸入框擋住內容 */
     }
 
-    /* 訊息動畫 */
+    /* 訊息進場動畫 */
     @keyframes messageSlideIn {
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
@@ -72,8 +73,11 @@
       animation: messageSlideIn 0.6s ease-out forwards;
     }
 
+    /* 初始訊息的延遲效果 */
     .delay-1 { animation-delay: 0.2s; }
-    .delay-2 { animation-delay: 0.8s; }
+    .delay-2 { animation-delay: 1.0s; }
+    .delay-3 { animation-delay: 1.8s; }
+    .delay-4 { animation-delay: 2.6s; }
 
     .message-avatar {
       width: 48px;
@@ -81,6 +85,7 @@
       border-radius: 50%;
       border: 2px solid var(--primary);
       flex-shrink: 0;
+      object-fit: cover;
     }
 
     .message-content {
@@ -92,9 +97,10 @@
       width: 100%;
     }
 
-    .message-header { font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .message-header { font-weight: 800; color: var(--primary); margin-bottom: 4px; font-size: 1rem; }
+    .message-text { line-height: 1.7; word-break: break-all; }
 
-    /* 底部輸入框 */
+    /* 底部固定輸入框 */
     .chat-input-wrapper {
       position: fixed;
       bottom: 30px;
@@ -109,6 +115,7 @@
       display: flex;
       gap: 10px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      z-index: 99;
     }
 
     .chat-input {
@@ -116,9 +123,10 @@
       border: none;
       background: var(--background);
       color: var(--text);
-      padding: 12px;
+      padding: 12px 16px;
       border-radius: 8px;
       outline: none;
+      font-size: 1rem;
     }
 
     .send-btn {
@@ -129,9 +137,16 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.2s;
+      transition: background 0.2s;
     }
     .send-btn:hover { background: #4752c4; }
+
+    .back-nav {
+      margin-top: 40px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--ghost-btn);
+    }
   </style>
 </head>
 <body>
@@ -139,7 +154,7 @@
   <header class="nav">
     <div class="container nav-inner">
       <div class="brand"><div class="name">Discord 工作群</div></div>
-      <a href="index.html" style="text-decoration:none; color:var(--text)">← 返回首頁</a>
+      <a href="index.html" style="text-decoration:none; color:var(--text); font-size: 0.9rem;">← 返回首頁</a>
     </div>
   </header>
 
@@ -154,7 +169,7 @@
         </div>
       </div>
 
-       <div class="message-block delay-2">
+      <div class="message-block delay-2">
         <img src="suphoto/colinsu-photo.jpg" class="message-avatar">
         <div class="message-content">
           <div class="message-header">Guan Syun Su</div>
@@ -162,7 +177,7 @@
         </div>
       </div>
 
-       <div class="message-block delay-3">
+      <div class="message-block delay-3">
         <img src="suphoto/colinsu-photo.jpg" class="message-avatar">
         <div class="message-content">
           <div class="message-header">Guan Syun Su</div>
@@ -174,13 +189,13 @@
         <img src="suphoto/colinsu-photo.jpg" class="message-avatar">
         <div class="message-content">
           <div class="message-header">Guan Syun Su</div>
-          <div class="message-text">在下方輸入任何訊息立即加入吧!。</div>
+          <div class="message-text">在下方輸入任何訊息立即加入吧！</div>
         </div>
       </div>
 
       <div class="chat-input-wrapper">
         <input type="text" id="userInput" class="chat-input" placeholder="說點什麼來加入..." autofocus>
-        <button id="sendBtn" class="send-btn">發送並加入</button>
+        <button id="sendBtn" class="send-btn">發送</button>
       </div>
 
     </div>
@@ -192,47 +207,55 @@
     const chatArea = document.getElementById('chatArea');
     const DISCORD_LINK = "https://discord.gg/SAXzaDJTTQ";
 
-    function sendMessage() {
-      const text = userInput.value.trim();
-      if (!text) return;
-
-      // 1. 建立新訊息區塊
+    function appendMessage(sender, text, isSystem = false) {
       const msg = document.createElement('div');
       msg.className = 'message-block';
       msg.style.opacity = '1';
-      msg.style.animation = 'messageSlideIn 0.5s ease-out';
+      msg.style.animation = 'messageSlideIn 0.3s ease-out';
+      
       msg.innerHTML = `
         <img src="suphoto/colinsu-photo.jpg" class="message-avatar">
         <div class="message-content">
-          <div class="message-header">訪客 (您)</div>
+          <div class="message-header">${sender}</div>
           <div class="message-text">${text}</div>
         </div>
       `;
-
-      // 2. 插入訊息 (放在輸入框容器之前)
-      chatArea.insertBefore(msg, document.querySelector('.chat-input-wrapper'));
       
-      // 3. 清空輸入
-      userInput.value = '';
-
-      // 4. 滾動到底部
+      chatArea.insertBefore(msg, document.querySelector('.chat-input-wrapper'));
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-
-      // 5. 延遲 1 秒後開啟新視窗連結
-      setTimeout(() => {
-        window.open(DISCORD_LINK, '_blank');
-      }, 1000);
     }
 
-    sendBtn.addEventListener('click', sendMessage);
+    function handleSend() {
+      const val = userInput.value.trim();
+      if (!val) return;
+
+      // 1. 顯示使用者的訊息
+      appendMessage("訪客 (您)", val);
+      userInput.value = '';
+
+      // 2. 顯示系統自動回覆
+      setTimeout(() => {
+        appendMessage("Guan Syun Su (系統)", "正在為您開啟連結，歡迎加入！", true);
+      }, 500);
+
+      // 3. 延遲 1.2 秒後在新視窗開啟連結
+      setTimeout(() => {
+        window.open(DISCORD_LINK, '_blank');
+      }, 1200);
+    }
+
+    // 事件監聽
+    sendBtn.addEventListener('click', handleSend);
     userInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendMessage();
+      if (e.key === 'Enter') handleSend();
     });
 
-    // 繼承深色模式設定
-    const root = document.documentElement;
-    let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    root.setAttribute('data-theme', theme);
+    // 處理深色模式
+    document.addEventListener('DOMContentLoaded', () => {
+      const root = document.documentElement;
+      let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      root.setAttribute('data-theme', theme);
+    });
   </script>
 </body>
 </html>
