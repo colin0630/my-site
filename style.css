@@ -38,6 +38,10 @@ body {
   background: var(--bg);
   transition: background .3s ease, color .3s ease;
 }
+body, html {
+  overflow-x: hidden; /* 防止水平卷軸 */
+  /* 確保沒有 overflow-y: hidden 阻礙 sticky */
+}
 
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
@@ -52,8 +56,10 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; letter-spa
    導覽列 (固定與電腦版樣式)
    ========================================= */
 .nav {
+  position: -webkit-sticky; /* 增加 Safari 相容性 */
   position: sticky; 
   top: 0; 
+  width: 100%; /* 確保它撐滿整個畫面寬度 */
   z-index: 1000;
   background: color-mix(in oklab, var(--surface) 90%, transparent);
   backdrop-filter: blur(12px); 
