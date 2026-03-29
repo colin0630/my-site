@@ -356,3 +356,82 @@ body {
   .contact-icons { gap: 1.25rem; }
   .icon-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 }
+
+/* --- 漢堡選單 基礎樣式 (電腦版隱藏) --- */
+.menu-toggle {
+  display: none; /* 預設隱藏 */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001; /* 比 nav 稍微高一點 */
+}
+
+.menu-toggle .bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--on-surface); /* 使用你的變數顏色 */
+  border-radius: 10px;
+  transition: all 0.3s ease; /* 用於動畫 */
+}
+
+/* --- 手機版 RWD 樣式 (關鍵部分) --- */
+@media (max-width: 768px) {
+  /* 顯示漢堡按鈕 */
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* 將原本的選單隱藏，並設定為手機版樣式 */
+  .nav-menu {
+    position: absolute;
+    top: 100%; /* 在導覽列下方 */
+    left: 0;
+    width: 100%;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--divider);
+    flex-direction: column; /* 垂直排列 */
+    gap: 0; /* 清除 gap */
+    padding: 1rem 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* 預設狀態：隱藏且滑出螢幕 */
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transition: all 0.3s ease;
+  }
+
+  /* 當選單被激活時 (由 JS 控制) */
+  .nav-menu.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-menu li a {
+    display: block;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  /* 漢堡按鈕 動畫 (變成 X) */
+  .menu-toggle.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.is-active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .menu-toggle.is-active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+}
