@@ -46,96 +46,49 @@ button { font: inherit; }
 h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; letter-spacing: -0.02em; }
 
 /* =========================================
-   全站基礎排版容器 (核心置中設定)
+   全站基礎排版容器 (核心置中設定，修復文字貼齊邊緣的問題)
    ========================================= */
-.container { 
-  max-width: 1120px; 
-  margin: 0 auto; 
-  padding: 0 24px; 
-  width: 100%; 
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
 }
 .small { font-size: .95rem; }
 .muted { color: var(--muted); }
 
 /* =========================================
-   導覽列 (固定與電腦版樣式)
+   導覽列
    ========================================= */
 .nav {
-  position: -webkit-sticky; 
-  position: sticky; 
-  top: 0; 
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   width: 100%;
   z-index: 1000;
   background: color-mix(in oklab, var(--surface) 90%, transparent);
-  backdrop-filter: blur(12px); 
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--divider);
   box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  position: relative; /* 給手機選單定位用 */
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--primary);
-  display: block;
-  flex-shrink: 0;
-}
-
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; position: relative; }
+.brand { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); display: block; flex-shrink: 0; }
 .name { font-size: 1.08rem; font-weight: 800; }
 .role { color: var(--muted); font-size: .94rem; }
 
-/* 電腦版連結區 */
-.links {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.links a {
-  font-size: .95rem; font-weight: 600; padding: 6px 12px; border-radius: 10px; color: var(--muted); transition: .2s;
-}
+.links { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px; }
+.links a { font-size: .95rem; font-weight: 600; padding: 6px 12px; border-radius: 10px; color: var(--muted); transition: .2s; }
 .links a:hover { color: var(--primary); background: var(--primary-glow); }
 
-/* 漢堡按鈕基礎樣式 (電腦版隱藏) */
-.menu-toggle {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1100;
-}
-.menu-toggle .bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px auto;
-  background-color: var(--text);
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
+.menu-toggle { display: none; background: transparent; border: none; cursor: pointer; padding: 0; z-index: 1100; }
+.menu-toggle .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--text); border-radius: 3px; transition: all 0.3s ease; }
 
 /* =========================================
-   主要內容區塊與通用元件
+   主要內容區塊
    ========================================= */
 .hero { position: relative; overflow: hidden; padding: 108px 0 76px; background: radial-gradient(circle at 0% 0%, var(--primary-glow), transparent 46%); }
 .hero-layout, .hero-flex { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 28px; align-items: center; }
@@ -159,7 +112,7 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; letter-spa
 .section { padding: 88px 0; }
 .section.alt { background: var(--bg-2); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
 
-/* --- 讓閱讀區塊維持在舒適寬度 --- */
+/* 讓所有內容區塊標題與內容維持 1120px 寬度 */
 .section .container { max-width: 1120px; }
 
 .section h2 { font-size: 2rem; line-height: 1.2; margin-bottom: 10px; color: var(--primary); }
@@ -185,7 +138,9 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; letter-spa
    ========================================= */
 .list { list-style: none; padding-left: 0; }
 .pub-content-flex { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
-.list.large-pubs { flex: 1; width: 100%; }
+
+/* 修正：卡片寬度恢復 1120px */
+.list.large-pubs { flex: 1; width: 100%; max-width: 1120px; margin: 0 auto; }
 .pub-item { padding: 18px 20px; border-radius: 16px; transition: .25s ease; margin-bottom: 14px; border-left: 3px solid color-mix(in oklab, var(--primary) 35%, var(--divider)); background: color-mix(in oklab, var(--surface) 92%, transparent); }
 .pub-item:hover { background: var(--surface); transform: translateX(6px); }
 .pub-title { line-height: 1.58; margin-bottom: 6px; }
@@ -195,7 +150,8 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; letter-spa
 .pub-awards-imgs { flex: 0 0 300px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 92px; }
 .pub-awards-imgs img { width: 100%; border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--card-border); }
 
-.experience, .Education { display: grid; gap: 18px; width: 100%; }
+/* 修正：經歷與學歷寬度恢復 1120px */
+.experience, .Education { display: grid; gap: 18px; width: 100%; max-width: 1120px; margin: 0 auto; }
 .xp, .edu, .contact-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: 20px; padding: 22px; box-shadow: 0 10px 26px -20px rgba(0,0,0,.18); }
 .xp-head, .edu-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 800; font-size: 1.05rem; margin-bottom: 12px; }
 .bullets { padding-left: 1.15rem; display: grid; gap: 10px; color: var(--muted); }
