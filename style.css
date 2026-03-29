@@ -52,18 +52,38 @@ h1, h2, h3, .card-title, .name {
 .small { font-size: .95rem; }
 .muted { color: var(--muted); }
 
+/* --- 導覽列固定與優化 --- */
 .nav {
-  position: sticky; top: 0; z-index: 100;
-  background: color-mix(in oklab, var(--surface) 84%, transparent);
-  backdrop-filter: blur(12px);
+  position: sticky; 
+  top: 0; 
+  z-index: 1000; /* 提高層級，確保在所有內容之上 */
+  
+  /* 使用背景模糊效果，讓捲動時更有質感 */
+  background: color-mix(in oklab, var(--surface) 90%, transparent);
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px); /* 增加 Safari 相容性 */
+  
   border-bottom: 1px solid var(--divider);
+  
+  /* 增加細微陰影，讓導覽列與內容有空間感 */
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
-.nav-inner {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0;
+
+/* 確保 body 沒有會切斷 sticky 效果的 overflow 設定 */
+body {
+  overflow-x: hidden; /* 只防止水平溢出，不影響垂直滾動 */
 }
-.brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
-.avatar {
-  width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);
+
+/* 針對行動裝置微調，避免導覽列過高 */
+@media (max-width: 768px) {
+  .nav-inner {
+    padding: 8px 0;
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
 }
 .name { font-size: 1.08rem; font-weight: 800; }
 .role { color: var(--muted); font-size: .94rem; }
