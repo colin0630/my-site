@@ -24,29 +24,36 @@
 <body>
 
   <header class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container nav-inner">
-      <div class="brand">
-        <img src="./suphoto/colinsu-photo.jpg" alt="Portrait of Guan Syun Su" class="avatar" loading="lazy" decoding="async" />
-        <div>
-          <div class="name">
-            <span>Guan Syun Su</span>
-            <span class="muted"> / 蘇冠勳</span>
-          </div>
-          <div class="role" data-zh="大氣暴露 · PFAS 採樣分析方法" data-en="Environmental Exposure · PFAS air sampling">大氣暴露 · PFAS 採樣分析方法</div>
+  <div class="container nav-inner">
+    <div class="brand">
+      <img src="./suphoto/colinsu-photo.jpg" alt="Portrait of Guan Syun Su" class="avatar" loading="lazy" decoding="async" />
+      <div>
+        <div class="name">
+          <span>Guan Syun Su</span>
+          <span class="muted"> / 蘇冠勳</span>
         </div>
+        <div class="role" data-zh="大氣暴露 · PFAS 採樣分析方法" data-en="Environmental Exposure · PFAS air sampling">大氣暴露 · PFAS 採樣分析方法</div>
       </div>
-      <nav class="links">
-        <a href="#projects" data-zh="作品" data-en="Projects">作品</a>
-        <a href="#pubs" data-zh="發表" data-en="Publications">發表</a>
-        <a href="#experience" data-zh="經歷" data-en="Experience">經歷</a>
-        <a href="#education" data-zh="學歷" data-en="Education">學歷</a>
-        <a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a>
-        <a href="Guan_Syun_Su_CV.pdf" data-zh="履歷" data-en="CV" target="_blank" rel="noopener" download>履歷</a>
-        <button id="langBtn" class="btn small" type="button" aria-label="Switch language">中文/EN</button>
-        <button id="themeBtn" class="btn small" type="button" aria-label="Switch theme" title="切換深/淺">🌙</button>
-      </nav>
     </div>
-  </header>
+
+    <button class="menu-toggle" aria-label="Toggle navigation">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav class="links">
+      <a href="#projects" data-zh="作品" data-en="Projects">作品</a>
+      <a href="#pubs" data-zh="發表" data-en="Publications">發表</a>
+      <a href="#experience" data-zh="經歷" data-en="Experience">經歷</a>
+      <a href="#education" data-zh="學歷" data-en="Education">學歷</a>
+      <a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a>
+      <a href="Guan_Syun_Su_CV.pdf" data-zh="履歷" data-en="CV" target="_blank" rel="noopener" download>履歷</a>
+      <button id="langBtn" class="btn small" type="button" aria-label="Switch language">中文/EN</button>
+      <button id="themeBtn" class="btn small" type="button" aria-label="Switch theme" title="切換深/淺">🌙</button>
+    </nav>
+  </div>
+</header>
 
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
@@ -321,85 +328,129 @@
   </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // --- 1. 現有的基礎功能 (年份、時間、語言、主題) ---
-      const yearSpan = document.getElementById('year');
-      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. 基礎功能 (年份、最後更新、主題、語言) ---
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      const lastUpdated = document.getElementById('lastUpdated');
-      if (lastUpdated) {
-        const now = new Date();
-        lastUpdated.textContent = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-      }
+    const lastUpdated = document.getElementById('lastUpdated');
+    if (lastUpdated) {
+      const now = new Date();
+      lastUpdated.textContent = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    }
 
-      let isZh = (localStorage.getItem('lang') !== 'en');
-      const applyLang = () => {
-        document.documentElement.lang = isZh ? 'zh-Hant' : 'en';
-        document.querySelectorAll('[data-zh]').forEach(el => {
-          const zhText = el.getAttribute('data-zh');
-          const enText = el.getAttribute('data-en');
-          if (zhText !== null && enText !== null) el.textContent = isZh ? zhText : enText;
-        });
-      };
-      applyLang();
+    // 主題切換
+    const root = document.documentElement;
+    let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    root.setAttribute('data-theme', theme);
+    const themeBtn = document.getElementById('themeBtn');
+    const updateThemeIcon = () => { if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙'; };
+    updateThemeIcon();
 
-      document.getElementById('langBtn')?.addEventListener('click', () => {
-        isZh = !isZh;
-        localStorage.setItem('lang', isZh ? 'zh' : 'en');
-        applyLang();
-      });
-
-      const root = document.documentElement;
-      let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    themeBtn?.addEventListener('click', () => {
+      theme = (theme === 'dark') ? 'light' : 'dark';
       root.setAttribute('data-theme', theme);
-      const themeBtn = document.getElementById('themeBtn');
-      const updateThemeIcon = () => {
-        if (themeBtn) themeBtn.textContent = (theme === 'dark') ? '☀️' : '🌙';
-      };
+      localStorage.setItem('theme', theme);
       updateThemeIcon();
+    });
 
-      themeBtn?.addEventListener('click', () => {
-        theme = (theme === 'dark') ? 'light' : 'dark';
-        root.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        updateThemeIcon();
+    // 語言切換
+    let isZh = (localStorage.getItem('lang') !== 'en');
+    const applyLang = () => {
+      document.documentElement.lang = isZh ? 'zh-Hant' : 'en';
+      document.querySelectorAll('[data-zh]').forEach(el => {
+        const zhText = el.getAttribute('data-zh');
+        const enText = el.getAttribute('data-en');
+        if (zhText !== null && enText !== null) el.textContent = isZh ? zhText : enText;
+      });
+    };
+    applyLang();
+
+    document.getElementById('langBtn')?.addEventListener('click', () => {
+      isZh = !isZh;
+      localStorage.setItem('lang', isZh ? 'zh' : 'en');
+      applyLang();
+    });
+
+    // --- 2. 漢堡選單互動邏輯 ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.links');
+    const navLinks = document.querySelectorAll('.links a, .links .btn');
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuToggle.classList.toggle('is-active');
+        navMenu.classList.toggle('is-active');
       });
 
-      // --- 2. [新增] 漢堡選單互動邏輯 ---
-      const menuToggle = document.querySelector('.menu-toggle');
-      const navMenu = document.querySelector('.links'); // 你的 HTML 中選單 class 是 .links
-      const navLinks = document.querySelectorAll('.links a');
-
-      if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', (e) => {
-          e.stopPropagation(); // 防止點擊事件冒泡
-          menuToggle.classList.toggle('is-active');
-          navMenu.classList.toggle('is-active');
+      // 點擊選單內任何元素（連結或按鈕）即關閉選單
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('is-active');
+          navMenu.classList.remove('is-active');
         });
+      });
 
-        // 點擊連結後自動關閉選單
-        navLinks.forEach(link => {
-          link.addEventListener('click', () => {
-            menuToggle.classList.remove('is-active');
-            navMenu.classList.remove('is-active');
+      // 點擊選單外部關閉
+      document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+          menuToggle.classList.remove('is-active');
+          navMenu.classList.remove('is-active');
+        }
+      });
+    }
+
+    // --- 3. 發表卡片彈出視窗 (Modal) 邏輯 ---
+    const modal = document.getElementById('pub-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalAuthors = document.getElementById('modal-authors');
+    const modalHighlights = document.getElementById('modal-highlights');
+    const modalPhotoContainer = document.querySelector('.modal-photo');
+
+    document.querySelectorAll('.pub-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const currentLang = document.documentElement.lang === 'zh-Hant' ? 'zh' : 'en';
+        modalTitle.textContent = card.getAttribute(`data-title-${currentLang}`) || card.querySelector('.pub-title').textContent;
+        modalAuthors.textContent = card.getAttribute(`data-authors-${currentLang}`) || card.querySelector('.pub-meta').textContent;
+        const highlights = card.getAttribute(`data-highlights-${currentLang}`);
+        modalHighlights.textContent = highlights ? highlights : (currentLang === 'zh' ? '詳細精華內容建構中...' : 'Details coming soon...');
+        
+        modalPhotoContainer.innerHTML = '';
+        const imagesStr = card.getAttribute('data-images');
+        const singleImageStr = card.getAttribute('data-img');
+        let finalImageSrcs = [];
+        if (imagesStr) finalImageSrcs = imagesStr.split(',').map(s => s.trim());
+        else if (singleImageStr) finalImageSrcs.push(singleImageStr);
+
+        if (finalImageSrcs.length > 0) {
+          finalImageSrcs.forEach(imgSrc => {
+            if (imgSrc) {
+              const imgTag = document.createElement('img');
+              imgTag.src = imgSrc;
+              imgTag.classList.add('modal-detail-img');
+              modalPhotoContainer.appendChild(imgTag);
+            }
           });
-        });
-
-        // 點擊頁面其他地方時關閉選單
-        document.addEventListener('click', (e) => {
-          if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-            menuToggle.classList.remove('is-active');
-            navMenu.classList.remove('is-active');
-          }
-        });
-      }
-
-      // --- 3. 彈出視窗 (Modal) 與其餘邏輯 (保持不變) ---
-      const modal = document.getElementById('pub-modal');
-      const closeModalBtn = document.getElementById('close-modal');
-      // ... (此處保留你原本處理 modal 的程式碼)
-      
+          modalPhotoContainer.style.display = 'flex';
+        } else {
+          modalPhotoContainer.style.display = 'none';
+        }
+        modal.showModal();
+      });
     });
+
+    closeModalBtn?.addEventListener('click', () => modal.close());
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
+
+    // 禁止禁用連結跳轉
+    document.querySelectorAll('a[aria-disabled="true"]').forEach(card => {
+      card.addEventListener('click', (e) => e.preventDefault());
+    });
+  });
 </script>
 </body>
 </html>
