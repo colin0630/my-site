@@ -210,8 +210,7 @@ h1, h2, h3, .card-title, .name { font-family: "Noto Serif TC", serif; letter-spa
 
   /* 顯示漢堡按鈕 */
   .menu-toggle {
-    display: flex !important;
-    flex-shrink: 0;
+    display: block !important; /* 改回 block，讓三條線乖乖上下疊起來 */
     margin-left: auto;
     margin-top: 6px; 
   }
