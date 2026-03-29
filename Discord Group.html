@@ -4,34 +4,90 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Discord Knowledge Base | Guan Syun Su</title>
-  <link rel="stylesheet" href="style.css" />
   
   <style>
-    /* --- 專屬動畫與排版樣式 --- */
+    /* --- 基礎變數定義 (模擬原本外部 style.css 的變數) --- */
+    :root[data-theme="light"] {
+      --primary: #5865F2;
+      --background: #f0f2f5;
+      --surface: #ffffff;
+      --text: #2e3338;
+      --card-border: #e3e5e8;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --ghost-btn: #4f5660;
+    }
+    :root[data-theme="dark"] {
+      --primary: #5865F2;
+      --background: #313338;
+      --surface: #2b2d31;
+      --text: #dbdee1;
+      --card-border: #1e1f22;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --ghost-btn: #b5bac1;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* --- 導航列樣式 --- */
+    .nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand .name {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+    .btn {
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .btn.primary { background: var(--primary); color: white; }
+    .btn.ghost { color: var(--ghost-btn); border: 1px solid var(--card-border); }
+
+    /* --- Discord 訊息流排版 --- */
     .discord-intro-container {
       max-width: 800px;
       margin: 40px auto;
-      padding: 0 24px;
+      padding: 0 24px 120px 24px; /* 底部留空間給輸入框 */
     }
 
-    /* 定義滑入淡入的動畫 */
     @keyframes messageSlideIn {
       0% { opacity: 0; transform: translateY(30px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* 模擬訊息區塊 */
     .message-block {
       display: flex;
       gap: 16px;
-      margin-bottom: 40px;
-      /* 預設隱藏，由動畫來顯示 */
+      margin-bottom: 30px;
       opacity: 0; 
-      /* 套用動畫：名稱 期間 速度曲線 停留在最後狀態 */
       animation: messageSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* 針對每個區塊設定不同的延遲時間，做出依序彈出的效果 */
     .delay-1 { animation-delay: 0.2s; }
     .delay-2 { animation-delay: 1.0s; }
     .delay-3 { animation-delay: 1.8s; }
@@ -43,13 +99,14 @@
       object-fit: cover;
       flex-shrink: 0;
       border: 2px solid var(--primary);
+      background: #ccc;
     }
 
     .message-content {
       background: var(--surface);
       border: 1px solid var(--card-border);
       border-radius: 0 16px 16px 16px;
-      padding: 20px;
+      padding: 18px;
       box-shadow: var(--shadow);
       width: 100%;
     }
@@ -57,25 +114,49 @@
     .message-header {
       font-weight: 800;
       color: var(--primary);
-      margin-bottom: 8px;
-      font-size: 1.05rem;
+      margin-bottom: 6px;
+      font-size: 1rem;
     }
 
     .message-text {
-      color: var(--text);
-      line-height: 1.7;
-      margin-bottom: 16px;
+      line-height: 1.6;
     }
 
-    .message-image {
-      width: 100%;
-      border-radius: 8px;
+    /* --- 互動輸入框樣式 --- */
+    .chat-input-wrapper {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 48px);
+      max-width: 752px;
+      background: var(--surface);
       border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
-    
-    .back-nav {
-      margin-top: 40px;
-      display: inline-block;
+
+    .chat-input {
+      flex: 1;
+      border: none;
+      background: var(--background);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .send-btn {
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -83,60 +164,81 @@
 
   <header class="nav">
     <div class="container nav-inner">
-      <div class="brand">
-        <div class="name">Discord 知識庫</div>
-      </div>
+      <div class="brand"><div class="name">Discord 知識庫</div></div>
       <nav class="links">
-        <a href="index.html" class="btn small primary">← 返回首頁</a>
+        <a href="index.html" class="btn primary">← 返回首頁</a>
       </nav>
     </div>
   </header>
 
-  <main id="main">
-    <div class="discord-intro-container">
+  <main>
+    <div class="discord-intro-container" id="chatFlow">
       
       <div class="message-block delay-1">
-        <img src="suphoto/colinsu-photo.jpg" alt="Avatar" class="message-avatar">
+        <img src="suphoto/colinsu-photo.jpg" alt="Ava" class="message-avatar">
         <div class="message-content">
           <div class="message-header">Guan Syun Su (系統提示)</div>
-          <div class="message-text">
-            歡迎來到我的 Discord 頻道！<br>
-            我習慣將平時的研究靈感、考試筆記以及程式碼片段，分門別類地記錄在專屬的 Discord 伺服器中。有興趣的話請進入主業連結。
-          </div>
+          <div class="message-text">歡迎來到我的 Discord 頻道！我習慣將靈感與筆記記錄在此。</div>
         </div>
       </div>
 
       <div class="message-block delay-2">
-        <img src="suphoto/colinsu-photo.jpg" alt="Avatar" class="message-avatar">
+        <img src="suphoto/colinsu-photo.jpg" alt="Ava" class="message-avatar">
         <div class="message-content">
           <div class="message-header"># 考試與讀書筆記</div>
-          <div class="message-text">
-            這裡有一直以來的考試與課程筆記，方便日後隨時跨裝置檢索與複習。
-          </div>
+          <div class="message-text">這裡有一直以來的考試與課程筆記，方便跨裝置檢索。</div>
         </div>
       </div>
 
-      <div class="message-block delay-3">
-        <img src="suphoto/colinsu-photo.jpg" alt="Avatar" class="message-avatar">
-        <div class="message-content">
-          <div class="message-header"># 程式繪圖與資料視覺化</div>
-          <div class="message-text">
-            在處理 PFAS 氣象條件等複雜數據時，我會使用 Python 或 R 語言的程式碼來視覺化數據。
-          </div>
-        </div>
+      <div class="chat-input-wrapper">
+        <input type="text" id="userInput" class="chat-input" placeholder="輸入內容並按下發送..." />
+        <button id="sendBtn" class="send-btn">發送</button>
       </div>
 
-      <a href="index.html" class="btn ghost back-nav">← 回到作品集</a>
     </div>
   </main>
 
   <script>
-    // 繼承你在主頁設定的深淺色模式
-    document.addEventListener('DOMContentLoaded', () => {
-      const root = document.documentElement;
-      let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      root.setAttribute('data-theme', theme);
-    });
+    // 1. 初始化主題
+    const root = document.documentElement;
+    let theme = localStorage.getItem('theme') || 'light';
+    root.setAttribute('data-theme', theme);
+
+    // 2. 發送邏輯
+    const sendBtn = document.getElementById('sendBtn');
+    const userInput = document.getElementById('userInput');
+    const chatFlow = document.getElementById('chatFlow');
+    const DISCORD_URL = "https://discord.gg/YOUR_INVITE_CODE"; // 改成你的連結
+
+    function handleSend() {
+      const val = userInput.value.trim();
+      if (!val) return;
+
+      // 建立新訊息
+      const msg = document.createElement('div');
+      msg.className = 'message-block';
+      msg.style.opacity = '1';
+      msg.style.animation = 'messageSlideIn 0.4s ease-out';
+      msg.innerHTML = `
+        <img src="suphoto/colinsu-photo.jpg" class="message-avatar">
+        <div class="message-content">
+          <div class="message-header">訪客 (你)</div>
+          <div class="message-text">${val}</div>
+        </div>
+      `;
+
+      // 插在輸入框包裝層之前
+      chatFlow.insertBefore(msg, document.querySelector('.chat-input-wrapper'));
+      userInput.value = '';
+
+      // 1秒後跳轉
+      setTimeout(() => {
+        window.location.href = DISCORD_URL;
+      }, 1000);
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+    userInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSend(); });
   </script>
 </body>
 </html>
