@@ -52,27 +52,41 @@ h1, h2, h3, .card-title, .name {
 .small { font-size: .95rem; }
 .muted { color: var(--muted); }
 
-/* --- 導覽列固定與優化 --- */
+//* --- 導覽列固定與優化 --- */
 .nav {
   position: sticky; 
   top: 0; 
-  z-index: 1000; /* 提高層級，確保在所有內容之上 */
-  
-  /* 使用背景模糊效果，讓捲動時更有質感 */
+  z-index: 1000;
   background: color-mix(in oklab, var(--surface) 90%, transparent);
   backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px); /* 增加 Safari 相容性 */
-  
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--divider);
-  
-  /* 增加細微陰影，讓導覽列與內容有空間感 */
   box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 確保 body 沒有會切斷 sticky 效果的 overflow 設定 */
-body {
-  overflow-x: hidden; /* 只防止水平溢出，不影響垂直滾動 */
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0; /* 確保頭像區域不被擠壓 */
+}
+
+/* 修正：電腦版頭像固定大小與圓形 */
+.avatar {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  flex-shrink: 0;
 }
 
 /* 針對行動裝置微調，避免導覽列過高 */
@@ -377,26 +391,25 @@ body {
 
 /* --- [修正] 漢堡選單 RWD 樣式 --- */
 @media (max-width: 768px) {
-  .nav-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-  }
-
-  /* 確保手機版頭像不會消失且維持比例 */
+  .hero { padding: 88px 0 52px; }
+  .section { padding: 72px 0; }
+  
+  /* 修正：手機版頭像縮小但維持圓形 */
   .avatar {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
   }
 
+  /* 修正：顯示漢堡按鈕並防止縮小 */
   .menu-toggle {
-    display: flex !important; /* 強制顯示按鈕 */
+    display: flex !important;
+    flex-shrink: 0; /* 防止變成小點 */
+    margin-left: auto;
   }
 
-  /* 將原本的 .nav-menu 改為 .links，因為你的 HTML 用的是 .links */
+  /* 修正：手機版選單滑出邏輯 */
   .links {
-    display: flex; /* 必須為 flex */
+    display: flex !important;
     flex-direction: column;
     position: absolute;
     top: 100%;
@@ -408,15 +421,15 @@ body {
     padding: 1rem 0;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     
-    /* 初始狀態：隱藏 */
+    /* 初始隱藏狀態 */
     opacity: 0;
-    visibility: hidden; /* 改用 visibility 配合 opacity */
+    visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
     pointer-events: none;
   }
 
-  /* 當選單被激活時 */
+  /* 當選單激活時 */
   .links.is-active {
     opacity: 1;
     visibility: visible;
@@ -424,17 +437,11 @@ body {
     pointer-events: auto;
   }
 
-  /* 讓選單內的連結垂直排列並撐滿 */
   .links a, .links .btn {
-    display: block !important; /* 強制顯示被隱藏的連結 */
+    display: block !important;
     width: 100%;
     text-align: center;
-    padding: 12px;
+    padding: 14px;
     border-radius: 0;
-  }
-  
-  /* 移除你原本隱藏連結的那行 */
-  .links a:not([href$="CV.pdf"]) { 
-    display: block; 
   }
 }
