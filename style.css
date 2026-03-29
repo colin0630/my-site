@@ -40,6 +40,14 @@ body {
   /* 確保這裡沒有任何 overflow 的設定 */
 }
 
+/* --- 修正：網頁主要內容容器置中與寬度限制 --- */
+.container { 
+  max-width: 1120px; /* 限制網頁最大寬度 */
+  margin: 0 auto;    /* 讓整個容器在畫面中水平置中 */
+  padding: 0 24px;   /* 兩側保留安全距離，避免文字貼齊邊緣 */
+  width: 100%;       /* 確保容器在小螢幕時也能撐滿 */
+}
+
 /* --- 導覽列固定與優化 --- */
 .nav {
   position: -webkit-sticky; /* 支援蘋果 Safari */
