@@ -374,38 +374,37 @@
 
     // --- 2. 漢堡選單互動邏輯 ---
 // --- [新增/修正] 漢堡選單互動邏輯 (請替換這段) ---
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.links');
-    // 抓取選單內的所有連結和按鈕，點擊後要關閉選單
-    const navLinksAndBtns = document.querySelectorAll('.links a, .links .btn');
+ const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('.links'); // 確保這裡是 .links，抓取 HTML 的 <nav class="links">
 
-    if (menuToggle && navMenu) {
-      // 1. 點擊漢堡按鈕：切換 is-active
-      menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation(); // 防止點擊冒泡
-        menuToggle.classList.toggle('is-active');
-        navMenu.classList.toggle('is-active');
-        console.log('漢堡按鈕被點擊了！'); // 測試用，可在控制台看到
-      });
+if (menuToggle && navMenu) {
+  // console.log('漢堡按鈕與選單已抓取'); // 測試用
+  
+  // 1. 點擊漢堡按鈕：切換 is-active
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuToggle.classList.toggle('is-active');
+    navMenu.classList.toggle('is-active');
+  });
 
-      // 2. 點擊選單內任何連結或按鈕：自動關閉選單 (優化體驗)
-      navLinksAndBtns.forEach(item => {
-        item.addEventListener('click', () => {
-          menuToggle.classList.remove('is-active');
-          navMenu.classList.remove('is-active');
-        });
-      });
+  // 2. 點擊連結後自動關閉選單 (優化體驗)
+  document.querySelectorAll('.links a, .links .btn').forEach(item => {
+    item.addEventListener('click', () => {
+      menuToggle.classList.remove('is-active');
+      navMenu.classList.remove('is-active');
+    });
+  });
 
-      // 3. 點擊選單外部：關閉選單
-      document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-          menuToggle.classList.remove('is-active');
-          navMenu.classList.remove('is-active');
-        }
-      });
-    } else {
-      console.error('找不到 .menu-toggle 或 .links 元素，請檢查 HTML 結構！');
+  // 3. 點擊選單外部關閉
+  document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+      menuToggle.classList.remove('is-active');
+      navMenu.classList.remove('is-active');
     }
+  });
+} else {
+  console.error('找不到 .menu-toggle 或 .links 元素，請檢查 HTML 結構！');
+}
 
     // --- 3. 發表卡片彈出視窗 (Modal) 邏輯 ---
     const modal = document.getElementById('pub-modal');
