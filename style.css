@@ -374,9 +374,9 @@ body {
 .menu-toggle .bar {
   height: 3px;
   width: 100%;
-  background-color: var(--on-surface); /* 使用你的變數顏色 */
+  background-color: var(--text); /* 改用 var(--text) 確保隨主題變色 */
   border-radius: 10px;
-  transition: all 0.3s ease; /* 用於動畫 */
+  transition: all 0.3s ease;
 }
 
 /* --- 手機版 RWD 樣式 (關鍵部分) --- */
