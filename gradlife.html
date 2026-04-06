@@ -1,24 +1,25 @@
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D 星空照片牆</title>
+    <title>3D 星空照片牆 - 質感升級版</title>
     <style>
-        /* 重置預設邊距，隱藏捲軸，設定背景為黑色星空感 */
+        /* 基礎重置與背景設定 */
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #050510;
+            background: radial-gradient(circle at center, #0a0a1a 0%, #020205 100%); /* 加上微微的漸層感 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 畫布容器 */
         #canvas-container {
             width: 100vw;
             height: 100vh;
         }
 
-        /* 放大照片的燈箱 (預設隱藏) */
+        /* 優化後的燈箱 (加入毛玻璃模糊特效) */
         #lightbox {
             display: none;
             position: fixed;
@@ -26,54 +27,71 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(5, 5, 15, 0.6); /* 降低原本的黑色透明度 */
+            backdrop-filter: blur(12px); /* CSS 毛玻璃模糊效果 */
+            -webkit-backdrop-filter: blur(12px); /* 支援 Safari */
             z-index: 1000;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.4s ease; /* 讓出現時有淡入效果 */
         }
 
-        /* 放大後的照片圖片 */
+        #lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* 優化照片邊框與發光感 */
         #lightbox img {
-            max-width: 90%;
+            max-width: 85%;
             max-height: 80%;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            border: 2px solid #fff;
-            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px; /* 微微的圓角更現代 */
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 彈性放大動畫 */
         }
 
-        /* 關閉按鈕 */
+        #lightbox.active img {
+            transform: scale(1);
+        }
+
         #close-btn {
             position: absolute;
             top: 30px;
             right: 40px;
-            font-size: 40px;
-            color: white;
+            font-size: 45px;
+            color: rgba(255, 255, 255, 0.7);
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         #close-btn:hover {
-            color: #ff5555;
-            transform: scale(1.1);
+            color: #ffffff;
+            transform: rotate(90deg) scale(1.1); /* 加上旋轉特效 */
         }
         
-        /* 提示文字 */
+        /* 質感提升的提示文字 */
         #hint {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px;
             width: 100%;
             text-align: center;
-            color: rgba(255,255,255,0.6);
-            font-family: sans-serif;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 4px; /* 增加字距產生電影感 */
+            font-size: 0.9rem;
+            font-weight: 300;
             pointer-events: none;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* 確保在亮色照片前也能看清楚 */
         }
     </style>
 </head>
 <body>
 
     <div id="canvas-container"></div>
-    <div id="hint">移動滑鼠轉動星空，點擊照片放大瀏覽</div>
+    <div id="hint">探索星空 ‧ 點擊照片瀏覽</div>
 
     <div id="lightbox">
         <span id="close-btn">&times;</span>
@@ -83,61 +101,81 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
-        // --- 1. 基本設定 (場景、相機、渲染器) ---
+        // --- 1. 基本設定 ---
         const scene = new THREE.Scene();
-        // 增加一點迷霧效果，讓遠處的照片變暗，增加星空深邃感
-        scene.fog = new THREE.FogExp2(0x050510, 0.002); 
+        scene.fog = new THREE.FogExp2(0x020205, 0.0015); // 調整迷霧顏色與背景漸層融合
 
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 0; // 相機放在中心點
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1500);
+        camera.position.z = 0; 
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio); // 讓高解析度螢幕(如 Retina)更清晰
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // --- 2. 建立照片群組與星空 ---
-        const photoGroup = new THREE.Group();
-        scene.add(photoGroup);
+        // 建立一個宇宙群組，用來包裝「照片」與「星星」，這樣轉動時兩者會一起動
+        const universeGroup = new THREE.Group();
+        scene.add(universeGroup);
 
+        // --- 2. 建立星空背景 (粒子系統) ---
+        const starGeometry = new THREE.BufferGeometry();
+        const starCount = 4000; // 4000 顆星星
+        const starPosArray = new Float32Array(starCount * 3);
+
+        for(let i = 0; i < starCount * 3; i++) {
+            // 將星星散佈在極大的 3D 空間中
+            starPosArray[i] = (Math.random() - 0.5) * 1200; 
+        }
+
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(starPosArray, 3));
+        const starMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 1.2,
+            transparent: true,
+            opacity: 0.8,
+            sizeAttenuation: true // 讓遠處的星星比較小
+        });
+        
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        universeGroup.add(stars); // 將星星加入宇宙群組
+
+        // --- 3. 建立照片 ---
         const textureLoader = new THREE.TextureLoader();
-        const photoCount = 150; // 你想要的照片數量
+        const photoCount = 120; // 稍微調整數量，讓空間不那麼擁擠
 
-        // 隨機生成照片
         for (let i = 0; i < photoCount; i++) {
-            // 使用 Picsum 產生隨機圖片 (開發測試用)
-            // 未來你可以改成你自己的陣列，例如：const myImages = ['img1.jpg', 'img2.jpg'...];
             const imageUrl = `https://picsum.photos/400/300?random=${i}`;
             
-            // 載入圖片並建立 3D 平面
             textureLoader.load(imageUrl, (texture) => {
-                const geometry = new THREE.PlaneGeometry(16, 12); // 照片的長寬比例
+                const geometry = new THREE.PlaneGeometry(16, 12);
                 const material = new THREE.MeshBasicMaterial({ 
                     map: texture, 
-                    side: THREE.DoubleSide, // 讓正反面都看得到
-                    transparent: true
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 0.9 // 讓照片有一點點微透感，融入星空
                 });
                 const plane = new THREE.Mesh(geometry, material);
 
-                // 將照片隨機散佈在一個球體空間中 (半徑約為 100 到 300 之間)
-                const radius = 100 + Math.random() * 200;
-                const theta = Math.random() * Math.PI * 2; // 水平角度
-                const phi = Math.acos(Math.random() * 2 - 1); // 垂直角度
+                // 隨機分佈照片
+                const radius = 120 + Math.random() * 250;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(Math.random() * 2 - 1);
 
                 plane.position.x = radius * Math.sin(phi) * Math.cos(theta);
                 plane.position.y = radius * Math.sin(phi) * Math.sin(theta);
                 plane.position.z = radius * Math.cos(phi);
 
-                // 讓照片永遠面向中心點 (相機位置)
                 plane.lookAt(0, 0, 0);
 
-                // 將圖片網址儲存在物件中，方便點擊時取得
-                plane.userData = { url: imageUrl }; 
+                // 給照片加一點隨機的自身旋轉，讓它們看起來更自然，不死板
+                plane.rotation.z = (Math.random() - 0.5) * 0.2;
 
-                photoGroup.add(plane);
+                plane.userData = { url: imageUrl }; 
+                universeGroup.add(plane); // 將照片加入宇宙群組
             });
         }
 
-        // --- 3. 滑鼠互動 (轉動星空) ---
+        // --- 4. 滑鼠互動 ---
         let mouseX = 0;
         let mouseY = 0;
         let targetX = 0;
@@ -146,61 +184,75 @@
         const windowHalfY = window.innerHeight / 2;
 
         document.addEventListener('mousemove', (event) => {
-            // 將滑鼠座標轉換為 -1 到 1 的比例
             mouseX = (event.clientX - windowHalfX);
             mouseY = (event.clientY - windowHalfY);
         });
 
-        // --- 4. 滑鼠點擊 (Raycaster 光線投射) ---
+        // --- 5. 光線投射 (點擊放大) ---
         const raycaster = new THREE.Raycaster();
         const mouse = new THREE.Vector2();
+        const lightbox = document.getElementById('lightbox');
 
         document.addEventListener('click', (event) => {
-            // 計算正規化的滑鼠座標 (-1 到 +1)
+            // 如果點擊到了關閉按鈕或是燈箱背景，就不執行射線計算
+            if(event.target.id === 'close-btn' || event.target.id === 'lightbox') return;
+
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-            // 透過相機和滑鼠位置發射光線
             raycaster.setFromCamera(mouse, camera);
+            // 這裡要注意：我們現在要檢查的是 universeGroup 裡面的所有物件 (包含照片和星星)
+            // 所以要過濾出我們有點擊到網址的照片物件
+            const intersects = raycaster.intersectObjects(universeGroup.children);
 
-            // 計算光線交會到的物件 (我們的照片群組)
-            const intersects = raycaster.intersectObjects(photoGroup.children);
-
-            if (intersects.length > 0) {
-                // 如果點到了照片，取得該照片的網址
-                const clickedPhoto = intersects[0].object;
-                const highResUrl = clickedPhoto.userData.url; // 這裡可以換成更高畫質的圖片網址
-
-                // 顯示燈箱
-                const lightbox = document.getElementById('lightbox');
-                const enlargedImg = document.getElementById('enlarged-img');
-                enlargedImg.src = highResUrl;
-                lightbox.style.display = 'flex';
+            for (let i = 0; i < intersects.length; i++) {
+                if (intersects[i].object.userData.url) {
+                    const highResUrl = intersects[i].object.userData.url;
+                    document.getElementById('enlarged-img').src = highResUrl;
+                    
+                    // 使用 class 來控制淡入動畫
+                    lightbox.style.display = 'flex';
+                    // 稍微延遲加上 active class 來觸發 CSS 動畫
+                    setTimeout(() => lightbox.classList.add('active'), 10);
+                    break; // 找到第一張有網址的照片就停止
+                }
             }
         });
 
-        // --- 5. 關閉燈箱 ---
+        // --- 6. 關閉燈箱 ---
         document.getElementById('close-btn').addEventListener('click', () => {
-            document.getElementById('lightbox').style.display = 'none';
+            lightbox.classList.remove('active');
+            // 等待淡出動畫(0.4s)結束後，再真正隱藏元素
+            setTimeout(() => lightbox.style.display = 'none', 400);
         });
 
-        // --- 6. 動畫迴圈 ---
+        // 點擊燈箱背景也可以關閉
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox) {
+                lightbox.classList.remove('active');
+                setTimeout(() => lightbox.style.display = 'none', 400);
+            }
+        });
+
+        // --- 7. 動畫迴圈 ---
         function animate() {
             requestAnimationFrame(animate);
 
-            // 平滑計算目標旋轉角度 (加入一點阻尼感，讓轉動更柔和)
-            targetX = mouseX * 0.001;
-            targetY = mouseY * 0.001;
+            targetX = mouseX * 0.0008;
+            targetY = mouseY * 0.0008;
 
-            // 讓整個照片群組跟著滑鼠緩慢旋轉
-            photoGroup.rotation.y += 0.05 * (targetX - photoGroup.rotation.y);
-            photoGroup.rotation.x += 0.05 * (targetY - photoGroup.rotation.x);
+            // 讓宇宙群組平滑跟隨滑鼠
+            universeGroup.rotation.y += 0.05 * (targetX - universeGroup.rotation.y);
+            universeGroup.rotation.x += 0.05 * (targetY - universeGroup.rotation.x);
+
+            // 【增加生命力】加入緩慢的自動旋轉，即使不動滑鼠星空也會轉
+            universeGroup.rotation.y -= 0.0005;
 
             renderer.render(scene, camera);
         }
         animate();
 
-        // --- 7. 視窗大小調整 ---
+        // --- 8. 視窗大小調整 ---
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
