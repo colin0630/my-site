@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D 星空照片牆 - 拖曳互動版</title>
+    <title>3D 星空照片牆 - 反向拖曳版</title>
     <style>
         /* 基礎重置與背景設定 */
         body {
@@ -12,18 +12,17 @@
             overflow: hidden;
             background: radial-gradient(circle at center, #0a0a1a 0%, #020205 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* 避免拖曳時選取到網頁文字 */
             user-select: none; 
         }
 
         #canvas-container {
             width: 100vw;
             height: 100vh;
-            cursor: grab; /* 滑鼠游標變成手掌 */
+            cursor: grab;
         }
 
         #canvas-container:active {
-            cursor: grabbing; /* 點按時游標變成抓住的手掌 */
+            cursor: grabbing;
         }
 
         /* 燈箱與毛玻璃特效 */
@@ -134,20 +133,17 @@
         universeGroup.add(stars);
 
         // --- 3. 匯入你自己的照片 ---
-        // 請將這裡替換成你實際的照片檔名或路徑
+        // 記得將這裡替換成你實際的照片檔名
         const myImages = [
             'photo1.jpg',
             'photo2.jpg',
             'photo3.jpg',
-            // 'images/photo4.png', (也可以放在資料夾內)
         ];
         
         const textureLoader = new THREE.TextureLoader();
-        const totalPhotosNeeded = 80; // 畫面上總共想要顯示多少張照片
+        const totalPhotosNeeded = 80; 
 
         for (let i = 0; i < totalPhotosNeeded; i++) {
-            // 利用餘數(%)輪流從你的陣列中取出照片，如果陣列只有3張，就會一直重複這3張
-            // 如果你的陣列本來就超過80張，那就會依序顯示前80張
             const imageUrl = myImages[i % myImages.length]; 
             
             textureLoader.load(imageUrl, (texture) => {
@@ -170,26 +166,24 @@
                 plane.lookAt(0, 0, 0);
                 plane.rotation.z = (Math.random() - 0.5) * 0.2;
 
-                // 儲存真正的圖片路徑
                 plane.userData = { url: imageUrl }; 
                 universeGroup.add(plane);
             }, undefined, function (err) {
-                // 如果找不到照片檔案，會在主控台報錯，但不會讓網頁整個壞掉
                 console.warn('無法載入圖片:', imageUrl, '請確認檔案路徑是否正確。');
             });
         }
 
-        // --- 4. 滑鼠拖曳互動 (取代舊的滑鼠跟隨) ---
+        // --- 4. 滑鼠拖曳互動 (已修改為反向) ---
         let isDragging = false;
         let previousMousePosition = { x: 0, y: 0 };
-        let startPoint = { x: 0, y: 0 }; // 用來紀錄點擊瞬間的位置
+        let startPoint = { x: 0, y: 0 }; 
         let targetRotationX = 0;
         let targetRotationY = 0;
 
         document.addEventListener('mousedown', (e) => {
             isDragging = true;
             previousMousePosition = { x: e.clientX, y: e.clientY };
-            startPoint = { x: e.clientX, y: e.clientY }; // 記住按下的起始點
+            startPoint = { x: e.clientX, y: e.clientY }; 
         });
 
         document.addEventListener('mousemove', (e) => {
@@ -199,9 +193,9 @@
                     y: e.clientY - previousMousePosition.y
                 };
 
-                // 將拖曳距離轉換成旋轉角度 (數字越小轉越慢)
-                targetRotationY += deltaMove.x * 0.003;
-                targetRotationX += deltaMove.y * 0.003;
+                // 【修改點】將 += 改成 -=，實現拖曳方向相反
+                targetRotationY -= deltaMove.x * 0.003;
+                targetRotationX -= deltaMove.y * 0.003;
 
                 previousMousePosition = { x: e.clientX, y: e.clientY };
             }
@@ -219,8 +213,6 @@
         document.addEventListener('click', (event) => {
             if(event.target.id === 'close-btn' || event.target.id === 'lightbox') return;
 
-            // 【重點】計算滑鼠「按下」到「放開」移動的距離
-            // 如果移動距離超過 5 像素，我們認定這是「拖曳轉動」，不觸發照片放大
             const moveDistance = Math.sqrt(Math.pow(event.clientX - startPoint.x, 2) + Math.pow(event.clientY - startPoint.y, 2));
             if (moveDistance > 5) {
                 return; 
@@ -235,7 +227,6 @@
             for (let i = 0; i < intersects.length; i++) {
                 if (intersects[i].object.userData.url) {
                     const highResUrl = intersects[i].object.userData.url;
-                    // 因為使用本機照片，這裡抓到的網址會完全等於 3D 貼圖的網址
                     document.getElementById('enlarged-img').src = highResUrl;
                     
                     lightbox.style.display = 'flex';
@@ -261,11 +252,10 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            // 加入平滑過渡 (Lerp) 讓拖曳停止時有緩衝的滑動感
             universeGroup.rotation.y += (targetRotationY - universeGroup.rotation.y) * 0.1;
             universeGroup.rotation.x += (targetRotationX - universeGroup.rotation.x) * 0.1;
 
-            // 依然保留微小的自動旋轉，讓星空保持生命力 (如果不喜歡可以刪除這行)
+            // 保持微小的自動旋轉
             targetRotationY += 0.0005;
 
             renderer.render(scene, camera);
