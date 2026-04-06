@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D 星空照片牆 - 反向拖曳版</title>
+    <title>3D 星空照片牆 - 速度調整版</title>
     <style>
-        /* 基礎重置與背景設定 */
         body {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             cursor: grabbing;
         }
 
-        /* 燈箱與毛玻璃特效 */
         #lightbox {
             display: none;
             position: fixed;
@@ -133,7 +131,6 @@
         universeGroup.add(stars);
 
         // --- 3. 匯入你自己的照片 ---
-        // 記得將這裡替換成你實際的照片檔名
         const myImages = [
             'photo1.jpg',
             'photo2.jpg',
@@ -169,16 +166,20 @@
                 plane.userData = { url: imageUrl }; 
                 universeGroup.add(plane);
             }, undefined, function (err) {
-                console.warn('無法載入圖片:', imageUrl, '請確認檔案路徑是否正確。');
+                console.warn('無法載入圖片:', imageUrl);
             });
         }
 
-        // --- 4. 滑鼠拖曳互動 (已修改為反向) ---
+        // --- 4. 滑鼠拖曳互動 (新增速度控制變數) ---
         let isDragging = false;
         let previousMousePosition = { x: 0, y: 0 };
         let startPoint = { x: 0, y: 0 }; 
         let targetRotationX = 0;
         let targetRotationY = 0;
+
+        // 【這裡可以調整拖動速度！】
+        // 預設是 0.003。如果你覺得太快，可以改成 0.001；如果覺得太慢，可以改成 0.008。
+        const dragSpeed = 0.003; 
 
         document.addEventListener('mousedown', (e) => {
             isDragging = true;
@@ -193,9 +194,9 @@
                     y: e.clientY - previousMousePosition.y
                 };
 
-                // 【修改點】將 += 改成 -=，實現拖曳方向相反
-                targetRotationY -= deltaMove.x * 0.003;
-                targetRotationX -= deltaMove.y * 0.003;
+                // 套用我們設定的速度變數
+                targetRotationY -= deltaMove.x * dragSpeed;
+                targetRotationX -= deltaMove.y * dragSpeed;
 
                 previousMousePosition = { x: e.clientX, y: e.clientY };
             }
@@ -255,8 +256,7 @@
             universeGroup.rotation.y += (targetRotationY - universeGroup.rotation.y) * 0.1;
             universeGroup.rotation.x += (targetRotationX - universeGroup.rotation.x) * 0.1;
 
-            // 保持微小的自動旋轉
-            targetRotationY += 0.0005;
+            targetRotationY += 0.0005; // 微小的自動旋轉
 
             renderer.render(scene, camera);
         }
